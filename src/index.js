@@ -1,14 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
+import { SignInUpProvider } from './context/loginContext';
+import { UserProvider } from './context/usersContext';
+import { TasksManagementProvider } from './context/tasksManagementContext';
+import { LoaderProvider } from './context/loadingContext';
+import { ModalProvider } from './context/modalContext';
+import { BoardsProvider } from './context/boardsContext';
+import { ColumnsProvider } from './context/columnContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <BrowserRouter>
+      <LoaderProvider>
+        <ModalProvider>
+          <SignInUpProvider>
+            <UserProvider>
+              <TasksManagementProvider>
+                <BoardsProvider>
+                  <ColumnsProvider>
+                    <App />
+                  </ColumnsProvider>
+                </BoardsProvider>
+              </TasksManagementProvider>
+            </UserProvider>
+          </SignInUpProvider>
+        </ModalProvider>
+      </LoaderProvider>
+    </BrowserRouter>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function
