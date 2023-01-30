@@ -2,10 +2,10 @@ import React, { useContext, useState } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { ModalContext } from '../context/modalContext';
-import { BoardsContext } from '../context/boardsContext';
-import { ColumnsContext } from '../context/columnContext';
+import { UsersContext } from '../context/usersContext';
 import { useForm } from 'react-hook-form';
 import { TiDelete } from 'react-icons/ti';
+import { AddDataContext } from '../context/addDataContext';
 
 const style = {
   position: 'absolute',
@@ -21,12 +21,16 @@ const style = {
 
 export default function BasicModal() {
   const { open, handleClose } = useContext(ModalContext);
-  const { boards, setBoards } = useContext(BoardsContext);
-  const [inputFields, setInputFields] = useState([0]);
+  const [inputFields, setInputFields] = useState([1]);
+
+  const { users } = useContext(UsersContext);
+  const { addBoards, addColumns } = useContext(AddDataContext);
 
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data, e) => {
-    setBoards([...boards, data]);
+    //console.log(data);
+    addBoards(data, users);
+    addColumns(data, users);
     reset();
   };
 
@@ -79,7 +83,7 @@ export default function BasicModal() {
                           })}
                         />
                         <TiDelete
-                          onClick={() => removeColumn()}
+                          onClick={() => removeColumn(index)}
                           className="h-[2.5rem] w-[2.5rem] cursor-pointer"
                         />
                       </div>
@@ -113,21 +117,9 @@ export default function BasicModal() {
   );
 }
 
-/*<div className="flex items-center gap-5">
-                    <input
-                      className="border py-4 px-4 border-black rounded-lg w-full"
-                      type="text"
-                      placeholder="e.g. Todo"
-                      {...register('columns.0.columnName')}
-                    />
-                    <TiDelete className="h-[2.5rem] w-[2.5rem]" />
-                  </div>
-                  <div className="flex items-center gap-5">
-                    <input
-                      className="border py-4 px-4 border-black rounded-lg w-full"
-                      type="text"
-                      placeholder="e.g. Doing"
-                      {...register('columns.1.columnName')}
-                    />
-                    <TiDelete className="h-[2.5rem] w-[2.5rem]" />
-                  </div>*/
+/*e.preventDefault();
+    var newArray = data.columns.filter(
+      (value) => Object.keys(value).length !== 0,
+    );
+
+    console.log(newArray);*/

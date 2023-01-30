@@ -5,6 +5,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   browserSessionPersistence,
+  signOut,
 } from 'firebase/auth';
 import { app } from '../utils/firebaseClient';
 
@@ -39,7 +40,11 @@ export const SignInUpProvider = ({ children }) => {
     });
   };
 
-  const value = { handleLogin };
+  const handleSignOut = () => {
+    signOut(auth);
+  };
+
+  const value = { handleLogin, handleSignOut };
   return (
     <SignInUpContext.Provider value={value}>
       {children}

@@ -18,7 +18,7 @@ const TasksBox = () => {
         </div>
       ) : (
         <div className="p-2 flex gap-7 flex-nowrap overflow-x-scroll h-[85vh] w-full">
-          {boards.map((items) => {
+          {[].map((items) => {
             if (items.title === title && items.hasOwnProperty('columns')) {
               return items.columns.map((cols) => (
                 <div key={cols.columnName} className="min-w-[24%] min-h-full">

@@ -10,28 +10,35 @@ import { LoaderProvider } from './context/loadingContext';
 import { ModalProvider } from './context/modalContext';
 import { BoardsProvider } from './context/boardsContext';
 import { ColumnsProvider } from './context/columnContext';
+import { AddDataProvider } from './context/addDataContext';
+import { AddBoardsProvider } from './context/addBoardsContext';
+import { GetDataProvider } from './context/getDataContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <LoaderProvider>
-        <ModalProvider>
-          <SignInUpProvider>
-            <UserProvider>
-              <TasksManagementProvider>
-                <BoardsProvider>
-                  <ColumnsProvider>
-                    <App />
-                  </ColumnsProvider>
-                </BoardsProvider>
-              </TasksManagementProvider>
-            </UserProvider>
-          </SignInUpProvider>
-        </ModalProvider>
-      </LoaderProvider>
-    </BrowserRouter>
-  </React.StrictMode>,
+  <BrowserRouter>
+    <LoaderProvider>
+      <ModalProvider>
+        <SignInUpProvider>
+          <UserProvider>
+            <TasksManagementProvider>
+              <BoardsProvider>
+                <ColumnsProvider>
+                  <AddDataProvider>
+                    <AddBoardsProvider>
+                      <GetDataProvider>
+                        <App />
+                      </GetDataProvider>
+                    </AddBoardsProvider>
+                  </AddDataProvider>
+                </ColumnsProvider>
+              </BoardsProvider>
+            </TasksManagementProvider>
+          </UserProvider>
+        </SignInUpProvider>
+      </ModalProvider>
+    </LoaderProvider>
+  </BrowserRouter>,
 );
 
 // If you want to start measuring performance in your app, pass a function
