@@ -4,7 +4,6 @@ import { TasksManagementContext } from '../context/tasksManagementContext';
 import { LoadingContext } from '../context/loadingContext';
 import { UsersContext } from '../context/usersContext';
 import { ModalContext } from '../context/modalContext';
-import { BoardsContext } from '../context/boardsContext';
 import { collection } from 'firebase/firestore';
 import { db } from '../utils/firebaseClient';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -38,9 +37,9 @@ const Boards = () => {
                   <button
                     onClick={() => {
                       setLoading(true);
+                      setTitle(items.boardName);
                       setTimeout(() => {
                         setLoading((prevState) => !prevState);
-                        setTitle(items.boardName);
                       }, 1500);
                     }}
                     className="text-[18px] font-semibold flex items-center gap-5"

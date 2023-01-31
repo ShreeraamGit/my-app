@@ -1,13 +1,43 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { TasksManagementContext } from '../context/tasksManagementContext';
 import { LoadingContext } from '../context/loadingContext';
-import { BoardsContext } from '../context/boardsContext';
+import { UsersContext } from '../context/usersContext';
 import CircularProgress from '@mui/material/CircularProgress';
+import { db } from '../utils/firebaseClient';
+import { collection, getDocs } from 'firebase/firestore';
 
 const TasksBox = () => {
   const { title } = useContext(TasksManagementContext);
   const { loading } = useContext(LoadingContext);
-  const { boards } = useContext(BoardsContext);
+  const { users } = useContext(UsersContext);
+  const [columns, setColumns] = useState();
+
+  const getData = async () => {
+    let cols = [];
+    if (title) {
+      const querySnapshot = await getDocs(
+        collection(
+          db,
+          'data',
+          'boards',
+          'users',
+          `${users.uid}`,
+          'boardDetails',
+          `boardName - ${title.replace(/\s/g, '')}`,
+          'columns',
+        ),
+      );
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        cols.push(doc.data());
+        setColumns(cols.reverse());
+      });
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, [title]);
 
   return (
     <div className="bg-[#F4F7FD] w-screen h-screen p-5">
@@ -18,6 +48,30 @@ const TasksBox = () => {
         </div>
       ) : (
         <div className="p-2 flex gap-7 flex-nowrap overflow-x-scroll h-[85vh] w-full">
+          {title && !loading
+            ? columns.map((items) => (
+                <div key={items.colName} className="min-w-[24%] min-h-full">
+                  <div className="flex items-center gap-5">
+                    <div className="h-5 w-5 bg-green-500 rounded-full" />
+                    <h1 className="text-[18px] tracking-[0.3rem] text-[#828FA3] font-bold">
+                      {items.colName.toUpperCase()} (4)
+                    </h1>
+                  </div>
+                </div>
+              ))
+            : null}
+          <div className="min-w-[25%] rounded-xl min-h-full flex text-[#828FA3] justify-center items-center text-[24px] font-extrabold bg-[#E4EBFA]">
+            <button className="">+ New Column</button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default TasksBox;
+
+/*<div className="p-2 flex gap-7 flex-nowrap overflow-x-scroll h-[85vh] w-full">
           {[].map((items) => {
             if (items.title === title && items.hasOwnProperty('columns')) {
               return items.columns.map((cols) => (
@@ -37,33 +91,4 @@ const TasksBox = () => {
               <button className="">+ New Column</button>
             </div>
           ) : null}
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default TasksBox;
-
-/*  {loading ? (
-        <div className="flex h-full justify-center items-center">
-        <CircularProgress />
-      </div>
-      ) : (
-        <div className="p-8 flex gap-10 border h-full">
-          {boards.map((items) => {
-            if (items.title === title) {
-              return items.columns.map((cols) => (
-                <div className="min-w-[25%] min-h-full">
-                <div className="flex items-center gap-5">
-                    <div className="h-5 w-5 bg-green-500 rounded-full" />
-                    <h1 className="text-[18px] tracking-[0.3rem] text-[#828FA3] font-bold">
-                      {cols.columnName.toUpperCase()} (4)
-                    </h1>
-                  </div></div>
-                  
-              ));
-            }
-          })}
-        </div>
-      )}*/
+        </div>*/

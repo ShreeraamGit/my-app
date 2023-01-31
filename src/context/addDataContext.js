@@ -1,7 +1,6 @@
 import { createContext, useState } from 'react';
-import { doc, setDoc, getDoc, addDoc, collection } from 'firebase/firestore';
+import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../utils/firebaseClient';
-import { async } from '@firebase/util';
 
 export const AddDataContext = createContext({});
 
@@ -37,6 +36,7 @@ export const AddDataProvider = ({ children }) => {
       ),
       {
         boardName: boards.title,
+        createdAt: serverTimestamp(),
       },
     );
   };
@@ -60,6 +60,7 @@ export const AddDataProvider = ({ children }) => {
         ),
         {
           colName: item.columnName,
+          createdAt: serverTimestamp(),
         },
       );
     }
