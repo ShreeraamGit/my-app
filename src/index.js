@@ -13,6 +13,7 @@ import { ColumnsProvider } from './context/columnContext';
 import { AddDataProvider } from './context/addDataContext';
 import { AddBoardsProvider } from './context/addBoardsContext';
 import { GetDataProvider } from './context/getDataContext';
+import { AddTaskModalProvider } from './context/addTaskModal';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -27,7 +28,9 @@ root.render(
                   <AddDataProvider>
                     <AddBoardsProvider>
                       <GetDataProvider>
-                        <App />
+                        <AddTaskModalProvider>
+                          <App />
+                        </AddTaskModalProvider>
                       </GetDataProvider>
                     </AddBoardsProvider>
                   </AddDataProvider>

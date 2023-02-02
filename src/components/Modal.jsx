@@ -28,7 +28,7 @@ export default function BasicModal() {
 
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data, e) => {
-    //console.log(data);
+    ///console.log(data);
     addBoards(data, users);
     addColumns(data, users);
     reset();

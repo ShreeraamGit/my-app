@@ -14,7 +14,7 @@ export const AddDataProvider = ({ children }) => {
     const docSnap = await getDoc(checkUserRef);
 
     if (docSnap.exists()) {
-      console.log('user is there');
+      //console.log('user is there');
     } else {
       await setDoc(doc(db, 'data', 'boards', 'users', `${users.uid}`), {
         uid: users.uid,
@@ -46,6 +46,7 @@ export const AddDataProvider = ({ children }) => {
       (value) => Object.keys(value).length !== 0,
     );
     for (const item of columns) {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       await setDoc(
         doc(
           db,

@@ -4,7 +4,14 @@ import { LoadingContext } from '../context/loadingContext';
 import { UsersContext } from '../context/usersContext';
 import CircularProgress from '@mui/material/CircularProgress';
 import { db } from '../utils/firebaseClient';
-import { collection, getDocs } from 'firebase/firestore';
+import {
+  collection,
+  getDocs,
+  orderBy,
+  doc,
+  query,
+  firebase,
+} from 'firebase/firestore';
 
 const TasksBox = () => {
   const { title } = useContext(TasksManagementContext);
@@ -15,22 +22,22 @@ const TasksBox = () => {
   const getData = async () => {
     let cols = [];
     if (title) {
-      const querySnapshot = await getDocs(
-        collection(
-          db,
-          'data',
-          'boards',
-          'users',
-          `${users.uid}`,
-          'boardDetails',
-          `boardName - ${title.replace(/\s/g, '')}`,
-          'columns',
-        ),
+      const snapshot = await collection(
+        db,
+        'data',
+        'boards',
+        'users',
+        `${users.uid}`,
+        'boardDetails',
+        `boardName - ${title.replace(/\s/g, '')}`,
+        'columns',
       );
+      const q = query(snapshot, orderBy('createdAt', 'asc'));
+      const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         cols.push(doc.data());
-        setColumns(cols.reverse());
+        setColumns(cols);
       });
     }
   };
@@ -54,7 +61,7 @@ const TasksBox = () => {
                   <div className="flex items-center gap-5">
                     <div className="h-5 w-5 bg-green-500 rounded-full" />
                     <h1 className="text-[18px] tracking-[0.3rem] text-[#828FA3] font-bold">
-                      {items.colName.toUpperCase()} (4)
+                      {items.colName.toUpperCase()} (0)
                     </h1>
                   </div>
                 </div>
@@ -71,24 +78,27 @@ const TasksBox = () => {
 
 export default TasksBox;
 
-/*<div className="p-2 flex gap-7 flex-nowrap overflow-x-scroll h-[85vh] w-full">
-          {[].map((items) => {
-            if (items.title === title && items.hasOwnProperty('columns')) {
-              return items.columns.map((cols) => (
-                <div key={cols.columnName} className="min-w-[24%] min-h-full">
-                  <div className="flex items-center gap-5">
-                    <div className="h-5 w-5 bg-green-500 rounded-full" />
-                    <h1 className="text-[18px] tracking-[0.3rem] text-[#828FA3] font-bold">
-                      {cols.columnName.toUpperCase()} (4)
-                    </h1>
-                  </div>
-                </div>
-              ));
-            }
-          })}
-          {title ? (
-            <div className="min-w-[25%] rounded-xl min-h-full flex text-[#828FA3] justify-center items-center text-[24px] font-extrabold bg-[#E4EBFA]">
-              <button className="">+ New Column</button>
-            </div>
-          ) : null}
-        </div>*/
+/*
+  const getData = async () => {
+    let cols = [];
+    if (title) {
+      const querySnapshot = await getDocs(
+        collection(
+          db,
+          'data',
+          'boards',
+          'users',
+          `${users.uid}`,
+          'boardDetails',
+          `boardName - ${title.replace(/\s/g, '')}`,
+          'columns',
+        ),
+        orderBy('createdAt'),
+      );
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        cols.push(doc.data());
+        setColumns(cols);
+      });
+    }
+  };*/
