@@ -4,14 +4,7 @@ import { LoadingContext } from '../context/loadingContext';
 import { UsersContext } from '../context/usersContext';
 import CircularProgress from '@mui/material/CircularProgress';
 import { db } from '../utils/firebaseClient';
-import {
-  collection,
-  getDocs,
-  orderBy,
-  doc,
-  query,
-  firebase,
-} from 'firebase/firestore';
+import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 
 const TasksBox = () => {
   const { title } = useContext(TasksManagementContext);
