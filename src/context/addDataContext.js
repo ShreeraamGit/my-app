@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext } from 'react';
 import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../utils/firebaseClient';
 
@@ -95,7 +95,49 @@ export const AddDataProvider = ({ children }) => {
     }
   };
 
-  const value = { writeData, writeUsers, addBoards, addColumns, addTasks };
+  const addSubtasks = async (columns, users, tasks, title) => {
+    const subTasks = tasks.subtasks.filter(
+      (value) => Object.keys(value).length !== 0,
+    );
+    for (const items of columns) {
+      if (items.colName === tasks.status) {
+        for (const item of subTasks) {
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+          await setDoc(
+            doc(
+              db,
+              'data',
+              'boards',
+              'users',
+              `${users.uid}`,
+              'boardDetails',
+              `boardName - ${title.replace(/\s/g, '')}`,
+              'columns',
+              `colName - ${items.colName.replace(/\s/g, '')}`,
+              'tasks',
+              `taskName - ${tasks.title.replace(/\s/g, '')}`,
+              'subtasks',
+              `subtasks - ${item.title}`,
+            ),
+            {
+              title: `${item.title}`,
+              isCompleted: false,
+              createdAt: serverTimestamp(),
+            },
+          );
+        }
+      }
+    }
+  };
+
+  const value = {
+    writeData,
+    writeUsers,
+    addBoards,
+    addColumns,
+    addTasks,
+    addSubtasks,
+  };
   return (
     <AddDataContext.Provider value={value}>{children}</AddDataContext.Provider>
   );
