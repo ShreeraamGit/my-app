@@ -56,10 +56,10 @@ export default function BasicModal() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-3">
             <h1 className="text-[24px] font-bold">Add New Board</h1>
             <div className="">
-              <form className="flex flex-col gap-5">
+              <form className="flex flex-col gap-3">
                 <div className="flex flex-col gap-5">
                   <label>Name</label>
                   <input

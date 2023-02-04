@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { TasksManagementContext } from '../context/tasksManagementContext';
 import { LoadingContext } from '../context/loadingContext';
 import { UsersContext } from '../context/usersContext';
+import { ColumnsContext } from '../context/columnContext';
 import CircularProgress from '@mui/material/CircularProgress';
 import { db } from '../utils/firebaseClient';
 import { collection, getDocs, orderBy, query } from 'firebase/firestore';
@@ -10,7 +11,7 @@ const TasksBox = () => {
   const { title } = useContext(TasksManagementContext);
   const { loading } = useContext(LoadingContext);
   const { users } = useContext(UsersContext);
-  const [columns, setColumns] = useState();
+  const { columns, setColumns } = useContext(ColumnsContext);
 
   const getData = async () => {
     let cols = [];

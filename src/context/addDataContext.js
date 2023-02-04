@@ -67,7 +67,35 @@ export const AddDataProvider = ({ children }) => {
     }
   };
 
-  const value = { writeData, writeUsers, addBoards, addColumns };
+  const addTasks = async (columns, users, tasks, title) => {
+    for (const item of columns) {
+      if (item.colName === tasks.status) {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        await setDoc(
+          doc(
+            db,
+            'data',
+            'boards',
+            'users',
+            `${users.uid}`,
+            'boardDetails',
+            `boardName - ${title.replace(/\s/g, '')}`,
+            'columns',
+            `colName - ${item.colName.replace(/\s/g, '')}`,
+            'tasks',
+            `taskName - ${tasks.title.replace(/\s/g, '')}`,
+          ),
+          {
+            taskName: tasks.title,
+            description: tasks.Description,
+            createdAt: serverTimestamp(),
+          },
+        );
+      }
+    }
+  };
+
+  const value = { writeData, writeUsers, addBoards, addColumns, addTasks };
   return (
     <AddDataContext.Provider value={value}>{children}</AddDataContext.Provider>
   );
