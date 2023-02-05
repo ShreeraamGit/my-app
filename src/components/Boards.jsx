@@ -4,6 +4,8 @@ import { TasksManagementContext } from '../context/tasksManagementContext';
 import { LoadingContext } from '../context/loadingContext';
 import { UsersContext } from '../context/usersContext';
 import { ModalContext } from '../context/modalContext';
+import { GetDataContext } from '../context/getDataContext';
+import { ColumnsContext } from '../context/columnContext';
 import { collection } from 'firebase/firestore';
 import { db } from '../utils/firebaseClient';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -13,6 +15,8 @@ const Boards = () => {
   const { setLoading } = useContext(LoadingContext);
   const { handleOpen } = useContext(ModalContext);
   const { users } = useContext(UsersContext);
+  const { getData } = useContext(GetDataContext);
+  const { setColumns } = useContext(ColumnsContext);
 
   const query = collection(
     db,
@@ -35,9 +39,12 @@ const Boards = () => {
             ? docs.map((items) => (
                 <li key={items.boardName} className="">
                   <button
-                    onClick={() => {
+                    onClick={async () => {
                       setLoading(true);
                       setTitle(items.boardName);
+                      const cols = await getData(users, items.boardName);
+                      setColumns(cols);
+
                       setTimeout(() => {
                         setLoading((prevState) => !prevState);
                       }, 1500);

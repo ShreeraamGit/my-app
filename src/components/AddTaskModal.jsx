@@ -6,6 +6,7 @@ import { AddTaskModalContext } from '../context/addTaskModal';
 import { TasksManagementContext } from '../context/tasksManagementContext';
 import { UsersContext } from '../context/usersContext';
 import { AddDataContext } from '../context/addDataContext';
+import { GetDataContext } from '../context/getDataContext';
 import { ColumnsContext } from '../context/columnContext';
 import { TiDelete } from 'react-icons/ti';
 import { CgDanger } from 'react-icons/cg';
@@ -26,7 +27,7 @@ const style = {
 export default function BasicAddTaskModal() {
   const { title } = useContext(TasksManagementContext);
   const { columns } = useContext(ColumnsContext);
-  const { addTasks, addSubtasks } = useContext(AddDataContext);
+  const { addTasks } = useContext(AddDataContext);
   const { users } = useContext(UsersContext);
 
   const [subTasks, setSubtasks] = useState([1]);
@@ -34,12 +35,10 @@ export default function BasicAddTaskModal() {
     useContext(AddTaskModalContext);
 
   const { register, handleSubmit, reset } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     if (title) {
       addTasks(columns, users, data, title);
-      addSubtasks(columns, users, data, title);
     }
-    console.log(data);
     reset();
   };
 
@@ -161,11 +160,9 @@ export default function BasicAddTaskModal() {
   );
 }
 
-/*<select {...register('status')}>
-                    <option
-                      className="border py-4 px-4 border-black rounded-lg w-full"
-                      value={columns}
-                    >
-                      {columns}
-                    </option>
-                  </select>*/
+/*const getTasksLists = await getTasks(
+                        users,
+                        items.boardName,
+                        columns,
+                      );
+                      setTasksLists(getTasksLists);*/
