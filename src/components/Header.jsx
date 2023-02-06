@@ -2,13 +2,19 @@ import React, { useContext } from 'react';
 import { RxDotsVertical } from 'react-icons/rx';
 import { AddTaskModalContext } from '../context/addTaskModal';
 import { TasksManagementContext } from '../context/tasksManagementContext';
+import { DarkLightModeContext } from '../context/darkLightMode';
 
 const Header = () => {
   const { title } = useContext(TasksManagementContext);
   const { handleAddTaskModalOpen } = useContext(AddTaskModalContext);
+  const { darkMode } = useContext(DarkLightModeContext);
 
   return (
-    <div className="h-[5rem] border flex justify-between items-center p-6">
+    <div
+      className={`h-[5rem] border flex justify-between items-center p-6 bg-${
+        darkMode ? '[#3E3F4E]' : 'white'
+      } text-${darkMode ? 'white' : 'gray-900'}`}
+    >
       <div className="">
         <h1 className="font-bold text-[24px]">{title}</h1>
       </div>
@@ -28,3 +34,7 @@ const Header = () => {
 };
 
 export default Header;
+
+/*bg-${
+        darkMode ? '[#3E3F4E]' : 'white'
+      } text-${darkMode ? 'white' : 'gray-900'}*/

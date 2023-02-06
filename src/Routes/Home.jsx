@@ -3,6 +3,7 @@ import { SignInUpContext } from '../context/loginContext.js';
 import { UsersContext } from '../context/usersContext.js';
 import { ModalContext } from '../context/modalContext.js';
 import { AddTaskModalContext } from '../context/addTaskModal.js';
+import { DarkLightModeContext } from '../context/darkLightMode.js';
 import SideMenu from '../components/SideMenu.jsx';
 import Header from '../components/Header';
 import TasksBox from '../components/TasksBox';
@@ -14,6 +15,7 @@ const Home = () => {
   const { users } = useContext(UsersContext);
   const { open } = useContext(ModalContext);
   const { addTaskModalopen } = useContext(AddTaskModalContext);
+  const { darkMode } = useContext(DarkLightModeContext);
   return (
     <div className="">
       <section className="flex">
@@ -31,11 +33,6 @@ const Home = () => {
 
 export default Home;
 
-/*<button
-        onClick={() => {
-          signOut();
-        }}
-        className="mt-20 border-2 border-black p-5 text-2xl"
-      >
-        Sign out
-      </button>*/
+/*bg-${
+        darkMode ? '[#3E3F4E]' : 'white'
+      } text-${darkMode ? 'white' : 'gray-900'}*/

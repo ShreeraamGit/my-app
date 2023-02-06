@@ -34,30 +34,35 @@ const Boards = () => {
         ALL BOARDS ({!loadingStatus && docs ? docs.length : 0})
       </h2>
       <div className="">
-        <ul className="flex flex-col gap-6">
-          {!loadingStatus && docs
-            ? docs.map((items) => (
-                <li key={items.boardName} className="">
-                  <button
-                    onClick={async () => {
-                      setLoading(true);
-                      setTitle(items.boardName);
-                      const cols = await getData(users, items.boardName);
-                      setColumns(cols);
+        <ul className="flex flex-col gap-4">
+          {!loadingStatus && docs ? (
+            docs.map((items) => (
+              <li
+                key={items.boardName}
+                className="rounded-r-full p-2 pr-10 hover:bg-violet-500"
+              >
+                <button
+                  onClick={async () => {
+                    setLoading(true);
+                    setTitle(items.boardName);
+                    const cols = await getData(users, items.boardName);
+                    setColumns(cols);
 
-                      setTimeout(() => {
-                        setLoading((prevState) => !prevState);
-                      }, 1500);
-                    }}
-                    className="text-[18px] font-semibold flex items-center gap-5"
-                  >
-                    <TiFlowChildren className="h-[1.5rem] w-[1.5rem]" />
-                    {items.boardName.slice(0, 1).toUpperCase() +
-                      items.boardName.slice(1)}
-                  </button>
-                </li>
-              ))
-            : 'loading please wait......'}
+                    setTimeout(() => {
+                      setLoading((prevState) => !prevState);
+                    }, 1500);
+                  }}
+                  className="text-[18px] font-semibold flex items-center gap-5"
+                >
+                  <TiFlowChildren className="h-[1.5rem] w-[1.5rem]" />
+                  {items.boardName.slice(0, 1).toUpperCase() +
+                    items.boardName.slice(1)}
+                </button>
+              </li>
+            ))
+          ) : (
+            <h1 className="text-center">Loading... Please Wait...</h1>
+          )}
         </ul>
       </div>
       <div className="">

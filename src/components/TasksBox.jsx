@@ -4,6 +4,7 @@ import { LoadingContext } from '../context/loadingContext';
 import { ColumnsContext } from '../context/columnContext';
 import { GetDataContext } from '../context/getDataContext';
 import { UsersContext } from '../context/usersContext';
+import { DarkLightModeContext } from '../context/darkLightMode';
 import CircularProgress from '@mui/material/CircularProgress';
 
 const TasksBox = () => {
@@ -11,6 +12,7 @@ const TasksBox = () => {
     TasksManagementContext,
   );
   const { loading, setLoading } = useContext(LoadingContext);
+  const { darkMode } = useContext(DarkLightModeContext);
   const { columns } = useContext(ColumnsContext);
   const { getTasks } = useContext(GetDataContext);
   const { users } = useContext(UsersContext);
@@ -27,7 +29,11 @@ const TasksBox = () => {
   }, [title, columns, taskLists]);
 
   return (
-    <div className="bg-[#F4F7FD] w-screen h-screen p-5">
+    <div
+      className={`bg-${
+        darkMode ? '[#2B2C37]' : '[#F4F7FD] '
+      } w-screen h-screen p-5`}
+    >
       {loading ? (
         <div className="flex h-full justify-start items-start gap-20">
           <CircularProgress />

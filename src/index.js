@@ -14,33 +14,36 @@ import { AddDataProvider } from './context/addDataContext';
 import { AddBoardsProvider } from './context/addBoardsContext';
 import { GetDataProvider } from './context/getDataContext';
 import { AddTaskModalProvider } from './context/addTaskModal';
+import { DarkLightModeProvider } from './context/darkLightMode';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <LoaderProvider>
-      <ModalProvider>
-        <SignInUpProvider>
-          <UserProvider>
-            <TasksManagementProvider>
-              <BoardsProvider>
-                <ColumnsProvider>
-                  <AddDataProvider>
-                    <AddBoardsProvider>
-                      <GetDataProvider>
-                        <AddTaskModalProvider>
-                          <App />
-                        </AddTaskModalProvider>
-                      </GetDataProvider>
-                    </AddBoardsProvider>
-                  </AddDataProvider>
-                </ColumnsProvider>
-              </BoardsProvider>
-            </TasksManagementProvider>
-          </UserProvider>
-        </SignInUpProvider>
-      </ModalProvider>
-    </LoaderProvider>
+    <DarkLightModeProvider>
+      <LoaderProvider>
+        <ModalProvider>
+          <SignInUpProvider>
+            <UserProvider>
+              <TasksManagementProvider>
+                <BoardsProvider>
+                  <ColumnsProvider>
+                    <AddDataProvider>
+                      <AddBoardsProvider>
+                        <GetDataProvider>
+                          <AddTaskModalProvider>
+                            <App />
+                          </AddTaskModalProvider>
+                        </GetDataProvider>
+                      </AddBoardsProvider>
+                    </AddDataProvider>
+                  </ColumnsProvider>
+                </BoardsProvider>
+              </TasksManagementProvider>
+            </UserProvider>
+          </SignInUpProvider>
+        </ModalProvider>
+      </LoaderProvider>
+    </DarkLightModeProvider>
   </BrowserRouter>,
 );
 
