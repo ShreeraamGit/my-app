@@ -83,7 +83,11 @@ const TasksBox = () => {
                 </div>
               ))
             : null}
-          <div className="min-w-[25%] rounded-xl min-h-full flex text-[#828FA3] justify-center items-center text-[24px] font-extrabold bg-[#E4EBFA]">
+          <div
+            className={`min-w-[25%] rounded-xl min-h-full flex text-[#828FA3] justify-center items-center text-[24px] font-extrabold ${
+              darkMode ? 'bg-[#3E3F4E]' : 'bg-white'
+            }`}
+          >
             <button className="">+ New Column</button>
           </div>
         </div>
