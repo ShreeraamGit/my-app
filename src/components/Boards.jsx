@@ -6,6 +6,7 @@ import { UsersContext } from '../context/usersContext';
 import { ModalContext } from '../context/modalContext';
 import { GetDataContext } from '../context/getDataContext';
 import { ColumnsContext } from '../context/columnContext';
+import { DarkLightModeContext } from '../context/darkLightMode';
 import { collection } from 'firebase/firestore';
 import { db } from '../utils/firebaseClient';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -17,6 +18,7 @@ const Boards = () => {
   const { users } = useContext(UsersContext);
   const { getData } = useContext(GetDataContext);
   const { setColumns } = useContext(ColumnsContext);
+  const { darkMode } = useContext(DarkLightModeContext);
 
   const query = collection(
     db,
@@ -30,16 +32,20 @@ const Boards = () => {
 
   return (
     <div className="flex flex-col gap-10">
-      <h2 className="tracking-[0.18rem] text-[15px] font-semibold text-[#A8A4FF]">
+      <h2
+        className={`tracking-[0.18rem] text-[15px] font-semibold ${
+          darkMode ? 'text-[#E4EBFA]' : 'text-[#A8A4FF]'
+        }`}
+      >
         ALL BOARDS ({!loadingStatus && docs ? docs.length : 0})
       </h2>
       <div className="">
-        <ul className="flex flex-col gap-4">
+        <ul className="flex flex-col gap-4 hover:text-white">
           {!loadingStatus && docs ? (
             docs.map((items) => (
               <li
                 key={items.boardName}
-                className="rounded-r-full p-2 pr-10 hover:bg-violet-500"
+                className="rounded-r-full p-2 pr-10 hover:bg-violet-500 hover:text-white"
               >
                 <button
                   onClick={async () => {
@@ -52,7 +58,9 @@ const Boards = () => {
                       setLoading((prevState) => !prevState);
                     }, 1500);
                   }}
-                  className="text-[18px] font-semibold flex items-center gap-5"
+                  className={`text-[18px] text-white font-semibold flex items-center gap-5 ${
+                    darkMode ? 'text-[#E4EBFA]' : 'text-black'
+                  }`}
                 >
                   <TiFlowChildren className="h-[1.5rem] w-[1.5rem]" />
                   {items.boardName.slice(0, 1).toUpperCase() +

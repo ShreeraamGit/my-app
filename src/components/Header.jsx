@@ -11,12 +11,18 @@ const Header = () => {
 
   return (
     <div
-      className={`h-[5rem] border flex justify-between items-center p-6 bg-${
-        darkMode ? '[#3E3F4E]' : 'white'
-      } text-${darkMode ? 'white' : 'gray-900'}`}
+      className={`h-[5rem] flex justify-between items-center p-6 ${
+        darkMode ? 'bg-lightBlack2' : 'bg-white'
+      }`}
     >
       <div className="">
-        <h1 className="font-bold text-[24px]">{title}</h1>
+        <h1
+          className={` ${
+            darkMode ? 'text-white' : 'text-black'
+          } font-bold text-[24px]`}
+        >
+          {title}
+        </h1>
       </div>
       <div className="flex justify-center items-center gap-7">
         <button
@@ -27,7 +33,11 @@ const Header = () => {
         >
           + Add Task
         </button>
-        <RxDotsVertical className="w-5 h-5" />
+        <RxDotsVertical
+          className={`w-[1.8rem] h-[1.8rem] ${
+            darkMode ? 'text-[#E4EBFA]' : 'text-[#3E3F4E]'
+          }`}
+        />
       </div>
     </div>
   );

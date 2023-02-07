@@ -8,19 +8,39 @@ import { DarkLightModeContext } from '../context/darkLightMode';
 const DarkLightModeSwitch = () => {
   const { darkMode, setDarkMode } = useContext(DarkLightModeContext);
   return (
-    <div className="flex border w-full justify-center items-center gap-8 py-1 px-10 rounded-lg bg-[#F4F7FD]">
-      <FiSun className="w-[2rem] h-[2rem] text-gray-500" />
+    <div
+      className={`flex w-full justify-center items-center gap-8 py-1 px-10 rounded-lg bg-[#F4F7FD] ${
+        darkMode ? 'bg-[#20212C]' : 'bg-[#F4F7FD]'
+      }`}
+    >
+      <BsMoonStarsFill
+        className={`w-[2rem] h-[2rem] ${
+          darkMode ? 'text-[#E4EBFA]' : 'text-[#3E3F4E]'
+        }`}
+      />
       <button
         onClick={() => setDarkMode((prevState) => !prevState)}
         className=""
       >
         {darkMode ? (
-          <MdToggleOff className="w-[4rem] h-[4rem] text-violet-500" />
+          <MdToggleOff
+            className={`w-[4rem] h-[4rem] text-violet-500 ${
+              darkMode ? 'text-[#635FC7]' : 'text-[#3E3F4E]'
+            }`}
+          />
         ) : (
-          <MdToggleOn className="w-[4rem] h-[4rem] text-violet-500" />
+          <MdToggleOn
+            className={`w-[4rem] h-[4rem] text-violet-500 ${
+              darkMode ? 'text-[#635FC7]' : 'text-[#3E3F4E]'
+            }`}
+          />
         )}
       </button>
-      <BsMoonStarsFill className="w-[2rem] h-[2rem] text-gray-500" />
+      <FiSun
+        className={`w-[2rem] h-[2rem] text-gray-500 ${
+          darkMode ? 'text-[#E4EBFA]' : 'text-[#3E3F4E]'
+        } `}
+      />
     </div>
   );
 };

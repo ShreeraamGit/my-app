@@ -9,9 +9,9 @@ const SideMenu = () => {
   const { darkMode } = useContext(DarkLightModeContext);
   return (
     <div
-      className={`w-[23%] relative h-screen border p-6 flex flex-col justify-between items-start bg-${
-        darkMode ? '[#3E3F4E]' : 'white'
-      } text-${darkMode ? 'white' : 'gray-900'}`}
+      className={`${
+        darkMode ? 'bg-lightBlack2' : 'white'
+      } w-[23%] relative h-screen p-6 flex flex-col justify-between items-start`}
     >
       <div className="flex flex-col gap-16">
         <LogoHeader />
@@ -26,3 +26,7 @@ const SideMenu = () => {
 };
 
 export default SideMenu;
+
+/*bg-${
+        darkMode ? 'lightBlack2' : 'white'
+      } text-${darkMode ? 'white' : 'gray-900'}`*/

@@ -30,8 +30,8 @@ const TasksBox = () => {
 
   return (
     <div
-      className={`bg-${
-        darkMode ? '[#2B2C37]' : '[#F4F7FD] '
+      className={`${
+        darkMode ? 'bg-[#20212C]' : 'bg-[#F4F7FD]'
       } w-screen h-screen p-5`}
     >
       {loading ? (
@@ -58,12 +58,22 @@ const TasksBox = () => {
                       item.colToAdd === items.colName ? (
                         <button
                           key={index}
-                          className="flex shadow-xl rounded-lg cursor-pointer flex-col gap-2 bg-white p-4"
+                          className={`flex shadow-xl rounded-lg cursor-pointer flex-col gap-2 p-4 ${
+                            darkMode ? 'bg-[#3E3F4E]' : 'bg-white'
+                          }`}
                         >
-                          <h1 className="font-bold text-[18px]">
+                          <h1
+                            className={`font-bold text-[18px] ${
+                              darkMode ? 'text-white' : 'text-black'
+                            }`}
+                          >
                             {item.taskName}
                           </h1>
-                          <span className="">
+                          <span
+                            className={`${
+                              darkMode ? 'text-white' : 'text-black'
+                            }`}
+                          >
                             0 of {item.subTasks.length} Subtasks
                           </span>
                         </button>
