@@ -16,37 +16,40 @@ import { GetDataProvider } from './context/getDataContext';
 import { AddTaskModalProvider } from './context/addTaskModal';
 import { DarkLightModeProvider } from './context/darkLightMode';
 import { EditTaskProvider } from './context/editTaskContext';
+import { MobileBoardModalProvider } from './context/mobileBoardModalContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <EditTaskProvider>
-      <DarkLightModeProvider>
-        <LoaderProvider>
-          <ModalProvider>
-            <SignInUpProvider>
-              <UserProvider>
-                <TasksManagementProvider>
-                  <BoardsProvider>
-                    <ColumnsProvider>
-                      <AddDataProvider>
-                        <AddBoardsProvider>
-                          <GetDataProvider>
-                            <AddTaskModalProvider>
-                              <App />
-                            </AddTaskModalProvider>
-                          </GetDataProvider>
-                        </AddBoardsProvider>
-                      </AddDataProvider>
-                    </ColumnsProvider>
-                  </BoardsProvider>
-                </TasksManagementProvider>
-              </UserProvider>
-            </SignInUpProvider>
-          </ModalProvider>
-        </LoaderProvider>
-      </DarkLightModeProvider>
-    </EditTaskProvider>
+    <MobileBoardModalProvider>
+      <EditTaskProvider>
+        <DarkLightModeProvider>
+          <LoaderProvider>
+            <ModalProvider>
+              <SignInUpProvider>
+                <UserProvider>
+                  <TasksManagementProvider>
+                    <BoardsProvider>
+                      <ColumnsProvider>
+                        <AddDataProvider>
+                          <AddBoardsProvider>
+                            <GetDataProvider>
+                              <AddTaskModalProvider>
+                                <App />
+                              </AddTaskModalProvider>
+                            </GetDataProvider>
+                          </AddBoardsProvider>
+                        </AddDataProvider>
+                      </ColumnsProvider>
+                    </BoardsProvider>
+                  </TasksManagementProvider>
+                </UserProvider>
+              </SignInUpProvider>
+            </ModalProvider>
+          </LoaderProvider>
+        </DarkLightModeProvider>
+      </EditTaskProvider>
+    </MobileBoardModalProvider>
   </BrowserRouter>,
 );
 

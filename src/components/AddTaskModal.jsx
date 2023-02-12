@@ -6,7 +6,6 @@ import { AddTaskModalContext } from '../context/addTaskModal';
 import { TasksManagementContext } from '../context/tasksManagementContext';
 import { UsersContext } from '../context/usersContext';
 import { AddDataContext } from '../context/addDataContext';
-import { GetDataContext } from '../context/getDataContext';
 import { ColumnsContext } from '../context/columnContext';
 import { TiDelete } from 'react-icons/ti';
 import { CgDanger } from 'react-icons/cg';
@@ -16,7 +15,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 500,
+  width: [350, 500],
   bgcolor: 'background.paper',
   boxShadow: 0,
   p: 4,
@@ -151,7 +150,9 @@ export default function BasicAddTaskModal() {
           ) : (
             <div className="flex flex-col justify-center items-center gap-7">
               <CgDanger className="h-[3rem] w-[3rem] " />
-              <h1 className="text-center text-3xl">Please select a board</h1>
+              <h1 className="text-center text-xl md:text-3xl">
+                Please select a board
+              </h1>
             </div>
           )}
         </Box>

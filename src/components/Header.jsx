@@ -3,15 +3,20 @@ import { RxDotsVertical } from 'react-icons/rx';
 import { AddTaskModalContext } from '../context/addTaskModal';
 import { TasksManagementContext } from '../context/tasksManagementContext';
 import { DarkLightModeContext } from '../context/darkLightMode';
+import { MobileBoardModalContext } from '../context/mobileBoardModalContext';
 import { EditTaskContext } from '../context/editTaskContext';
 import LogoMobile from '../assets/logo-mobile.svg';
 import { RiArrowDropDownLine } from 'react-icons/ri';
+import { RiArrowDropUpLine } from 'react-icons/ri';
 
 const Header = () => {
   const { title } = useContext(TasksManagementContext);
   const { handleAddTaskModalOpen } = useContext(AddTaskModalContext);
   const { darkMode } = useContext(DarkLightModeContext);
   const { setEditTaskOpen } = useContext(EditTaskContext);
+  const { boardModalOpen, handleBoardModalOpen } = useContext(
+    MobileBoardModalContext,
+  );
 
   return (
     <div
@@ -31,7 +36,7 @@ const Header = () => {
           {title}
         </h1>
         <button
-          onClick={() => console.log('clicked')}
+          onClick={() => handleBoardModalOpen()}
           className="flex justify-center items-center gap-1"
         >
           {title ? (
@@ -46,12 +51,16 @@ const Header = () => {
             <h1
               className={` ${
                 darkMode ? 'text-white' : 'text-black'
-              } font-bold text-[15px] md:text-[24px] block md:hidden`}
+              } font-bold text-[18px] md:text-[24px] block md:hidden`}
             >
               Boards
             </h1>
           )}
-          <RiArrowDropDownLine className="w-[2.5rem] h-[2.5rem] text-[#635FC7] block md:hidden" />
+          {boardModalOpen ? (
+            <RiArrowDropUpLine className="w-[2.5rem] h-[2.5rem] text-[#635FC7] block md:hidden" />
+          ) : (
+            <RiArrowDropDownLine className="w-[2.5rem] h-[2.5rem] text-[#635FC7] block md:hidden" />
+          )}
         </button>
       </div>
       <div className="flex justify-center items-center gap-2 md:gap-7">

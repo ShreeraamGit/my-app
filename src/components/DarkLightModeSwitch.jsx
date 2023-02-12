@@ -6,7 +6,8 @@ import { MdToggleOff } from 'react-icons/md';
 import { DarkLightModeContext } from '../context/darkLightMode';
 
 const DarkLightModeSwitch = () => {
-  const { darkMode, setDarkMode } = useContext(DarkLightModeContext);
+  const { darkMode, setDarkMode, style, setStyle } =
+    useContext(DarkLightModeContext);
   return (
     <div
       className={`flex w-full justify-center items-center gap-8 py-1 px-10 rounded-lg bg-[#F4F7FD] ${
@@ -19,7 +20,13 @@ const DarkLightModeSwitch = () => {
         }`}
       />
       <button
-        onClick={() => setDarkMode((prevState) => !prevState)}
+        onClick={() => {
+          setDarkMode((prevState) => !prevState);
+          setStyle({
+            ...style,
+            bgcolor: style.bgcolor === '#2B2C37' ? '#FFFFFF' : '#2B2C37',
+          });
+        }}
         className=""
       >
         {darkMode ? (

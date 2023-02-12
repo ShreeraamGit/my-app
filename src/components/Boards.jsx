@@ -7,6 +7,7 @@ import { ModalContext } from '../context/modalContext';
 import { GetDataContext } from '../context/getDataContext';
 import { ColumnsContext } from '../context/columnContext';
 import { DarkLightModeContext } from '../context/darkLightMode';
+import BoardsList from './BoardsList';
 import { collection } from 'firebase/firestore';
 import { db } from '../utils/firebaseClient';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -39,49 +40,17 @@ const Boards = () => {
       >
         ALL BOARDS ({!loadingStatus && docs ? docs.length : 0})
       </h2>
-      <div className="">
-        <ul className="flex flex-col gap-4 hover:text-white">
-          {!loadingStatus && docs ? (
-            docs.map((items) => (
-              <li
-                key={items.boardName}
-                className="rounded-r-full p-2 pr-10 hover:bg-violet-500 hover:text-white"
-              >
-                <button
-                  onClick={async () => {
-                    setLoading(true);
-                    setTitle(items.boardName);
-                    const cols = await getData(users, items.boardName);
-                    setColumns(cols);
-
-                    setTimeout(() => {
-                      setLoading((prevState) => !prevState);
-                    }, 1500);
-                  }}
-                  className={`text-[18px] text-white font-semibold flex items-center gap-5 ${
-                    darkMode ? 'text-[#E4EBFA]' : 'text-black'
-                  }`}
-                >
-                  <TiFlowChildren className="h-[1.5rem] w-[1.5rem]" />
-                  {items.boardName.slice(0, 1).toUpperCase() +
-                    items.boardName.slice(1)}
-                </button>
-              </li>
-            ))
-          ) : (
-            <h1 className="text-center">Loading... Please Wait...</h1>
-          )}
-        </ul>
-      </div>
-      <div className="">
-        <button
-          onClick={() => handleOpen()}
-          className="text-[18px] font-semibold flex items-center gap-5"
-        >
-          <TiFlowChildren className="h-[1.5rem] w-[1.5rem] text-[#635FC7]" />
-          <span className="text-[#635FC7]">+ Create New Board</span>
-        </button>
-      </div>
+      <BoardsList
+        loadingStatus={loadingStatus}
+        docs={docs}
+        setLoading={setLoading}
+        setTitle={setTitle}
+        getData={getData}
+        setColumns={setColumns}
+        users={users}
+        darkMode={darkMode}
+        handleOpen={handleOpen}
+      />
     </div>
   );
 };

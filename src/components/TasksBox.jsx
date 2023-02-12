@@ -5,7 +5,13 @@ import { ColumnsContext } from '../context/columnContext';
 import { GetDataContext } from '../context/getDataContext';
 import { UsersContext } from '../context/usersContext';
 import { DarkLightModeContext } from '../context/darkLightMode';
+import { ModalContext } from '../context/modalContext';
+import { AddTaskModalContext } from '../context/addTaskModal';
+import { MobileBoardModalContext } from '../context/mobileBoardModalContext';
 import CircularProgress from '@mui/material/CircularProgress';
+import Modal from '../components/Modal';
+import BasicAddTaskModal from '../components/AddTaskModal';
+import MobileBoardModal from '../components/MobileBoardModal.jsx';
 import { AiTwotoneCheckCircle } from 'react-icons/ai';
 import { GoAlert } from 'react-icons/go';
 
@@ -18,6 +24,9 @@ const TasksBox = () => {
   const { columns } = useContext(ColumnsContext);
   const { getTasks } = useContext(GetDataContext);
   const { users } = useContext(UsersContext);
+  const { open } = useContext(ModalContext);
+  const { addTaskModalopen } = useContext(AddTaskModalContext);
+  const { boardModalOpen } = useContext(MobileBoardModalContext);
 
   useEffect(() => {
     const getTasksLists = async () => {
@@ -48,7 +57,13 @@ const TasksBox = () => {
           <h1 className="text-4xl">Loading.... Please Wait....</h1>
         </div>
       ) : title && !loading ? (
-        <div className="h-screen w-screen md:h-[85vh] transparent-scrollbar md:w-full overflow-scroll snap-always snap-center flex gap-7 md:gap-14">
+        <div
+          className={`h-screen w-screen md:h-[85vh] ${
+            darkMode
+              ? 'transparent-scrollbar'
+              : 'transparent-scrollbar-light-mode'
+          } md:w-full overflow-scroll snap-always snap-center flex gap-7 md:gap-14`}
+        >
           {columns.map((items, index) => (
             <div
               key={index}
@@ -100,6 +115,10 @@ const TasksBox = () => {
           </div>
         </div>
       )}
+      {open ? <Modal /> : null}
+      {addTaskModalopen ? <BasicAddTaskModal /> : null}
+
+      {boardModalOpen ? <MobileBoardModal /> : null}
     </div>
   );
 };

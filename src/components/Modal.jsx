@@ -2,22 +2,11 @@ import React, { useContext, useState } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { ModalContext } from '../context/modalContext';
+import { DarkLightModeContext } from '../context/darkLightMode';
 import { UsersContext } from '../context/usersContext';
 import { useForm } from 'react-hook-form';
 import { TiDelete } from 'react-icons/ti';
 import { AddDataContext } from '../context/addDataContext';
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 450,
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  p: 3,
-  borderRadius: 3,
-};
 
 export default function BasicModal() {
   const { open, handleClose } = useContext(ModalContext);
@@ -25,6 +14,7 @@ export default function BasicModal() {
 
   const { users } = useContext(UsersContext);
   const { addBoards, addColumns } = useContext(AddDataContext);
+  const { darkMode, style } = useContext(DarkLightModeContext);
 
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data, e) => {
@@ -54,14 +44,27 @@ export default function BasicModal() {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        className=""
       >
         <Box sx={style}>
           <div className="flex flex-col gap-3">
-            <h1 className="text-[24px] font-bold">Add New Board</h1>
+            <h1
+              className={`text-[24px] font-bold ${
+                darkMode ? 'text-white' : 'text-black'
+              }`}
+            >
+              Add New Board
+            </h1>
             <div className="">
               <form className="flex flex-col gap-3">
                 <div className="flex flex-col gap-5">
-                  <label>Name</label>
+                  <label
+                    className={`font-bold ${
+                      darkMode ? 'text-white' : 'text-black'
+                    }`}
+                  >
+                    Board Name
+                  </label>
                   <input
                     className="border py-4 px-4 border-black rounded-lg"
                     type="text"
@@ -70,7 +73,13 @@ export default function BasicModal() {
                   />
                 </div>
                 <div className="flex flex-col gap-5">
-                  <label>Columns</label>
+                  <label
+                    className={`font-bold ${
+                      darkMode ? 'text-white' : 'text-black'
+                    }`}
+                  >
+                    Board Columns
+                  </label>
                   {inputFields.map((items, index) =>
                     index !== 0 ? (
                       <div key={index} className="flex items-center gap-5">
@@ -84,7 +93,9 @@ export default function BasicModal() {
                         />
                         <TiDelete
                           onClick={() => removeColumn(index)}
-                          className="h-[2.5rem] w-[2.5rem] cursor-pointer"
+                          className={`h-[2.5rem] w-[2.5rem] cursor-pointer ${
+                            darkMode ? 'text-white' : 'text-black'
+                          }`}
                         />
                       </div>
                     ) : null,
