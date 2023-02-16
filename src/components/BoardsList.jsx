@@ -12,6 +12,7 @@ const BoardsList = ({
   users,
   darkMode,
   handleOpen,
+  handleBoardModalClose,
 }) => {
   return (
     <Fragment>

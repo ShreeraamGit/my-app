@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import Logo from '../assets/logo-mobile.svg';
 import SignInwithEmail from './SignInwithEmail';
+import LoginWithSocial from './LoginWithSocial';
 import { SignInUpContext } from '../context/loginContext.js';
 import { useForm } from 'react-hook-form';
 
@@ -18,20 +19,23 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-w-full min-h-screen flex items-center justify-center bg-[#f9fafc]">
-      <div className="rounded-xl bg-white p-10 w-full h-screen md:h-fit md:w-fit flex flex-col gap-10">
+    <div className="min-w-screen min-h-screen flex md:items-center md:justify-center justify-start bg-[#f9fafc]">
+      <div className="flex flex-col mt-16 md:mt-0 justify-center items-center gap-12 md:gap-20 w-full h-fit p-3">
         <div className="flex flex-col justify-center items-center gap-4">
           <img className="h-[3.5rem] w-[3.5rem]" src={Logo} alt="Logo" />
-          <h1 className="text-[24px] md:text-[32px]">
+          <h1 className="text-[24px] md:text-[32px] font-extrabold">
             Sign in to your account
           </h1>
         </div>
-        <div className="">
-          <SignInwithEmail
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            register={register}
-          />
+        <div className="rounded-xl bg-[#ffffff] p-5 md:p-10 w-full h-fit md:h-fit md:w-[30rem] flex flex-col gap-10">
+          <div className="flex flex-col gap-5">
+            <SignInwithEmail
+              handleSubmit={handleSubmit}
+              onSubmit={onSubmit}
+              register={register}
+            />
+            <LoginWithSocial />
+          </div>
         </div>
       </div>
     </div>
@@ -39,10 +43,3 @@ const Auth = () => {
 };
 
 export default Auth;
-
-/*<button
-        onClick={() => handleLogin()}
-        className="border border-black mt-44 p-4"
-      >
-        Log in
-      </button>*/

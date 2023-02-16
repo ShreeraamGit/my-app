@@ -8,10 +8,12 @@ import { DarkLightModeContext } from '../context/darkLightMode';
 import { ModalContext } from '../context/modalContext';
 import { AddTaskModalContext } from '../context/addTaskModal';
 import { MobileBoardModalContext } from '../context/mobileBoardModalContext';
+import { EditTaskModalContext } from '../context/editTaskModalContetx';
 import CircularProgress from '@mui/material/CircularProgress';
 import Modal from '../components/Modal';
 import BasicAddTaskModal from '../components/AddTaskModal';
 import MobileBoardModal from '../components/MobileBoardModal.jsx';
+import EditTaskModal from './EditTaskModal';
 import { AiTwotoneCheckCircle } from 'react-icons/ai';
 import { GoAlert } from 'react-icons/go';
 
@@ -19,7 +21,7 @@ const TasksBox = () => {
   const { title, taskLists, setTasksLists } = useContext(
     TasksManagementContext,
   );
-  const { loading, setLoading } = useContext(LoadingContext);
+  const { loading } = useContext(LoadingContext);
   const { darkMode } = useContext(DarkLightModeContext);
   const { columns } = useContext(ColumnsContext);
   const { getTasks } = useContext(GetDataContext);
@@ -27,6 +29,7 @@ const TasksBox = () => {
   const { open } = useContext(ModalContext);
   const { addTaskModalopen } = useContext(AddTaskModalContext);
   const { boardModalOpen } = useContext(MobileBoardModalContext);
+  const { openEditTaskModal } = useContext(EditTaskModalContext);
 
   useEffect(() => {
     const getTasksLists = async () => {
@@ -47,14 +50,14 @@ const TasksBox = () => {
     >
       {title && loading ? (
         <div
-          className={`flex h-full w-full justify-center items-center gap-20 ${
+          className={`flex flex-col md:flex-row h-full w-full justify-center items-center gap-10 md:gap-20 ${
             darkMode ? 'text-white' : 'text-black'
           }`}
         >
           <CircularProgress
             className={`${darkMode ? 'text-white' : 'text-black'}`}
           />
-          <h1 className="text-4xl">Loading.... Please Wait....</h1>
+          <h1 className="text-xl md:text-4xl">Loading.... Please Wait....</h1>
         </div>
       ) : title && !loading ? (
         <div
@@ -119,6 +122,7 @@ const TasksBox = () => {
       {addTaskModalopen ? <BasicAddTaskModal /> : null}
 
       {boardModalOpen ? <MobileBoardModal /> : null}
+      {openEditTaskModal ? <EditTaskModal /> : null}
     </div>
   );
 };

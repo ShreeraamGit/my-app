@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { RxDotsVertical } from 'react-icons/rx';
 import { AddTaskModalContext } from '../context/addTaskModal';
 import { TasksManagementContext } from '../context/tasksManagementContext';
 import { DarkLightModeContext } from '../context/darkLightMode';
@@ -8,6 +7,7 @@ import { EditTaskContext } from '../context/editTaskContext';
 import LogoMobile from '../assets/logo-mobile.svg';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import { RiArrowDropUpLine } from 'react-icons/ri';
+import HeaderDropDownMenu from './HeaderDropDownMenu';
 
 const Header = () => {
   const { title } = useContext(TasksManagementContext);
@@ -63,7 +63,7 @@ const Header = () => {
           )}
         </button>
       </div>
-      <div className="flex justify-center items-center gap-2 md:gap-7">
+      <div className="flex justify-center items-center gap-1 md:gap-1">
         <button
           onClick={() => {
             handleAddTaskModalOpen();
@@ -80,14 +80,7 @@ const Header = () => {
         >
           +
         </button>
-        <RxDotsVertical
-          onClick={() => {
-            setEditTaskOpen((prevState) => !prevState);
-          }}
-          className={`w-[1.5rem] h-[1.5rem] md:w-[1.8rem] md:h-[1.8rem] cursor-pointer ${
-            darkMode ? 'text-[#E4EBFA]' : 'text-[#3E3F4E]'
-          }`}
-        />
+        <HeaderDropDownMenu menuItems={['edit Board', 'delete Board']} />
       </div>
     </div>
   );

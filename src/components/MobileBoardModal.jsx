@@ -62,6 +62,7 @@ const MobileBoardModal = () => {
               users={users}
               darkMode={darkMode}
               handleOpen={handleOpen}
+              handleBoardModalClose={handleBoardModalClose}
             />
             <DarkLightModeSwitch />
           </div>

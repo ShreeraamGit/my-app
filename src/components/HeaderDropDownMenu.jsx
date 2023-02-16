@@ -1,19 +1,14 @@
 import React, { useContext } from 'react';
-import { SignInUpContext } from '../context/loginContext.js';
-import Avatar from '@mui/material/Avatar';
-import { UsersContext } from '../context/usersContext';
 import Box from '@mui/material/Box';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
+import { RxDotsVertical } from 'react-icons/rx';
+import { EditTaskModalContext } from '../context/editTaskModalContetx';
 
-const DropDownMenu = ({ menuItems }) => {
-  const { handleSignOut } = useContext(SignInUpContext);
-  const { users, setUsers } = useContext(UsersContext);
-
+const HeaderDropDownMenu = ({ menuItems }) => {
+  const { handleOpenEditTaskModal } = useContext(EditTaskModalContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -41,16 +36,9 @@ const DropDownMenu = ({ menuItems }) => {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar
-              sx={{ width: 32, height: 32 }}
-              alt={users.displayName}
-              src={users.photoURL}
-            />
+            <RxDotsVertical className="w-[2rem] h-[2rem] md:w-[2rem] md:h-[2rem]" />
           </IconButton>
         </Tooltip>
-        <Typography sx={{ minWidth: 100 }}>
-          Welcome {users.displayName}
-        </Typography>
       </Box>
       <Menu
         anchorEl={anchorEl}
@@ -64,7 +52,7 @@ const DropDownMenu = ({ menuItems }) => {
             overflow: 'visible',
             filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
             mt: 1,
-            width: 150,
+            width: 200,
             '& .MuiAvatar-root': {
               width: 32,
               height: 32,
@@ -88,36 +76,31 @@ const DropDownMenu = ({ menuItems }) => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        {menuItems.map((items) => (
-          <MenuItem
-            sx={{
-              fontSize: '20px',
-            }}
-            key={items}
-            onClick={handleClose}
-          >
-            {items.charAt(0).toUpperCase() + items.slice(1)}
-          </MenuItem>
-        ))}
-        <Divider />
         <MenuItem
           sx={{
             fontSize: '20px',
           }}
           onClick={() => {
-            handleSignOut();
-            setUsers(null);
+            handleOpenEditTaskModal();
             handleClose();
           }}
         >
-          Logout
+          Edit Board
+        </MenuItem>
+        <MenuItem
+          sx={{
+            fontSize: '20px',
+          }}
+          onClick={handleClose}
+        >
+          Delete Board
         </MenuItem>
       </Menu>
     </React.Fragment>
   );
 };
 
-export default DropDownMenu;
+export default HeaderDropDownMenu;
 
 /*<div className="flex justify-between items-center">
       <button

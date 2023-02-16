@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import DarkLightModeSwitch from './DarkLightModeSwitch';
-import HideSideBar from './HideSideBar';
+import DropDownMenu from './HideSideBar';
 import LogoHeader from './LogoHeader';
 import Boards from './Boards';
 import { DarkLightModeContext } from '../context/darkLightMode';
@@ -19,7 +19,7 @@ const SideMenu = () => {
       </div>
       <div className="flex flex-col gap-10">
         <DarkLightModeSwitch />
-        <HideSideBar />
+        <DropDownMenu menuItems={['profile', 'account']} />
       </div>
     </div>
   );
