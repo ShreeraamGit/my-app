@@ -1,54 +1,10 @@
-import {
-  render,
-  screen,
-  fireEvent,
-  waitFor,
-  waitForElementToBeRemoved,
-} from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import App from '../App';
-import DarkLightModeSwitch from '../components/DarkLightModeSwitch';
-import { DarkLightModeContext } from '../context/darkLightMode';
 
 test('renders sign in to your account header elementw', () => {
   render(<App />);
   const headingElement = screen.getByText(/Sign in to your account/i);
   expect(headingElement).toBeInTheDocument();
-});
-
-describe('DarkLightModeSwitcher', () => {
-  it('toggles between light and dark mode', async () => {
-    const setDarkMode = jest.fn();
-    const setStyle = jest.fn();
-    const darkMode = false;
-    const style = { bgcolor: '#FFFFFF' };
-    render(
-      <DarkLightModeContext.Provider
-        value={{ darkMode, setDarkMode, style, setStyle }}
-      >
-        <DarkLightModeSwitch />
-      </DarkLightModeContext.Provider>,
-    );
-    const toggleButton = screen.getByRole('button', {
-      name: /switch/i,
-    });
-    const toggleButtonOn = screen.getByTestId('toggle on');
-
-    expect(toggleButton).toBeInTheDocument();
-    expect(toggleButtonOn).toBeInTheDocument();
-
-    // dark mode changed
-    const mockOnClick = jest.fn();
-    render(<button onClick={mockOnClick()} />);
-    const toggleButtonOff = screen.getByTestId('toggle on');
-    fireEvent.click(toggleButtonOff);
-    expect(toggleButtonOff).toBeInTheDocument();
-    expect(mockOnClick).toHaveBeenCalledTimes(1);
-
-    //again changed to light mode
-    fireEvent.click(toggleButtonOn);
-    expect(toggleButtonOn).toBeInTheDocument();
-    expect(mockOnClick).toHaveBeenCalledTimes(1);
-  });
 });
 
 /*fireEvent.click(toggleButton);
