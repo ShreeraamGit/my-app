@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from 'react';
-import { TiFlowChildren } from 'react-icons/ti';
 import { TasksManagementContext } from '../context/tasksManagementContext';
 import { LoadingContext } from '../context/loadingContext';
 import { UsersContext } from '../context/usersContext';
@@ -7,29 +6,33 @@ import { ModalContext } from '../context/modalContext';
 import { GetDataContext } from '../context/getDataContext';
 import { ColumnsContext } from '../context/columnContext';
 import { DarkLightModeContext } from '../context/darkLightMode';
+import { BoardsContext } from '../context/boardsContext';
 import BoardsList from './BoardsList';
-import { collection } from 'firebase/firestore';
-import { db } from '../utils/firebaseClient';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 const Boards = () => {
   const { setTitle } = useContext(TasksManagementContext);
-  const { setLoading } = useContext(LoadingContext);
+  const { loading, setLoading } = useContext(LoadingContext);
   const { handleOpen } = useContext(ModalContext);
   const { users } = useContext(UsersContext);
-  const { getData } = useContext(GetDataContext);
   const { setColumns } = useContext(ColumnsContext);
   const { darkMode } = useContext(DarkLightModeContext);
+  const { getBoards, getData } = useContext(GetDataContext);
+  const { boards, setBoards } = useContext(BoardsContext);
 
-  const query = collection(
-    db,
-    'data',
-    'boards',
-    'users',
-    `${users.uid}`,
-    'boardDetails',
-  );
-  const [docs, loadingStatus, error] = useCollectionData(query);
+  useEffect(() => {
+    const getBoardsList = async () => {
+      setLoading(true);
+      const recieveBaords = await getBoards(users);
+      setBoards(recieveBaords);
+      setTimeout(() => {
+        setLoading((prevState) => !prevState);
+      }, 1500);
+    };
+
+    if (users) {
+      getBoardsList();
+    }
+  }, [users]);
 
   return (
     <div className="flex flex-col gap-10">
@@ -38,11 +41,17 @@ const Boards = () => {
           darkMode ? 'text-[#E4EBFA]' : 'text-[#A8A4FF]'
         }`}
       >
-        ALL BOARDS ({!loadingStatus && docs ? docs.length : 0})
+        ALL BOARDS (
+        {boards && boards.length > 0 ? (
+          <span className="">{boards.length}</span>
+        ) : (
+          <span className="">0</span>
+        )}
+        )
       </h2>
       <BoardsList
-        loadingStatus={loadingStatus}
-        docs={docs}
+        loadingStatus={loading}
+        docs={boards}
         setLoading={setLoading}
         setTitle={setTitle}
         getData={getData}
@@ -56,21 +65,3 @@ const Boards = () => {
 };
 
 export default Boards;
-
-/*const query = collection(
-    db,
-    'data',
-    'boards',
-    'users',
-    `${users.uid}`,
-    'boardDetails',
-  );
-  const [docs, loadingStatus, error] = useCollectionData(query);
-
-  useEffect(() => {
-    if (docs) {
-      setBoards(docs);
-    }
-  }, [docs]);
-
-  console.log(boards);*/

@@ -19,7 +19,7 @@ const BoardsList = ({
       {' '}
       <div className="">
         <ul className="flex flex-col gap-4 hover:text-white">
-          {!loadingStatus && docs ? (
+          {docs ? (
             docs.map((items) => (
               <li
                 key={items.boardName}

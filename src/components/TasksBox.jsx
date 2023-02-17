@@ -9,6 +9,7 @@ import { ModalContext } from '../context/modalContext';
 import { AddTaskModalContext } from '../context/addTaskModal';
 import { MobileBoardModalContext } from '../context/mobileBoardModalContext';
 import { EditTaskModalContext } from '../context/editTaskModalContetx';
+import { RandomColorsContext } from '../context/createRandomColorsContext';
 import CircularProgress from '@mui/material/CircularProgress';
 import Modal from '../components/Modal';
 import BasicAddTaskModal from '../components/AddTaskModal';
@@ -30,6 +31,8 @@ const TasksBox = () => {
   const { addTaskModalopen } = useContext(AddTaskModalContext);
   const { boardModalOpen } = useContext(MobileBoardModalContext);
   const { openEditTaskModal } = useContext(EditTaskModalContext);
+  const { color, setColor, generateRandomColor } =
+    useContext(RandomColorsContext);
 
   useEffect(() => {
     const getTasksLists = async () => {
@@ -73,7 +76,7 @@ const TasksBox = () => {
               className="text-white min-w-[69%] md:min-w-[25%] h-fit flex flex-col gap-5"
             >
               <div className="flex justify-start items-center gap-5">
-                <AiTwotoneCheckCircle className="" />
+                <AiTwotoneCheckCircle className="text-red-500" />
                 <h3 className="text-[18px] tracking-[0.3rem] text-[#828FA3] font-bold">
                   {items.colName.toUpperCase()} (0)
                 </h3>

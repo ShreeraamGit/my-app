@@ -5,6 +5,27 @@ import { getDocs, collection, query, orderBy } from 'firebase/firestore';
 export const GetDataContext = createContext({});
 
 export const GetDataProvider = ({ children }) => {
+  const getBoards = async (users) => {
+    let boards = [];
+    if (users) {
+      const snapshot = await collection(
+        db,
+        'data',
+        'boards',
+        'users',
+        `${users.uid}`,
+        'boardDetails',
+      );
+      const q = query(snapshot, orderBy('createdAt', 'asc'));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        boards.push(doc.data());
+      });
+    }
+    return boards;
+  };
+
   const getData = async (users, title) => {
     let cols = [];
     if (title) {
@@ -53,7 +74,7 @@ export const GetDataProvider = ({ children }) => {
     return tasks;
   };
 
-  const value = { getData, getTasks };
+  const value = { getData, getTasks, getBoards };
   return (
     <GetDataContext.Provider value={value}>{children}</GetDataContext.Provider>
   );

@@ -6,10 +6,12 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { RxDotsVertical } from 'react-icons/rx';
 import { EditTaskModalContext } from '../context/editTaskModalContetx';
+import { DarkLightModeContext } from '../context/darkLightMode';
 
 const HeaderDropDownMenu = ({ menuItems }) => {
   const { handleOpenEditTaskModal } = useContext(EditTaskModalContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const { darkMode } = useContext(DarkLightModeContext);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -36,7 +38,11 @@ const HeaderDropDownMenu = ({ menuItems }) => {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <RxDotsVertical className="w-[2rem] h-[2rem] md:w-[2rem] md:h-[2rem]" />
+            <RxDotsVertical
+              className={`${
+                darkMode ? 'text-white' : 'text-black'
+              } w-[2rem] h-[2rem] md:w-[2rem] md:h-[2rem]`}
+            />
           </IconButton>
         </Tooltip>
       </Box>
