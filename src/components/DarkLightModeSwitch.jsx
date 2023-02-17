@@ -20,6 +20,7 @@ const DarkLightModeSwitch = () => {
         }`}
       />
       <button
+        aria-label="switch"
         onClick={() => {
           setDarkMode((prevState) => !prevState);
           setStyle({
@@ -31,12 +32,14 @@ const DarkLightModeSwitch = () => {
       >
         {darkMode ? (
           <MdToggleOff
+            data-testid="toggle off"
             className={`w-[4rem] h-[4rem] text-violet-500 ${
               darkMode ? 'text-[#635FC7]' : 'text-[#3E3F4E]'
             }`}
           />
         ) : (
           <MdToggleOn
+            data-testid="toggle on"
             className={`w-[4rem] h-[4rem] text-violet-500 ${
               darkMode ? 'text-[#635FC7]' : 'text-[#3E3F4E]'
             }`}

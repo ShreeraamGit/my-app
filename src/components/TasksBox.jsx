@@ -43,7 +43,7 @@ const TasksBox = () => {
     if (title && columns.length > 0) {
       getTasksLists();
     }
-  }, [title, columns, taskLists]);
+  }, [title]);
 
   return (
     <div

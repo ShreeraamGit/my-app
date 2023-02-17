@@ -114,7 +114,7 @@ export default function BasicModal() {
                   onClick={handleSubmit(onSubmit)}
                   name="submit"
                   defaultValue={'Create New Board'}
-                  className="border text-[20px] font-bold py-4 px-4 text-white rounded-full bg-[#635FC7]"
+                  className="text-[20px] font-bold py-4 px-4 text-white rounded-full bg-[#635FC7]"
                   type="submit"
                 >
                   Create New Board
