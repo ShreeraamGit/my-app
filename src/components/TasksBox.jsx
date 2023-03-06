@@ -16,7 +16,7 @@ import MobileBoardModal from '../components/MobileBoardModal.jsx';
 import EditTaskModal from './EditTaskModal';
 import { AiTwotoneCheckCircle } from 'react-icons/ai';
 import { GoAlert } from 'react-icons/go';
-import { collection, orderBy } from 'firebase/firestore';
+import { collection } from 'firebase/firestore';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { db } from '../utils/firebaseClient';
 

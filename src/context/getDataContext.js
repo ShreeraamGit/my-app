@@ -1,38 +1,33 @@
 import { createContext } from 'react';
 import { db } from '../utils/firebaseClient';
-import {
-  getDocs,
-  collection,
-  doc,
-  query,
-  orderBy,
-  onSnapshot,
-} from 'firebase/firestore';
+import { getDocs, collection } from 'firebase/firestore';
 
 export const GetDataContext = createContext({});
 
 export const GetDataProvider = ({ children }) => {
   const getTasks = async (users, title, columns) => {
     let tasks = [];
-    for (const item of columns) {
-      const querySnapshot = await getDocs(
-        collection(
-          db,
-          'data',
-          'boards',
-          'users',
-          `${users.uid}`,
-          'boardDetails',
-          `boardName - ${title.replace(/\s/g, '')}`,
-          'columns',
-          `colName - ${item.colName.replace(/\s/g, '')}`,
-          'tasks',
-        ),
-      );
-      querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        tasks.push(doc.data());
-      });
+    if (columns.length > 0) {
+      for (const item of columns) {
+        const querySnapshot = await getDocs(
+          collection(
+            db,
+            'data',
+            'boards',
+            'users',
+            `${users.uid}`,
+            'boardDetails',
+            `boardName - ${title.replace(/\s/g, '')}`,
+            'columns',
+            `colName - ${item.colName.replace(/\s/g, '')}`,
+            'tasks',
+          ),
+        );
+        querySnapshot.forEach((doc) => {
+          // doc.data() is never undefined for query doc snapshots
+          tasks.push(doc.data());
+        });
+      }
     }
     return tasks;
   };

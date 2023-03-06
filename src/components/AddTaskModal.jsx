@@ -30,12 +30,8 @@ export default function BasicAddTaskModal() {
   const { users } = useContext(UsersContext);
 
   const [subTasks, setSubtasks] = useState([1]);
-  const {
-    addTaskModalopen,
-    addTaskCompletion,
-    handleAddTaskModalClose,
-    handleAddTaskCompletion,
-  } = useContext(AddTaskModalContext);
+  const { addTaskModalopen, handleAddTaskModalClose, handleAddTaskCompletion } =
+    useContext(AddTaskModalContext);
 
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = async (data) => {
@@ -43,7 +39,6 @@ export default function BasicAddTaskModal() {
       addTasks(columns, users, data, title);
       const timer = setTimeout(function () {
         handleAddTaskCompletion();
-        console.log('tasks created and sent', addTaskCompletion);
         clearTimeout(timer);
       }, 1000);
     }

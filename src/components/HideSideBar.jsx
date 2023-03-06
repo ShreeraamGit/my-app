@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { SignInUpContext } from '../context/loginContext.js';
 import Avatar from '@mui/material/Avatar';
 import { UsersContext } from '../context/usersContext';
+import { ColumnsContext } from '../context/columnContext';
+import { TasksManagementContext } from '../context/tasksManagementContext';
 import Box from '@mui/material/Box';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -13,7 +15,8 @@ import Tooltip from '@mui/material/Tooltip';
 const DropDownMenu = ({ menuItems }) => {
   const { handleSignOut } = useContext(SignInUpContext);
   const { users, setUsers } = useContext(UsersContext);
-
+  const { setColumns } = useContext(ColumnsContext);
+  const { setTitle, setTasksLists } = useContext(TasksManagementContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -107,6 +110,9 @@ const DropDownMenu = ({ menuItems }) => {
           onClick={() => {
             handleSignOut();
             setUsers(null);
+            setTitle(null);
+            setColumns(null);
+            setTasksLists(null);
             handleClose();
           }}
         >
