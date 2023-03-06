@@ -3,36 +3,34 @@ import { TasksManagementContext } from '../context/tasksManagementContext';
 import { LoadingContext } from '../context/loadingContext';
 import { UsersContext } from '../context/usersContext';
 import { ModalContext } from '../context/modalContext';
-import { GetDataContext } from '../context/getDataContext';
-import { ColumnsContext } from '../context/columnContext';
 import { DarkLightModeContext } from '../context/darkLightMode';
 import { BoardsContext } from '../context/boardsContext';
 import BoardsList from './BoardsList';
+import { collection } from 'firebase/firestore';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { db } from '../utils/firebaseClient';
 
 const Boards = () => {
   const { setTitle } = useContext(TasksManagementContext);
-  const { loading, setLoading } = useContext(LoadingContext);
+  const { setLoading } = useContext(LoadingContext);
   const { handleOpen } = useContext(ModalContext);
   const { users } = useContext(UsersContext);
-  const { setColumns } = useContext(ColumnsContext);
   const { darkMode } = useContext(DarkLightModeContext);
-  const { getBoards, getData } = useContext(GetDataContext);
   const { boards, setBoards } = useContext(BoardsContext);
 
-  useEffect(() => {
-    const getBoardsList = async () => {
-      setLoading(true);
-      const recieveBaords = await getBoards(users);
-      setBoards(recieveBaords);
-      setTimeout(() => {
-        setLoading((prevState) => !prevState);
-      }, 1500);
-    };
+  const query = collection(
+    db,
+    'data',
+    'boards',
+    'users',
+    `${users.uid}`,
+    'boardDetails',
+  );
+  const [docs, loadingStatus, error] = useCollectionData(query);
 
-    if (users) {
-      getBoardsList();
-    }
-  }, [users]);
+  useEffect(() => {
+    setBoards(docs);
+  }, [docs]);
 
   return (
     <div className="flex flex-col gap-10">
@@ -50,13 +48,10 @@ const Boards = () => {
         )
       </h2>
       <BoardsList
-        loadingStatus={loading}
+        loadingStatus={loadingStatus}
         docs={boards}
         setLoading={setLoading}
         setTitle={setTitle}
-        getData={getData}
-        setColumns={setColumns}
-        users={users}
         darkMode={darkMode}
         handleOpen={handleOpen}
       />
@@ -65,3 +60,18 @@ const Boards = () => {
 };
 
 export default Boards;
+
+/*useEffect(() => {
+    const getBoardsList = async () => {
+      setLoading(true);
+      const recieveBaords = await getBoards(users);
+      setBoards(recieveBaords);
+      setTimeout(() => {
+        setLoading((prevState) => !prevState);
+      }, 1500);
+    };
+
+    if (users) {
+      getBoardsList();
+    }
+  }, []);*/

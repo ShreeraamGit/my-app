@@ -7,19 +7,15 @@ const BoardsList = ({
   docs,
   setLoading,
   setTitle,
-  getData,
-  setColumns,
-  users,
   darkMode,
   handleOpen,
-  handleBoardModalClose,
 }) => {
   return (
     <Fragment>
       {' '}
       <div className="">
         <ul className="flex flex-col gap-4 hover:text-white">
-          {docs ? (
+          {!loadingStatus && docs ? (
             docs.map((items) => (
               <li
                 key={items.boardName}
@@ -29,9 +25,6 @@ const BoardsList = ({
                   onClick={async () => {
                     setLoading(true);
                     setTitle(items.boardName);
-                    const cols = await getData(users, items.boardName);
-                    setColumns(cols);
-
                     setTimeout(() => {
                       setLoading((prevState) => !prevState);
                     }, 1500);

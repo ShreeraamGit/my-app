@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { TasksManagementContext } from '../context/tasksManagementContext';
 import { LoadingContext } from '../context/loadingContext';
 import { ColumnsContext } from '../context/columnContext';
@@ -9,7 +9,6 @@ import { ModalContext } from '../context/modalContext';
 import { AddTaskModalContext } from '../context/addTaskModal';
 import { MobileBoardModalContext } from '../context/mobileBoardModalContext';
 import { EditTaskModalContext } from '../context/editTaskModalContetx';
-import { RandomColorsContext } from '../context/createRandomColorsContext';
 import CircularProgress from '@mui/material/CircularProgress';
 import Modal from '../components/Modal';
 import BasicAddTaskModal from '../components/AddTaskModal';
@@ -17,33 +16,67 @@ import MobileBoardModal from '../components/MobileBoardModal.jsx';
 import EditTaskModal from './EditTaskModal';
 import { AiTwotoneCheckCircle } from 'react-icons/ai';
 import { GoAlert } from 'react-icons/go';
+import { collection, orderBy } from 'firebase/firestore';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { db } from '../utils/firebaseClient';
 
 const TasksBox = () => {
+  const [columnsQuery, setColumnsQuery] = useState(null);
   const { title, taskLists, setTasksLists } = useContext(
     TasksManagementContext,
   );
   const { loading } = useContext(LoadingContext);
   const { darkMode } = useContext(DarkLightModeContext);
-  const { columns } = useContext(ColumnsContext);
+  const { columns, setColumns } = useContext(ColumnsContext);
   const { getTasks } = useContext(GetDataContext);
   const { users } = useContext(UsersContext);
   const { open } = useContext(ModalContext);
-  const { addTaskModalopen } = useContext(AddTaskModalContext);
+  const { addTaskModalopen, addTaskCompletion } =
+    useContext(AddTaskModalContext);
   const { boardModalOpen } = useContext(MobileBoardModalContext);
   const { openEditTaskModal } = useContext(EditTaskModalContext);
-  const { color, setColor, generateRandomColor } =
-    useContext(RandomColorsContext);
+
+  const getTasksLists = async () => {
+    const recieveTasks = await getTasks(users, title, columns);
+    setTasksLists(recieveTasks);
+  };
 
   useEffect(() => {
-    const getTasksLists = async () => {
-      const recieveTasks = await getTasks(users, title, columns);
-      setTasksLists(recieveTasks);
-    };
+    if (title) {
+      setColumnsQuery(
+        collection(
+          db,
+          'data',
+          'boards',
+          'users',
+          `${users.uid}`,
+          'boardDetails',
+          `boardName - ${title.replace(/\s/g, '')}`,
+          'columns',
+        ),
+      );
+    } else setColumnsQuery(null);
+  }, [title]);
 
-    if (title && columns.length > 0) {
+  const [columnsList, loadingStatus, error] = useCollectionData(columnsQuery, {
+    snapshotListenOptions: { includeMetadataChanges: true },
+  });
+
+  useEffect(() => {
+    if (title && !loadingStatus) {
+      setColumns(columnsList);
+    }
+  }, [columnsList]);
+
+  useEffect(() => {
+    if (title) {
       getTasksLists();
     }
-  }, [title]);
+  }, [title, columns]);
+
+  useEffect(() => {
+    getTasksLists();
+  }, [addTaskCompletion]);
 
   return (
     <div
@@ -132,52 +165,13 @@ const TasksBox = () => {
 
 export default TasksBox;
 
-/*{loading ? (
-        <div className="flex h-full justify-start items-start gap-20">
-          <CircularProgress />
-          <h1 className="text-4xl">Loading.... Please Wait....</h1>
-        </div>
-      ) : (
-        <div className="h-screen w-screen md:h-[85vh] md:w-fit overflow-scroll snap-always snap-center flex gap-7">
-          {title && !loading
-            ? columns.map((items, index) => (
-                <div
-                  key={index}
-                  className="text-white min-w-[69%] md:min-w-[25%] h-fit flex flex-col gap-5"
-                >
-                  <div className="flex justify-start items-center gap-5">
-                    <AiTwotoneCheckCircle className="" />
-                    <h3 className="text-[18px] tracking-[0.3rem] text-[#828FA3] font-bold">
-                      {items.colName.toUpperCase()} (0)
-                    </h3>
-                  </div>
-                  {taskLists.map((item, index) =>
-                    item.colToAdd === items.colName ? (
-                      <button
-                        key={index}
-                        className={`flex shadow-xl rounded-lg cursor-pointer flex-col gap-3 p-4 ${
-                          darkMode ? 'bg-[#3E3F4E]' : 'bg-white'
-                        }`}
-                      >
-                        <h1
-                          className={`font-bold text-[18px] ${
-                            darkMode ? 'text-white' : 'text-black'
-                          }`}
-                        >
-                          {item.taskName}
-                        </h1>
-                        <span
-                          className={`${
-                            darkMode ? 'text-white' : 'text-black'
-                          }`}
-                        >
-                          0 of {item.subTasks.length} Subtasks
-                        </span>
-                      </button>
-                    ) : null,
-                  )}
-                </div>
-              ))
-            : null}
-        </div>
-      )}*/
+/*  useEffect(() => {
+    const getTasksLists = async () => {
+      const recieveTasks = await getTasks(users, title, columns);
+      setTasksLists(recieveTasks);
+    };
+
+    if (title && columns.length > 0) {
+      getTasksLists();
+    }
+  }, [title]);*/

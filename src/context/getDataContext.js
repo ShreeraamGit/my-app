@@ -1,55 +1,48 @@
 import { createContext } from 'react';
 import { db } from '../utils/firebaseClient';
-import { getDocs, collection, query, orderBy } from 'firebase/firestore';
+import {
+  getDocs,
+  collection,
+  doc,
+  query,
+  orderBy,
+  onSnapshot,
+} from 'firebase/firestore';
 
 export const GetDataContext = createContext({});
 
 export const GetDataProvider = ({ children }) => {
-  const getBoards = async (users) => {
-    let boards = [];
-    if (users) {
-      const snapshot = await collection(
-        db,
-        'data',
-        'boards',
-        'users',
-        `${users.uid}`,
-        'boardDetails',
-      );
-      const q = query(snapshot, orderBy('createdAt', 'asc'));
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        boards.push(doc.data());
-      });
-    }
-    return boards;
-  };
-
-  const getData = async (users, title) => {
-    let cols = [];
-    if (title) {
-      const snapshot = await collection(
-        db,
-        'data',
-        'boards',
-        'users',
-        `${users.uid}`,
-        'boardDetails',
-        `boardName - ${title.replace(/\s/g, '')}`,
-        'columns',
-      );
-      const q = query(snapshot, orderBy('createdAt', 'asc'));
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        cols.push(doc.data());
-      });
-    }
-    return cols;
-  };
-
   const getTasks = async (users, title, columns) => {
+    let tasks = [];
+    for (const item of columns) {
+      const querySnapshot = await getDocs(
+        collection(
+          db,
+          'data',
+          'boards',
+          'users',
+          `${users.uid}`,
+          'boardDetails',
+          `boardName - ${title.replace(/\s/g, '')}`,
+          'columns',
+          `colName - ${item.colName.replace(/\s/g, '')}`,
+          'tasks',
+        ),
+      );
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        tasks.push(doc.data());
+      });
+    }
+    return tasks;
+  };
+  const value = { getTasks };
+  return (
+    <GetDataContext.Provider value={value}>{children}</GetDataContext.Provider>
+  );
+};
+
+/*const getTasks = async (users, title, columns) => {
     let tasks = [];
     for (const item of columns) {
       const snapshot = await collection(
@@ -65,35 +58,11 @@ export const GetDataProvider = ({ children }) => {
         'tasks',
       );
       const q = query(snapshot, orderBy('createdAt', 'asc'));
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        tasks.push(doc.data());
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          tasks.push(doc.data());
+        });
       });
     }
     return tasks;
-  };
-
-  const value = { getData, getTasks, getBoards };
-  return (
-    <GetDataContext.Provider value={value}>{children}</GetDataContext.Provider>
-  );
-};
-
-/*const docRef = doc(
-      db,
-      'data',
-      'boards',
-      'users',
-      `${users.uid}`,
-      'boardDetails',
-      'boardName - Testing',
-    );
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      console.log('Document data:', docSnap.data());
-    } else {
-      // doc.data() will be undefined in this case
-      console.log('No such document!');
-    }*/
+  };*/
