@@ -1,14 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Box from '@mui/material/Box';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
+import CustomizedSnackbars from './CustomizedSnackBar';
 import { RxDotsVertical } from 'react-icons/rx';
 import { EditTaskModalContext } from '../context/editTaskModalContetx';
 import { DarkLightModeContext } from '../context/darkLightMode';
+import { DeleteBoardContext } from '../context/deleteBoardContext';
+import { UsersContext } from '../context/usersContext';
+import { TasksManagementContext } from '../context/tasksManagementContext.js';
+import { SnackBarContext } from '../context/customizedSnakabrContext';
+import { ColumnsContext } from '../context/columnContext';
 
 const HeaderDropDownMenu = ({ menuItems }) => {
+  const { title, setTasksLists, setTitle } = useContext(TasksManagementContext);
+  const { setColumns } = useContext(ColumnsContext);
+  const { users } = useContext(UsersContext);
   const { handleOpenEditTaskModal } = useContext(EditTaskModalContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const { darkMode } = useContext(DarkLightModeContext);
@@ -19,6 +28,10 @@ const HeaderDropDownMenu = ({ menuItems }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const { deleteBoards } = useContext(DeleteBoardContext);
+  const { handleClickSnackBar, snackbarOpen } = useContext(SnackBarContext);
+
   return (
     <React.Fragment>
       <Box
@@ -97,11 +110,19 @@ const HeaderDropDownMenu = ({ menuItems }) => {
           sx={{
             fontSize: '20px',
           }}
-          onClick={handleClose}
+          onClick={() => {
+            deleteBoards(users, title, handleClickSnackBar);
+            handleClose();
+          }}
         >
           Delete Board
         </MenuItem>
       </Menu>
+      {snackbarOpen ? (
+        <CustomizedSnackbars
+          message={`The Board ${title} deleted succesfully`}
+        />
+      ) : null}
     </React.Fragment>
   );
 };

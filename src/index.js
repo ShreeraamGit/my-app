@@ -20,6 +20,8 @@ import { MobileBoardModalProvider } from './context/mobileBoardModalContext';
 import { DropDownMenuProvider } from './context/dropDownMenuContext';
 import { EditTaskModalProvider } from './context/editTaskModalContetx';
 import { RandomColorsProvider } from './context/createRandomColorsContext';
+import { DeleteBoardProvider } from './context/deleteBoardContext';
+import { SnackBarProvider } from './context/customizedSnakabrContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -41,7 +43,11 @@ root.render(
                                 <GetDataProvider>
                                   <AddTaskModalProvider>
                                     <EditTaskModalProvider>
-                                      <App />
+                                      <DeleteBoardProvider>
+                                        <SnackBarProvider>
+                                          <App />
+                                        </SnackBarProvider>
+                                      </DeleteBoardProvider>
                                     </EditTaskModalProvider>
                                   </AddTaskModalProvider>
                                 </GetDataProvider>

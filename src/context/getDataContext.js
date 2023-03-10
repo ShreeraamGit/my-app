@@ -28,7 +28,7 @@ export const GetDataProvider = ({ children }) => {
 
   const getTasks = async (users, title, columns) => {
     let tasks = [];
-    if (columns.length > 0) {
+    if (columns && columns.length > 0) {
       for (const item of columns) {
         const tasksRef = collection(
           db,
