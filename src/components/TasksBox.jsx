@@ -28,13 +28,18 @@ const TasksBox = () => {
   const { loading } = useContext(LoadingContext);
   const { darkMode } = useContext(DarkLightModeContext);
   const { columns, setColumns } = useContext(ColumnsContext);
-  const { getTasks } = useContext(GetDataContext);
+  const { getTasks, getColumns } = useContext(GetDataContext);
   const { users } = useContext(UsersContext);
   const { open } = useContext(ModalContext);
   const { addTaskModalopen, addTaskCompletion } =
     useContext(AddTaskModalContext);
   const { boardModalOpen } = useContext(MobileBoardModalContext);
   const { openEditTaskModal } = useContext(EditTaskModalContext);
+
+  const getColumnsLists = async () => {
+    const recieveColumns = await getColumns(users, title);
+    setColumns(recieveColumns);
+  };
 
   const getTasksLists = async () => {
     const recieveTasks = await getTasks(users, title, columns);
@@ -43,30 +48,9 @@ const TasksBox = () => {
 
   useEffect(() => {
     if (title) {
-      setColumnsQuery(
-        collection(
-          db,
-          'data',
-          'boards',
-          'users',
-          `${users.uid}`,
-          'boardDetails',
-          `boardName - ${title.replace(/\s/g, '')}`,
-          'columns',
-        ),
-      );
-    } else setColumnsQuery(null);
-  }, [title]);
-
-  const [columnsList, loadingStatus, error] = useCollectionData(columnsQuery, {
-    snapshotListenOptions: { includeMetadataChanges: true },
-  });
-
-  useEffect(() => {
-    if (title && !loadingStatus) {
-      setColumns(columnsList);
+      getColumnsLists();
     }
-  }, [columnsList]);
+  }, [title]);
 
   useEffect(() => {
     if (title) {
@@ -111,7 +95,7 @@ const TasksBox = () => {
               <div className="flex justify-start items-center gap-5">
                 <AiTwotoneCheckCircle className="text-red-500" />
                 <h3 className="text-[18px] tracking-[0.3rem] text-[#828FA3] font-bold">
-                  {items.colName.toUpperCase()} (0)
+                  {items.colName.toUpperCase()}
                 </h3>
               </div>
               {taskLists.map((item, index) =>
@@ -175,3 +159,30 @@ export default TasksBox;
       getTasksLists();
     }
   }, [title]);*/
+
+/*useEffect(() => {
+    if (title) {
+      setColumnsQuery(
+        collection(
+          db,
+          'data',
+          'boards',
+          'users',
+          `${users.uid}`,
+          'boardDetails',
+          `boardName - ${title.replace(/\s/g, '')}`,
+          'columns',
+        ),
+      );
+    } else setColumnsQuery(null);
+  }, [title]);
+
+  const [columnsList, loadingStatus, error] = useCollectionData(columnsQuery, {
+    snapshotListenOptions: { includeMetadataChanges: true },
+  });
+
+  useEffect(() => {
+    if (title && !loadingStatus) {
+      setColumns(columnsList);
+    }
+  }, [columnsList]);*/

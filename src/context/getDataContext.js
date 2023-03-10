@@ -1,28 +1,50 @@
 import { createContext } from 'react';
 import { db } from '../utils/firebaseClient';
-import { getDocs, collection } from 'firebase/firestore';
+import { getDocs, collection, orderBy, query } from 'firebase/firestore';
+import { async } from '@firebase/util';
 
 export const GetDataContext = createContext({});
 
 export const GetDataProvider = ({ children }) => {
+  const getColumns = async (users, title) => {
+    let columns = [];
+    const columnsRef = collection(
+      db,
+      'data',
+      'boards',
+      'users',
+      `${users.uid}`,
+      'boardDetails',
+      `boardName - ${title.replace(/\s/g, '')}`,
+      'columns',
+    );
+    const q = query(columnsRef, orderBy('createdAt', 'asc'));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      columns.push(doc.data());
+    });
+    return columns;
+  };
+
   const getTasks = async (users, title, columns) => {
     let tasks = [];
     if (columns.length > 0) {
       for (const item of columns) {
-        const querySnapshot = await getDocs(
-          collection(
-            db,
-            'data',
-            'boards',
-            'users',
-            `${users.uid}`,
-            'boardDetails',
-            `boardName - ${title.replace(/\s/g, '')}`,
-            'columns',
-            `colName - ${item.colName.replace(/\s/g, '')}`,
-            'tasks',
-          ),
+        const tasksRef = collection(
+          db,
+          'data',
+          'boards',
+          'users',
+          `${users.uid}`,
+          'boardDetails',
+          `boardName - ${title.replace(/\s/g, '')}`,
+          'columns',
+          `colName - ${item.colName.replace(/\s/g, '')}`,
+          'tasks',
         );
+        const q = query(tasksRef, orderBy('createdAt', 'asc'));
+        const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
           // doc.data() is never undefined for query doc snapshots
           tasks.push(doc.data());
@@ -31,7 +53,7 @@ export const GetDataProvider = ({ children }) => {
     }
     return tasks;
   };
-  const value = { getTasks };
+  const value = { getTasks, getColumns };
   return (
     <GetDataContext.Provider value={value}>{children}</GetDataContext.Provider>
   );

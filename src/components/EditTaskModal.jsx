@@ -14,9 +14,7 @@ import { TasksManagementContext } from '../context/tasksManagementContext';
 export default function EditTaskModal() {
   const { openEditTaskModal, handleCloseEditTaskModal } =
     useContext(EditTaskModalContext);
-  const { columns } = useContext(ColumnsContext);
   const [inputFields, setInputFields] = useState([1]);
-  const { users } = useContext(UsersContext);
   const { darkMode, style } = useContext(DarkLightModeContext);
   const { title } = useContext(TasksManagementContext);
 
