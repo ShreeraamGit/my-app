@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { TasksManagementContext } from '../context/tasksManagementContext';
 import { LoadingContext } from '../context/loadingContext';
 import { ColumnsContext } from '../context/columnContext';
@@ -14,14 +14,11 @@ import Modal from '../components/Modal';
 import BasicAddTaskModal from '../components/AddTaskModal';
 import MobileBoardModal from '../components/MobileBoardModal.jsx';
 import EditTaskModal from './EditTaskModal';
+import TaskNumberCount from './TaskNumberCount';
 import { AiTwotoneCheckCircle } from 'react-icons/ai';
 import { GoAlert } from 'react-icons/go';
-import { collection } from 'firebase/firestore';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
-import { db } from '../utils/firebaseClient';
 
 const TasksBox = () => {
-  const [columnsQuery, setColumnsQuery] = useState(null);
   const { title, taskLists, setTasksLists } = useContext(
     TasksManagementContext,
   );
@@ -94,8 +91,9 @@ const TasksBox = () => {
             >
               <div className="flex justify-start items-center gap-5">
                 <AiTwotoneCheckCircle className="text-red-500" />
-                <h3 className="text-[18px] tracking-[0.3rem] text-[#828FA3] font-bold">
-                  {items.colName.toUpperCase()}
+                <h3 className="text-[18px] tracking-[0.3rem] text-[#828FA3]">
+                  {items.colName.toUpperCase()}(
+                  <TaskNumberCount task={taskLists} colName={items.colName} />)
                 </h3>
               </div>
               {taskLists.map((item, index) =>

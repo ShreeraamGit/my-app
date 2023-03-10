@@ -1,7 +1,6 @@
 import { createContext } from 'react';
 import { db } from '../utils/firebaseClient';
 import { getDocs, collection, orderBy, query } from 'firebase/firestore';
-import { async } from '@firebase/util';
 
 export const GetDataContext = createContext({});
 
