@@ -11,11 +11,11 @@ import { DarkLightModeContext } from '../context/darkLightMode';
 import { DeleteBoardContext } from '../context/deleteBoardContext';
 import { UsersContext } from '../context/usersContext';
 import { TasksManagementContext } from '../context/tasksManagementContext.js';
-import { SnackBarContext } from '../context/customizedSnakabrContext';
 import { ColumnsContext } from '../context/columnContext';
+import { SnackBarContext } from '../context/customizedSnakabrContext';
 
 const HeaderDropDownMenu = ({ menuItems }) => {
-  const { title, setTasksLists, setTitle } = useContext(TasksManagementContext);
+  const { title, setTitle } = useContext(TasksManagementContext);
   const { setColumns } = useContext(ColumnsContext);
   const { users } = useContext(UsersContext);
   const { handleOpenEditTaskModal } = useContext(EditTaskModalContext);
@@ -113,15 +113,15 @@ const HeaderDropDownMenu = ({ menuItems }) => {
           onClick={() => {
             deleteBoards(users, title, handleClickSnackBar);
             handleClose();
+            setTitle(null);
+            setColumns([]);
           }}
         >
           Delete Board
         </MenuItem>
       </Menu>
       {snackbarOpen ? (
-        <CustomizedSnackbars
-          message={`The Board ${title} deleted succesfully`}
-        />
+        <CustomizedSnackbars message={`Board deleted succesfully`} />
       ) : null}
     </React.Fragment>
   );

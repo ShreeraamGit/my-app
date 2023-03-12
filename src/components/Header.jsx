@@ -33,7 +33,7 @@ const Header = () => {
             darkMode ? 'text-white' : 'text-black'
           } font-bold text-[15px] md:text-[24px] hidden md:block`}
         >
-          {title}
+          {title ? title.charAt(0).toUpperCase() + title.slice(1) : null}
         </h1>
         <button
           onClick={() => handleBoardModalOpen()}
