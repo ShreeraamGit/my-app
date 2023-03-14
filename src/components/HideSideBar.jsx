@@ -4,6 +4,7 @@ import Avatar from '@mui/material/Avatar';
 import { UsersContext } from '../context/usersContext';
 import { ColumnsContext } from '../context/columnContext';
 import { TasksManagementContext } from '../context/tasksManagementContext';
+import { DarkLightModeContext } from '../context/darkLightMode.js';
 import Box from '@mui/material/Box';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -14,6 +15,7 @@ import Tooltip from '@mui/material/Tooltip';
 
 const DropDownMenu = ({ menuItems }) => {
   const { handleSignOut } = useContext(SignInUpContext);
+  const { darkMode } = useContext(DarkLightModeContext);
   const { users, setUsers } = useContext(UsersContext);
   const { setColumns } = useContext(ColumnsContext);
   const { setTitle, setTasksLists } = useContext(TasksManagementContext);
@@ -32,7 +34,7 @@ const DropDownMenu = ({ menuItems }) => {
           display: 'flex',
           alignItems: 'center',
           textAlign: 'center',
-          gap: '30px',
+          gap: '7px',
         }}
       >
         <Tooltip title="Account settings">
@@ -51,8 +53,16 @@ const DropDownMenu = ({ menuItems }) => {
             />
           </IconButton>
         </Tooltip>
-        <Typography sx={{ minWidth: 100 }}>
-          Welcome {users.displayName}
+        <Typography variant="h6" sx={{ minWidth: 100 }}>
+          {darkMode ? (
+            <span className="font-normal text-white underline underline-offset-4">
+              Welcome {users.displayName.split(' ')[0]}
+            </span>
+          ) : (
+            <span className="font-normal underline underline-offset-4">
+              Welcome {users.displayName.split(' ')[0]}
+            </span>
+          )}
         </Typography>
       </Box>
       <Menu

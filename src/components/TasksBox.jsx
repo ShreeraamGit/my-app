@@ -7,6 +7,7 @@ import { UsersContext } from '../context/usersContext';
 import { DarkLightModeContext } from '../context/darkLightMode';
 import { ModalContext } from '../context/modalContext';
 import { AddTaskModalContext } from '../context/addTaskModal';
+import { RandomColorsContext } from '../context/createRandomColorsContext';
 import { MobileBoardModalContext } from '../context/mobileBoardModalContext';
 import { EditTaskModalContext } from '../context/editTaskModalContetx';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -22,6 +23,7 @@ const TasksBox = () => {
   const { title, taskLists, setTasksLists } = useContext(
     TasksManagementContext,
   );
+  const { generateRandomColor } = useContext(RandomColorsContext);
   const { loading } = useContext(LoadingContext);
   const { darkMode } = useContext(DarkLightModeContext);
   const { columns, setColumns } = useContext(ColumnsContext);
@@ -90,7 +92,7 @@ const TasksBox = () => {
               className="text-white min-w-[69%] md:min-w-[25%] h-fit flex flex-col gap-5"
             >
               <div className="flex justify-start items-center gap-5">
-                <AiTwotoneCheckCircle className="text-red-500" />
+                <AiTwotoneCheckCircle className={`${generateRandomColor()}`} />
                 <h3 className="text-[18px] tracking-[0.3rem] text-[#828FA3]">
                   {items.colName.toUpperCase()}(
                   <TaskNumberCount task={taskLists} colName={items.colName} />)

@@ -9,10 +9,12 @@ export const RandomColorsProvider = ({ children }) => {
   const [color, setColor] = useState(null);
 
   const generateRandomColor = () => {
-    const red = Math.floor(Math.random() * 256);
-    const green = Math.floor(Math.random() * 256);
-    const blue = Math.floor(Math.random() * 256);
-    return `rgb(${red}, ${green}, ${blue})`;
+    // generate a random number between 0 and 16777215 (0xffffff in decimal)
+    const randomColor = Math.floor(Math.random() * 16777215);
+    // convert the number to a hexadecimal string
+    const hexColor = randomColor.toString(16);
+    // pad the string with zeros until it has six characters
+    return `text-[#${hexColor.padStart(6, '0')}]`;
   };
 
   const value = { color, setColor, generateRandomColor };
