@@ -10,17 +10,18 @@ import { AddTaskModalContext } from '../context/addTaskModal';
 import { RandomColorsContext } from '../context/createRandomColorsContext';
 import { MobileBoardModalContext } from '../context/mobileBoardModalContext';
 import { EditTaskModalContext } from '../context/editTaskModalContetx';
+import { TaskListModalOpenContext } from '../context/editTaskListModalContext';
 import CircularProgress from '@mui/material/CircularProgress';
 import Modal from '../components/Modal';
 import BasicAddTaskModal from '../components/AddTaskModal';
 import MobileBoardModal from '../components/MobileBoardModal.jsx';
 import EditTaskModal from './EditTaskModal';
 import TaskNumberCount from './TaskNumberCount';
+import EditTaskListModal from './EditTaskListModal';
 import { AiTwotoneCheckCircle } from 'react-icons/ai';
 import { GoAlert } from 'react-icons/go';
 
 const TasksBox = () => {
-  const colors = ['red', 'green', 'blue', 'yellow', 'purple'];
   const { title, taskLists, setTasksLists } = useContext(
     TasksManagementContext,
   );
@@ -35,6 +36,9 @@ const TasksBox = () => {
     useContext(AddTaskModalContext);
   const { boardModalOpen } = useContext(MobileBoardModalContext);
   const { openEditTaskModal } = useContext(EditTaskModalContext);
+  const { handleTaskListModalOpen, taskListModalOpen } = useContext(
+    TaskListModalOpenContext,
+  );
 
   const getColumnsLists = async () => {
     const recieveColumns = await getColumns(users, title);
@@ -106,6 +110,9 @@ const TasksBox = () => {
               {taskLists.map((item, index) =>
                 item.colToAdd === items.colName ? (
                   <button
+                    onClick={() => {
+                      handleTaskListModalOpen();
+                    }}
                     key={index}
                     className={`flex shadow-xl rounded-lg cursor-pointer flex-col gap-3 p-4 ${
                       darkMode ? 'bg-[#3E3F4E]' : 'bg-white'
@@ -148,6 +155,7 @@ const TasksBox = () => {
 
       {boardModalOpen ? <MobileBoardModal /> : null}
       {openEditTaskModal ? <EditTaskModal /> : null}
+      {taskListModalOpen ? <EditTaskListModal /> : null}
     </div>
   );
 };

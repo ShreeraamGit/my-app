@@ -22,6 +22,7 @@ import { EditTaskModalProvider } from './context/editTaskModalContetx';
 import { RandomColorsProvider } from './context/createRandomColorsContext';
 import { DeleteBoardProvider } from './context/deleteBoardContext';
 import { SnackBarProvider } from './context/customizedSnakabrContext';
+import { TaskListModalProvider } from './context/editTaskListModalContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -45,7 +46,9 @@ root.render(
                                     <EditTaskModalProvider>
                                       <DeleteBoardProvider>
                                         <SnackBarProvider>
-                                          <App />
+                                          <TaskListModalProvider>
+                                            <App />
+                                          </TaskListModalProvider>
                                         </SnackBarProvider>
                                       </DeleteBoardProvider>
                                     </EditTaskModalProvider>

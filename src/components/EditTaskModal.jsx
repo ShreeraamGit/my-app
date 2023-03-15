@@ -116,7 +116,7 @@ export default function EditTaskModal() {
                   <button
                     onClick={() => createColumn()}
                     type="createColumn"
-                    className="border text-[20px] text-[#635FC7] font-bold py-4 px-4 rounded-full bg-[#F4F7FD]"
+                    className="border text-[20px] text-[#635FC7] font-bold py-3 px-3 rounded-full bg-[#F4F7FD]"
                   >
                     + Add New Column
                   </button>
@@ -124,7 +124,7 @@ export default function EditTaskModal() {
                     onClick={handleSubmit(onSubmit)}
                     name="submit"
                     defaultValue={'Create New Board'}
-                    className="border text-[20px] font-bold py-4 px-4 text-white rounded-full bg-[#635FC7]"
+                    className="border text-[20px] font-bold py-3 px-3 text-white rounded-full bg-[#635FC7]"
                     type="submit"
                   >
                     Save Changes
