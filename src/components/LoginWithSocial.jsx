@@ -16,10 +16,10 @@ const LoginWithSocial = () => {
       <div className="flex justify-around items-center">
         <BsGoogle
           onClick={() => handleLogin()}
-          className=" h-[2.4rem] w-[2.4rem] cursor-pointer"
+          className="h-[1.8rem] w-[1.8rem] md:h-[2.4rem] md:w-[2.4rem] cursor-pointer"
         />
-        <BsFacebook className=" h-[2.4rem] w-[2.4rem] cursor-pointer" />
-        <BsTwitter className=" h-[2.4rem] w-[2.4rem] cursor-pointer" />
+        <BsFacebook className=" h-[1.8rem] w-[1.8rem] md:h-[2.4rem] md:w-[2.4rem] cursor-pointer" />
+        <BsTwitter className=" h-[1.8rem] w-[1.8rem] md:h-[2.4rem] md:w-[2.4rem] cursor-pointer" />
       </div>
     </div>
   );

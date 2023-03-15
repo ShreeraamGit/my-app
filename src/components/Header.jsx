@@ -7,6 +7,7 @@ import LogoMobile from '../assets/logo-mobile.svg';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import { RiArrowDropUpLine } from 'react-icons/ri';
 import HeaderDropDownMenu from './HeaderDropDownMenu';
+import { MdAddCircle } from 'react-icons/md';
 
 const Header = () => {
   const { title } = useContext(TasksManagementContext);
@@ -70,14 +71,12 @@ const Header = () => {
         >
           + Add New Task
         </button>
-        <button
+        <MdAddCircle
           onClick={() => {
             handleAddTaskModalOpen();
           }}
-          className="py-2 px-2 md:hidden rounded-full flex justify-center items-center bg-[#635FC7] text-white font-extrabold text-[20px]"
-        >
-          +
-        </button>
+          className="md:hidden h-[2rem] w-[2rem] text-[#635FC7]"
+        />
         <HeaderDropDownMenu menuItems={['edit Board', 'delete Board']} />
       </div>
     </div>

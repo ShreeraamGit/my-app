@@ -54,7 +54,7 @@ const HeaderDropDownMenu = ({ menuItems }) => {
             <RxDotsVertical
               className={`${
                 darkMode ? 'text-white' : 'text-black'
-              } w-[2rem] h-[2rem] md:w-[2rem] md:h-[2rem]`}
+              } w-[1.5rem] h-[1.5rem] md:w-[2rem] md:h-[2rem]`}
             />
           </IconButton>
         </Tooltip>
