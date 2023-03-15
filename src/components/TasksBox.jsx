@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { TasksManagementContext } from '../context/tasksManagementContext';
 import { LoadingContext } from '../context/loadingContext';
 import { ColumnsContext } from '../context/columnContext';
@@ -22,6 +22,7 @@ import { AiTwotoneCheckCircle } from 'react-icons/ai';
 import { GoAlert } from 'react-icons/go';
 
 const TasksBox = () => {
+  const [individualTask, setIndividualTask] = useState();
   const { title, taskLists, setTasksLists } = useContext(
     TasksManagementContext,
   );
@@ -112,6 +113,7 @@ const TasksBox = () => {
                   <button
                     onClick={() => {
                       handleTaskListModalOpen();
+                      setIndividualTask(item);
                     }}
                     key={index}
                     className={`flex shadow-xl rounded-lg cursor-pointer flex-col gap-3 p-4 ${
@@ -155,7 +157,7 @@ const TasksBox = () => {
 
       {boardModalOpen ? <MobileBoardModal /> : null}
       {openEditTaskModal ? <EditTaskModal /> : null}
-      {taskListModalOpen ? <EditTaskListModal /> : null}
+      {taskListModalOpen ? <EditTaskListModal task={individualTask} /> : null}
     </div>
   );
 };
