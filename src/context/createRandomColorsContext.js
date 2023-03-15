@@ -14,7 +14,7 @@ export const RandomColorsProvider = ({ children }) => {
     // convert the number to a hexadecimal string
     const hexColor = randomColor.toString(16);
     // pad the string with zeros until it has six characters
-    return `text-[#${hexColor.padStart(6, '0')}]`;
+    return `#${hexColor.padStart(6, '0')}`;
   };
 
   const value = { color, setColor, generateRandomColor };

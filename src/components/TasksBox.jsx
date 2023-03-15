@@ -20,6 +20,7 @@ import { AiTwotoneCheckCircle } from 'react-icons/ai';
 import { GoAlert } from 'react-icons/go';
 
 const TasksBox = () => {
+  const colors = ['red', 'green', 'blue', 'yellow', 'purple'];
   const { title, taskLists, setTasksLists } = useContext(
     TasksManagementContext,
   );
@@ -92,7 +93,11 @@ const TasksBox = () => {
               className="text-white min-w-[69%] md:min-w-[25%] h-fit flex flex-col gap-5"
             >
               <div className="flex justify-start items-center gap-5">
-                <AiTwotoneCheckCircle className={`${generateRandomColor()}`} />
+                <AiTwotoneCheckCircle
+                  style={{
+                    color: generateRandomColor(),
+                  }}
+                />
                 <h3 className="text-[18px] tracking-[0.3rem] text-[#828FA3]">
                   {items.colName.toUpperCase()}(
                   <TaskNumberCount task={taskLists} colName={items.colName} />)
