@@ -3,7 +3,6 @@ import { AddTaskModalContext } from '../context/addTaskModal';
 import { TasksManagementContext } from '../context/tasksManagementContext';
 import { DarkLightModeContext } from '../context/darkLightMode';
 import { MobileBoardModalContext } from '../context/mobileBoardModalContext';
-import { EditTaskContext } from '../context/editTaskContext';
 import LogoMobile from '../assets/logo-mobile.svg';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import { RiArrowDropUpLine } from 'react-icons/ri';
@@ -13,7 +12,6 @@ const Header = () => {
   const { title } = useContext(TasksManagementContext);
   const { handleAddTaskModalOpen } = useContext(AddTaskModalContext);
   const { darkMode } = useContext(DarkLightModeContext);
-  const { setEditTaskOpen } = useContext(EditTaskContext);
   const { boardModalOpen, handleBoardModalOpen } = useContext(
     MobileBoardModalContext,
   );

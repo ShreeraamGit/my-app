@@ -1,6 +1,6 @@
 import './styles/globalStyles.css';
 import { app } from './utils/firebaseClient';
-import { useEffect, useContext, useState } from 'react';
+import { useEffect, useContext } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { UsersContext } from './context/usersContext';
 import Auth from './components/Auth';

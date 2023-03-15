@@ -3,12 +3,9 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { EditTaskModalContext } from '../context/editTaskModalContetx';
 import { DarkLightModeContext } from '../context/darkLightMode';
-import { UsersContext } from '../context/usersContext';
 import { useForm } from 'react-hook-form';
 import { TiDelete } from 'react-icons/ti';
 import { CgDanger } from 'react-icons/cg';
-import { AddDataContext } from '../context/addDataContext';
-import { ColumnsContext } from '../context/columnContext';
 import { TasksManagementContext } from '../context/tasksManagementContext';
 
 export default function EditTaskModal() {

@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { doc, deleteDoc, collection } from 'firebase/firestore';
+import { doc, deleteDoc } from 'firebase/firestore';
 import { db } from '../utils/firebaseClient';
 
 export const DeleteBoardContext = createContext({});

@@ -20,8 +20,6 @@ export default function EditTaskListModal({ task }) {
     TaskListModalOpenContext,
   );
 
-  console.log(task);
-
   return (
     <div>
       <Modal

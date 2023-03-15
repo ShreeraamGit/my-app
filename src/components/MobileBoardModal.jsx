@@ -32,7 +32,7 @@ const MobileBoardModal = () => {
     `${users.uid}`,
     'boardDetails',
   );
-  const [docs, loadingStatus, error] = useCollectionData(query);
+  const [docs, loadingStatus] = useCollectionData(query);
 
   const { boardModalOpen, handleBoardModalClose } = useContext(
     MobileBoardModalContext,

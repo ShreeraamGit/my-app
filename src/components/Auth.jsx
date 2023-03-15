@@ -1,12 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Logo from '../assets/logo-mobile.svg';
 import SignInwithEmail from './SignInwithEmail';
 import LoginWithSocial from './LoginWithSocial';
-import { SignInUpContext } from '../context/loginContext.js';
 import { useForm } from 'react-hook-form';
 
 const Auth = () => {
-  const { handleLogin } = useContext(SignInUpContext);
   const {
     register,
     handleSubmit,
