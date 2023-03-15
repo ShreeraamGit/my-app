@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { useContext } from 'react';
-import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 import { TaskListModalOpenContext } from '../context/editTaskListModalContext';
 
@@ -18,10 +16,12 @@ const style = {
   p: 4,
 };
 
-export default function EditTaskListModal() {
+export default function EditTaskListModal({ task }) {
   const { taskListModalOpen, handleTaskListModalClose } = useContext(
     TaskListModalOpenContext,
   );
+
+  console.log(task);
 
   return (
     <div>
@@ -30,22 +30,13 @@ export default function EditTaskListModal() {
         aria-describedby="transition-modal-description"
         open={taskListModalOpen}
         onClose={handleTaskListModalClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
       >
-        <Fade in={taskListModalOpen}>
-          <Box sx={style}>
-            <Typography id="transition-modal-title" variant="h6" component="h2">
-              Text in a modal
-            </Typography>
-            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography>
-          </Box>
-        </Fade>
+        <Box sx={style}>
+          <div className="flex flex-col gap-4">
+            <h1 className="font-bold text-[20px]">{task.taskName}</h1>
+            <p className="">{task.description}</p>
+          </div>
+        </Box>
       </Modal>
     </div>
   );
