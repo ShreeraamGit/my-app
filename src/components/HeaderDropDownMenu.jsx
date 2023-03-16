@@ -54,7 +54,7 @@ const HeaderDropDownMenu = ({ menuItems }) => {
             <RxDotsVertical
               className={`${
                 darkMode ? 'text-white' : 'text-black'
-              } w-[1.5rem] h-[1.5rem] md:w-[2rem] md:h-[2rem]`}
+              } w-[1.5rem] h-[1.5rem] md:w-[1.5rem] md:h-[1.5rem]`}
             />
           </IconButton>
         </Tooltip>
@@ -71,7 +71,7 @@ const HeaderDropDownMenu = ({ menuItems }) => {
             overflow: 'visible',
             filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
             mt: 1,
-            width: 200,
+            width: 140,
             '& .MuiAvatar-root': {
               width: 32,
               height: 32,
@@ -97,7 +97,7 @@ const HeaderDropDownMenu = ({ menuItems }) => {
       >
         <MenuItem
           sx={{
-            fontSize: '20px',
+            fontSize: '16px',
           }}
           onClick={() => {
             handleOpenEditTaskModal();
@@ -108,7 +108,7 @@ const HeaderDropDownMenu = ({ menuItems }) => {
         </MenuItem>
         <MenuItem
           sx={{
-            fontSize: '20px',
+            fontSize: '16px',
           }}
           onClick={() => {
             deleteBoards(users, title, handleClickSnackBar);

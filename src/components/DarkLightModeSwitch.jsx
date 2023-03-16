@@ -10,12 +10,12 @@ const DarkLightModeSwitch = () => {
     useContext(DarkLightModeContext);
   return (
     <div
-      className={`flex w-full justify-center items-center gap-8 py-1 px-10 rounded-lg bg-[#F4F7FD] ${
+      className={`flex w-full justify-center items-center gap-8 py-1 px-7 rounded-lg bg-[#F4F7FD] ${
         darkMode ? 'bg-[#20212C]' : 'bg-[#F4F7FD]'
       }`}
     >
       <BsMoonStarsFill
-        className={`w-[2rem] h-[2rem] ${
+        className={`w-[1.2rem] h-[1.2rem] ${
           darkMode ? 'text-[#E4EBFA]' : 'text-[#3E3F4E]'
         }`}
       />
@@ -33,21 +33,21 @@ const DarkLightModeSwitch = () => {
         {darkMode ? (
           <MdToggleOff
             data-testid="toggle off"
-            className={`w-[4rem] h-[4rem] text-violet-500 ${
+            className={`w-[2.3rem] h-[2.3rem] text-violet-500 ${
               darkMode ? 'text-[#635FC7]' : 'text-[#3E3F4E]'
             }`}
           />
         ) : (
           <MdToggleOn
             data-testid="toggle on"
-            className={`w-[4rem] h-[4rem] text-violet-500 ${
+            className={`w-[2.3rem] h-[2.3rem] text-violet-500 ${
               darkMode ? 'text-[#635FC7]' : 'text-[#3E3F4E]'
             }`}
           />
         )}
       </button>
       <FiSun
-        className={`w-[2rem] h-[2rem] text-gray-500 ${
+        className={`w-[1.2rem] h-[1.2rem] text-gray-500 ${
           darkMode ? 'text-[#E4EBFA]' : 'text-[#3E3F4E]'
         } `}
       />

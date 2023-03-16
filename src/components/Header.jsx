@@ -30,7 +30,7 @@ const Header = () => {
         <h1
           className={` ${
             darkMode ? 'text-white' : 'text-black'
-          } font-bold text-[15px] md:text-[24px] hidden md:block`}
+          } font-bold text-[12px] md:text-[18px] hidden md:block`}
         >
           {title ? title.charAt(0).toUpperCase() + title.slice(1) : null}
         </h1>
@@ -42,7 +42,7 @@ const Header = () => {
             <h1
               className={` ${
                 darkMode ? 'text-white' : 'text-black'
-              } font-bold text-[15px] md:text-[24px] block md:hidden`}
+              } font-bold text-[12px] md:text-[18px]  block md:hidden`}
             >
               {title}
             </h1>
@@ -67,7 +67,7 @@ const Header = () => {
           onClick={() => {
             handleAddTaskModalOpen();
           }}
-          className="p-2 rounded-full hidden md:block px-9 bg-[#635FC7] font-semibold text-white"
+          className="p-2 text-[12px] md:text-[15px] rounded-full hidden md:block px-9 bg-[#635FC7] font-semibold text-white"
         >
           + Add New Task
         </button>

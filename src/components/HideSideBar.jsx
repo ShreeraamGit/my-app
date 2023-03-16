@@ -55,11 +55,11 @@ const DropDownMenu = ({ menuItems }) => {
         </Tooltip>
         <Typography variant="h6" sx={{ minWidth: 100 }}>
           {darkMode ? (
-            <span className="font-normal text-white underline underline-offset-4">
+            <span className="font-bold text-[12px] text-white underline underline-offset-4">
               Welcome {users.displayName.split(' ')[0]}
             </span>
           ) : (
-            <span className="font-normal underline underline-offset-4">
+            <span className="font-bold text-[12px] underline underline-offset-4">
               Welcome {users.displayName.split(' ')[0]}
             </span>
           )}
