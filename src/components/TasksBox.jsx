@@ -95,15 +95,17 @@ const TasksBox = () => {
           {columns.map((items, index) => (
             <div
               key={index}
-              className="text-white min-w-[69%] md:min-w-[25%] h-fit flex flex-col gap-5"
+              className="text-white min-w-[69%] md:min-w-[19%] h-fit flex flex-col gap-5"
             >
               <div className="flex justify-start items-center gap-5">
                 <AiTwotoneCheckCircle
                   style={{
                     color: generateRandomColor(),
+                    height: '10px',
+                    width: '10px',
                   }}
                 />
-                <h3 className="text-[18px] tracking-[0.3rem] text-[#828FA3]">
+                <h3 className="text-[12px] font-bold tracking-[0.3rem] text-[#828FA3]">
                   {items.colName.toUpperCase()}(
                   <TaskNumberCount task={taskLists} colName={items.colName} />)
                 </h3>
@@ -121,14 +123,18 @@ const TasksBox = () => {
                     }`}
                   >
                     <h1
-                      className={`font-bold text-[18px] ${
+                      className={`font-bold text-[12px] tracking-[0.08rem] ${
                         darkMode ? 'text-white' : 'text-black'
                       }`}
                     >
                       {item.taskName}
                     </h1>
                     <span
-                      className={`${darkMode ? 'text-white' : 'text-black'}`}
+                      className={`${
+                        darkMode
+                          ? 'text-white text-[12px]'
+                          : 'text-[12px] text-black'
+                      }`}
                     >
                       0 of {item.subTasks.length} Subtasks
                     </span>

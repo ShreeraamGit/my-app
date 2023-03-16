@@ -16,17 +16,23 @@
     }
 
     .transparent-scrollbar::-webkit-scrollbar {
-      width: 5px;
+      width: 1px;
+      height: 5px;
+      border-radius: 1px;
       background-color: transparent;
     }
 
     .transparent-scrollbar::-webkit-scrollbar-thumb {
       background-color: rgba(255, 255, 255, 0.2);
-      border-radius: 10px;
+      border-radius: 1px;
+      width: 1px;
+      height: 5px;
     }
     .transparent-scrollbar-light-mode::-webkit-scrollbar-thumb {
-      background-color: #f4f7fd;
-      border-radius: 10px;
+      background-color: #f4f5fd;
+      border-radius: 1px;
+      width: 1px;
+      height: 5px;
     }
   }
 }
