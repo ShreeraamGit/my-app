@@ -107,6 +107,8 @@ const HeaderDropDownMenu = ({ menuItems }) => {
           Edit Board
         </MenuItem>
         <MenuItem
+          onMouseEnter={(e) => (e.target.style.color = 'red')}
+          onMouseLeave={(e) => (e.target.style.color = 'black')}
           sx={{
             fontSize: '16px',
           }}
