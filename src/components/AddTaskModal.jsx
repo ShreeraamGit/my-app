@@ -74,10 +74,10 @@ export default function BasicAddTaskModal() {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: [350, 400],
+            width: [350, 370],
             bgcolor: darkMode ? '#2B2C37' : 'background.paper',
             boxShadow: 0,
-            p: 2,
+            p: 2.5,
             overFlow: 'hidden',
             borderRadius: 3,
           }}
@@ -128,7 +128,7 @@ export default function BasicAddTaskModal() {
                         darkMode
                           ? 'bg-[#2B2C37] border-white'
                           : 'bg-white border-black'
-                      } border placeholder:text-[12px] h-[6rem] placeholder:-translate-y-8 placeholder:whitespace-pre-wrap py-4 px-4 border-black rounded-lg`}
+                      } border placeholder:text-[12px] h-[6rem] break-all overflow-y-auto resize-none: placeholder:-translate-y-8 placeholder:whitespace-pre-wrap py-4 px-4 border-black rounded-lg`}
                       type="text"
                       placeholder="e.g. Taking Break is good.This 15 minutes bareak will help you to reacharge the batteries little."
                       {...register('Description', {
@@ -172,7 +172,7 @@ export default function BasicAddTaskModal() {
                     <button
                       onClick={() => createColumn()}
                       type="createColumn"
-                      className="border text-[15px] text-[#635FC7] font-bold py-1 px-2 rounded-full bg-[#F4F7FD]"
+                      className="border text-[13px] text-[#635FC7] font-bold py-1 px-2 rounded-full bg-[#F4F7FD]"
                     >
                       + Add New Subtasks
                     </button>
@@ -207,7 +207,7 @@ export default function BasicAddTaskModal() {
                     onClick={handleSubmit(onSubmit)}
                     name="submit"
                     defaultValue={'Create New Board'}
-                    className="text-[15px] font-bold py-1 px-2 text-white rounded-full bg-[#635FC7]"
+                    className="text-[13px] font-bold py-1 px-2 text-white rounded-full bg-[#635FC7]"
                     type="submit"
                   >
                     Create Task
