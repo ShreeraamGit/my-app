@@ -17,7 +17,7 @@ const SideMenu = () => {
         <LogoHeader />
         <Boards />
       </div>
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-4">
         <DarkLightModeSwitch />
         <DropDownMenu menuItems={['profile', 'account']} />
       </div>

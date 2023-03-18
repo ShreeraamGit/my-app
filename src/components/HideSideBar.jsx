@@ -34,14 +34,14 @@ const DropDownMenu = ({ menuItems }) => {
           display: 'flex',
           alignItems: 'center',
           textAlign: 'center',
-          gap: '7px',
+          gap: '10px',
         }}
       >
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
             size="small"
-            sx={{ ml: 2 }}
+            sx={{ ml: 0 }}
             aria-controls={open ? 'account-menu' : undefined}
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}

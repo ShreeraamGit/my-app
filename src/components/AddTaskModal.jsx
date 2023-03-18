@@ -9,6 +9,7 @@ import { AddDataContext } from '../context/addDataContext';
 import { ColumnsContext } from '../context/columnContext';
 import { TiDelete } from 'react-icons/ti';
 import { CgDanger } from 'react-icons/cg';
+import { DarkLightModeContext } from '../context/darkLightMode';
 
 const style = {
   position: 'absolute',
@@ -28,6 +29,7 @@ export default function BasicAddTaskModal() {
   const { columns } = useContext(ColumnsContext);
   const { addTasks } = useContext(AddDataContext);
   const { users } = useContext(UsersContext);
+  const { darkMode } = useContext(DarkLightModeContext);
 
   const [subTasks, setSubtasks] = useState([1]);
   const { addTaskModalopen, handleAddTaskModalClose, handleAddTaskCompletion } =
@@ -66,28 +68,67 @@ export default function BasicAddTaskModal() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: [350, 400],
+            bgcolor: darkMode ? '#2B2C37' : 'background.paper',
+            boxShadow: 0,
+            p: 2,
+            overFlow: 'hidden',
+            borderRadius: 3,
+          }}
+        >
           {title ? (
             <div className="flex flex-col gap-2">
-              <h1 className="text-[24px] font-bold">Add New Task</h1>
+              <h1
+                className={`text-[15px] font-bold ${
+                  darkMode ? 'text-white' : 'text-[#000112]'
+                }`}
+              >
+                Add New Task
+              </h1>
               <div className="">
                 <form
                   className="flex flex-col gap-2"
                   onSubmit={handleSubmit(onSubmit)}
                 >
                   <div className="flex flex-col gap-3">
-                    <label>Title</label>
+                    <label
+                      className={`text-[12px] font-bold ${
+                        darkMode ? 'text-white' : 'text-[#000112]'
+                      }`}
+                    >
+                      Title
+                    </label>
                     <input
-                      className="border py-2 px-2 border-black rounded-lg"
+                      className={`placeholder:text-[12px] border py-2 px-2 rounded-lg ${
+                        darkMode
+                          ? 'bg-[#2B2C37] border-white'
+                          : 'bg-white border-black'
+                      }`}
                       type="text"
                       placeholder="e.g. Take Coffee Break"
                       {...register('title', { required: true, maxLength: 25 })}
                     />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <label>Description</label>
+                    <label
+                      className={`text-[12px] font-bold ${
+                        darkMode ? 'text-white' : 'text-[#000112]'
+                      }`}
+                    >
+                      Description
+                    </label>
                     <input
-                      className="border h-[6rem] placeholder:-translate-y-4 placeholder:whitespace-pre-wrap py-4 px-4 border-black rounded-lg"
+                      className={`${
+                        darkMode
+                          ? 'bg-[#2B2C37] border-white'
+                          : 'bg-white border-black'
+                      } border placeholder:text-[12px] h-[6rem] placeholder:-translate-y-8 placeholder:whitespace-pre-wrap py-4 px-4 border-black rounded-lg`}
                       type="text"
                       placeholder="e.g. Taking Break is good.This 15 minutes bareak will help you to reacharge the batteries little."
                       {...register('Description', {
@@ -97,12 +138,22 @@ export default function BasicAddTaskModal() {
                     />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <label>Subtasks</label>
+                    <label
+                      className={`text-[12px] font-bold ${
+                        darkMode ? 'text-white' : 'text-[#000112]'
+                      }`}
+                    >
+                      Subtasks
+                    </label>
                     {subTasks.map((items, index) =>
                       index !== 0 ? (
                         <div key={index} className="flex items-center gap-5">
                           <input
-                            className="border py-2 px-2 border-black rounded-lg w-full"
+                            className={`border placeholder:text-[12px] py-1 px-2 border-black rounded-lg w-full ${
+                              darkMode
+                                ? 'bg-[#2B2C37] border-white'
+                                : 'bg-white border-black'
+                            }`}
                             type="text"
                             placeholder="e.g. Make Cofee"
                             {...register(`subtasks.${index}.title`, {
@@ -111,7 +162,9 @@ export default function BasicAddTaskModal() {
                           />
                           <TiDelete
                             onClick={() => removeColumn(index)}
-                            className="h-[2.5rem] w-[2.5rem] cursor-pointer"
+                            className={`h-[2rem] w-[2rem] cursor-pointer ${
+                              darkMode ? 'text-white' : 'text-[#000112]'
+                            } `}
                           />
                         </div>
                       ) : null,
@@ -119,31 +172,42 @@ export default function BasicAddTaskModal() {
                     <button
                       onClick={() => createColumn()}
                       type="createColumn"
-                      className="border text-[20px] text-[#635FC7] font-bold py-2 px-2 rounded-full bg-[#F4F7FD]"
+                      className="border text-[15px] text-[#635FC7] font-bold py-1 px-2 rounded-full bg-[#F4F7FD]"
                     >
                       + Add New Subtasks
                     </button>
                   </div>
                   <div className="flex flex-col gap-2">
-                    <label>Status</label>
+                    <label
+                      className={`text-[12px] font-bold ${
+                        darkMode ? 'text-white' : 'text-[#000112]'
+                      }`}
+                    >
+                      Status
+                    </label>
                     <select
-                      className="border py-2 px-2 border-black rounded-lg w-full"
+                      className={`border py-1 px-2 border-black rounded-lg w-full text-[12px] ${
+                        darkMode
+                          ? 'bg-[#2B2C37] border-white text-white'
+                          : 'bg-white border-black text-black'
+                      }`}
                       {...register('status')}
                     >
                       {columns.map((items, index) => (
                         <option key={index} className="" value={items.colName}>
-                          {items.colName}
+                          {items.colName.charAt(0).toUpperCase() +
+                            items.colName.slice(1)}
                         </option>
                       ))}
                     </select>
                   </div>
                 </form>
-                <div className="flex flex-col mt-8 gap-8">
+                <div className="flex flex-col mt-5 gap-8">
                   <button
                     onClick={handleSubmit(onSubmit)}
                     name="submit"
                     defaultValue={'Create New Board'}
-                    className="border text-[20px] font-bold py-2 px-2 text-white rounded-full bg-[#635FC7]"
+                    className="text-[15px] font-bold py-1 px-2 text-white rounded-full bg-[#635FC7]"
                     type="submit"
                   >
                     Create Task
