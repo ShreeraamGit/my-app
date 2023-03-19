@@ -1,6 +1,6 @@
 # Kanban task management web app
 
-#### _Emphasized text_ Design preview for the Kanban task management web app.
+#### _Design preview for the Kanban task management web app._
 
 ![Design preview for the Kanban task management web app coding challenge](./src//assets//ReadmeImages/Desktop%20-%20Board%20-%20Dark%20-%20Active.png)
 
