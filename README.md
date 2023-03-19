@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-# Task Manager App
-=======
-Kanban task management web app
->>>>>>> 4bcad35 (readme edit)
+# Kanban task management web app
 
 ![Design preview for the Kanban task management web app coding challenge](./preview.jpg)
 
