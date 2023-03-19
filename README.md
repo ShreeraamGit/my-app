@@ -2,6 +2,10 @@
 
 #### _Design preview for the Kanban task management web app._
 
+## About! 👋
+
+This is a task management app that allows users to create, read, update, and delete boards and tasks. Users can also mark subtasks as complete, move tasks between columns, and toggle the theme between light/dark modes.
+
 - ##### Dashboard - Desktop View
 
   ![Design preview for the Kanban task management web app](./src//assets//ReadmeImages/Desktop%20-%20Board%20-%20Dark%20-%20Active.png)
@@ -10,12 +14,8 @@
 
   ![Design preview for the Kanban task management web app](./src//assets//ReadmeImages/Mobile%20-%20Board%20-%20Dark.png)
 
-- ##### Dashboard - Mobile View
+- ##### Dashboard - Add Boards Feature
   ![Design preview for the Kanban task management web app](./src//assets//ReadmeImages/Desktop%20-%20Add%20Board%20-%20Dark.png)
-
-## About! 👋
-
-This is a task management app that allows users to create, read, update, and delete boards and tasks. Users can also mark subtasks as complete, move tasks between columns, and toggle the theme between light/dark modes.
 
 ## Features
 
