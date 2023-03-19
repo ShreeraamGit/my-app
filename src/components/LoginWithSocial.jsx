@@ -9,17 +9,17 @@ const LoginWithSocial = () => {
   return (
     <div className="flex flex-col gap-7">
       <div className="flex justify-center items-center">
-        <hr className="w-[25%] h-[0.10rem] bg-black" />
-        <p className="p-2">Or Continue With</p>
-        <hr className="w-[25%] h-[0.10rem] bg-black" />
+        <hr className="w-[32%] h-[0.10rem] bg-black" />
+        <p className="p-2 text-[12px]">Or Continue With</p>
+        <hr className="w-[32%] h-[0.10rem] bg-black" />
       </div>
       <div className="flex justify-around items-center">
         <BsGoogle
           onClick={() => handleLogin()}
-          className="h-[1.8rem] w-[1.8rem] md:h-[2.4rem] md:w-[2.4rem] cursor-pointer"
+          className="h-[1.8rem] w-[1.8rem] md:h-[2rem] md:w-[2rem] cursor-pointer"
         />
-        <BsFacebook className=" h-[1.8rem] w-[1.8rem] md:h-[2.4rem] md:w-[2.4rem] cursor-pointer" />
-        <BsTwitter className=" h-[1.8rem] w-[1.8rem] md:h-[2.4rem] md:w-[2.4rem] cursor-pointer" />
+        <BsFacebook className=" h-[1.8rem] w-[1.8rem] md:h-[2rem] md:w-[2rem] cursor-pointer" />
+        <BsTwitter className=" h-[1.8rem] w-[1.8rem] md:h-[2rem] md:w-[2rem]cursor-pointer" />
       </div>
     </div>
   );
