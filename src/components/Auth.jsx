@@ -17,7 +17,7 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-w-screen min-h-screen flex md:items-center md:justify-center justify-center items-center bg-[#f9fafc]">
+    <div className="min-w-screen min-h-screen flex md:items-center md:justify-center justify-center items-start bg-[#f9fafc]">
       <div className="flex flex-col mt-10 md:mt-0 justify-center items-center gap-12 md:gap-10 w-full h-fit p-3">
         <div className="flex flex-col justify-center items-center gap-4">
           <img
