@@ -1,37 +1,30 @@
 # Kanban task management web app
 
+# Design preview for the Kanban task management web app.
+
 ![Design preview for the Kanban task management web app coding challenge](./src//assets//ReadmeImages/Desktop%20-%20Board%20-%20Dark%20-%20Active.png)
 
 ## Welcome! 👋
 
-Thanks for purchasing this premium Frontend Mentor coding challenge.
-
-[Frontend Mentor](https://www.frontendmentor.io) challenges help you improve your coding skills by building realistic projects. These premium challenges are perfect portfolio pieces, so please feel free to use what you create in your portfolio to show others.
+This is a task management app that allows users to create, read, update, and delete boards and tasks. Users can also mark subtasks as complete, move tasks between columns, and toggle the theme between light/dark modes.
 
 **To do this challenge, you need a very strong understanding of HTML, CSS, and JavaScript.**
 
-## The challenge
+## Features
 
-Your challenge is to build out this task management app and get it looking as close to the design as possible.
+Responsive Design: The app has a fully responsive design that adapts to different screen sizes, providing an optimal viewing experience for users.
 
-You can use any tools you like to help you complete the challenge. So if you've got something you'd like to practice, feel free to give it a go.
+Interactive Elements: All interactive elements on the page have hover states, providing feedback to users and enhancing the overall user experience.
 
-We provide the data in a local `data.json` file, so use that to populate the content on the first load. If you want to take it up a notch, feel free to build this as a full-stack application!
+CRUD Operations: Users can create, read, update, and delete boards and tasks, allowing them to easily manage their tasks and stay organized.
 
-Your users should be able to:
+Form Validations: The app provides form validations when users try to create or edit boards and tasks, ensuring that all required fields are filled in and that the input is valid.
 
-- View the optimal layout for the app depending on their device's screen size
-- See hover states for all interactive elements on the page
-- Create, read, update, and delete boards and tasks
-- Receive form validations when trying to create/edit boards and tasks
-- Mark subtasks as complete and move tasks between columns
-- Hide/show the board sidebar
-- Toggle the theme between light/dark modes
-- **Bonus**: Allow users to drag and drop tasks to change their status and re-order them in a column
-- **Bonus**: Keep track of any changes, even after refreshing the browser (`localStorage` could be used for this if you're not building out a full-stack app)
-- **Bonus**: Build this project as a full-stack application
+Subtask Management: Users can mark subtasks as complete and move tasks between columns, providing a flexible and customizable way to manage tasks.
 
-Want some support on the challenge? [Join our Slack community](https://www.frontendmentor.io/slack) and ask questions in the **#help** channel.
+Sidebar Toggle: Users can hide/show the board sidebar, providing a clutter-free view of the tasks when needed.
+
+Theme Toggle: Users can toggle between light/dark modes, providing a personalized and comfortable viewing experience for users.
 
 ### Expected Behaviour
 
