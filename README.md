@@ -2,8 +2,16 @@
 
 #### _Design preview for the Kanban task management web app._
 
-- ##### Dashboard
-  ![Design preview for the Kanban task management web app coding challenge](./src//assets//ReadmeImages/Desktop%20-%20Board%20-%20Dark%20-%20Active.png)
+- ##### Dashboard - Desktop View
+
+  ![Design preview for the Kanban task management web app](./src//assets//ReadmeImages/Desktop%20-%20Board%20-%20Dark%20-%20Active.png)
+
+- ##### Dashboard - Mobile View
+
+  ![Design preview for the Kanban task management web app](./src//assets//ReadmeImages/Mobile%20-%20Board%20-%20Dark.png)
+
+- ##### Dashboard - Mobile View
+  ![Design preview for the Kanban task management web app](./src//assets//ReadmeImages/Desktop%20-%20Add%20Board%20-%20Dark.png)
 
 ## About! 👋
 
