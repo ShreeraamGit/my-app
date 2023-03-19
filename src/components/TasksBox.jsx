@@ -145,7 +145,7 @@ const TasksBox = () => {
           ))}
         </div>
       ) : title ? null : (
-        <div className="flex justify-center items-center h-full w-full">
+        <div className="flex justify-center items-start md:items-center h-full w-full">
           <div className="flex flex-col justify-center items-center gap-5">
             <GoAlert className="w-[3rem] h-[3rem] text-violet-500" />
             <h1
