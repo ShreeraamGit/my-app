@@ -80,9 +80,13 @@ const TasksBox = () => {
           }`}
         >
           <CircularProgress
-            className={`${darkMode ? 'text-white' : 'text-black'}`}
+            className={`${
+              darkMode ? 'text-white' : 'text-black'
+            } w-[2rem] h-[2rem]`}
           />
-          <h1 className="text-xl md:text-4xl">Loading.... Please Wait....</h1>
+          <h1 className="text-[12px] md:text-[18px]">
+            Loading.... Please Wait....
+          </h1>
         </div>
       ) : title && !loading ? (
         <div
@@ -147,9 +151,13 @@ const TasksBox = () => {
       ) : title ? null : (
         <div className="flex justify-center items-start md:items-center h-full w-full">
           <div className="flex flex-col justify-center items-center gap-5">
-            <GoAlert className="w-[3rem] h-[3rem] text-violet-500" />
+            <GoAlert
+              className={`w-[2rem] h-[2rem] ${
+                darkMode ? 'text-white' : 'text-violet-500'
+              }`}
+            />
             <h1
-              className={`text-[18px] md:text-[24px] ${
+              className={`text-[12px] md:text-[18px] ${
                 darkMode ? 'text-white' : 'text-black'
               }`}
             >

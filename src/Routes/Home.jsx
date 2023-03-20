@@ -18,7 +18,3 @@ const Home = () => {
 };
 
 export default Home;
-
-/*bg-${
-        darkMode ? '[#3E3F4E]' : 'white'
-      } text-${darkMode ? 'white' : 'gray-900'}*/
