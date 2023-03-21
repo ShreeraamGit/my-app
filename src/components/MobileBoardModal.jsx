@@ -22,7 +22,7 @@ const MobileBoardModal = () => {
   const { users } = useContext(UsersContext);
   const { getData } = useContext(GetDataContext);
   const { setColumns } = useContext(ColumnsContext);
-  const { darkMode, style } = useContext(DarkLightModeContext);
+  const { darkMode } = useContext(DarkLightModeContext);
 
   const query = collection(
     db,
@@ -37,6 +37,18 @@ const MobileBoardModal = () => {
   const { boardModalOpen, handleBoardModalClose } = useContext(
     MobileBoardModalContext,
   );
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: [350, 370],
+    bgcolor: darkMode ? '#2B2C37' : 'background.paper',
+    boxShadow: 24,
+    p: 2.5,
+    borderRadius: 3,
+  };
 
   return (
     <div className="">
