@@ -74,6 +74,7 @@ const HeaderDropDownMenu = ({ menuItems }) => {
             filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
             mt: 1,
             width: 140,
+            bgcolor: darkMode ? '#3E3F4E' : 'background.paper',
             '& .MuiAvatar-root': {
               width: 32,
               height: 32,
@@ -88,7 +89,7 @@ const HeaderDropDownMenu = ({ menuItems }) => {
               right: 14,
               width: 10,
               height: 10,
-              bgcolor: 'background.paper',
+              bgcolor: darkMode ? '#3E3F4E' : 'background.paper',
               transform: 'translateY(-50%) rotate(45deg)',
               zIndex: 0,
             },
@@ -100,6 +101,7 @@ const HeaderDropDownMenu = ({ menuItems }) => {
         <MenuItem
           sx={{
             fontSize: '16px',
+            color: darkMode ? 'white' : 'black',
           }}
           onClick={() => {
             handleOpenEditTaskModal();
@@ -110,9 +112,12 @@ const HeaderDropDownMenu = ({ menuItems }) => {
         </MenuItem>
         <MenuItem
           onMouseEnter={(e) => (e.target.style.color = 'red')}
-          onMouseLeave={(e) => (e.target.style.color = 'black')}
+          onMouseLeave={(e) =>
+            (e.target.style.color = darkMode ? 'white' : 'black')
+          }
           sx={{
             fontSize: '16px',
+            color: darkMode ? 'white' : 'black',
           }}
           onClick={(e) => {
             setEvent(e.target.innerText);

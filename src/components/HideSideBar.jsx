@@ -77,7 +77,8 @@ const DropDownMenu = ({ menuItems }) => {
             overflow: 'visible',
             filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
             mt: 1,
-            width: 150,
+            width: 130,
+            bgcolor: darkMode ? '#3E3F4E' : 'background.paper',
             '& .MuiAvatar-root': {
               width: 32,
               height: 32,
@@ -92,7 +93,7 @@ const DropDownMenu = ({ menuItems }) => {
               right: 14,
               width: 10,
               height: 10,
-              bgcolor: 'background.paper',
+              bgcolor: darkMode ? '#3E3F4E' : 'background.paper',
               transform: 'translateY(-50%) rotate(45deg)',
               zIndex: 0,
             },
@@ -104,7 +105,8 @@ const DropDownMenu = ({ menuItems }) => {
         {menuItems.map((items) => (
           <MenuItem
             sx={{
-              fontSize: '20px',
+              fontSize: '15px',
+              color: darkMode ? 'white' : 'black',
             }}
             key={items}
             onClick={handleClose}
@@ -114,8 +116,13 @@ const DropDownMenu = ({ menuItems }) => {
         ))}
         <Divider />
         <MenuItem
+          onMouseEnter={(e) => (e.target.style.color = 'red')}
+          onMouseLeave={(e) =>
+            (e.target.style.color = darkMode ? 'white' : 'black')
+          }
           sx={{
-            fontSize: '20px',
+            fontSize: '15px',
+            color: darkMode ? 'white' : 'black',
           }}
           onClick={() => {
             handleSignOut();
