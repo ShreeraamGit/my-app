@@ -12,7 +12,7 @@ export default function EditTaskModal() {
   const { openEditTaskModal, handleCloseEditTaskModal } =
     useContext(EditTaskModalContext);
   const [inputFields, setInputFields] = useState([1]);
-  const { darkMode, style } = useContext(DarkLightModeContext);
+  const { darkMode } = useContext(DarkLightModeContext);
   const { title } = useContext(TasksManagementContext);
 
   const preloadedValues = {
@@ -40,6 +40,18 @@ export default function EditTaskModal() {
     let newColumnFields = [...inputFields];
     newColumnFields.splice(index, 1);
     setInputFields(newColumnFields);
+  };
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: [350, 370],
+    bgcolor: darkMode ? '#2B2C37' : 'background.paper',
+    boxShadow: 24,
+    p: 2.5,
+    borderRadius: 3,
   };
 
   return (

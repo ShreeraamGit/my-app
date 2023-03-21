@@ -7,9 +7,11 @@ import { UsersContext } from '../context/usersContext';
 import { useForm } from 'react-hook-form';
 import { TiDelete } from 'react-icons/ti';
 import { AddDataContext } from '../context/addDataContext';
+import { SnackBarContext } from '../context/customizedSnakabrContext';
 
 export default function BasicModal() {
   const { open, handleClose } = useContext(ModalContext);
+  const { handleClickSnackBar } = useContext(SnackBarContext);
   const [inputFields, setInputFields] = useState([1]);
 
   const { users } = useContext(UsersContext);
@@ -18,10 +20,14 @@ export default function BasicModal() {
 
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data, e) => {
-    ///console.log(data);
-    addBoards(data, users);
-    addColumns(data, users);
-    reset();
+    try {
+      addBoards(data, users);
+      addColumns(data, users);
+      reset();
+      handleClickSnackBar();
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
   };
 
   const createColumn = () => {

@@ -10,21 +10,12 @@ import { ColumnsContext } from '../context/columnContext';
 import { TiDelete } from 'react-icons/ti';
 import { CgDanger } from 'react-icons/cg';
 import { DarkLightModeContext } from '../context/darkLightMode';
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: [350, 500],
-  bgcolor: 'background.paper',
-  boxShadow: 0,
-  p: 4,
-  overFlow: 'hidden',
-  borderRadius: 3,
-};
+import { SnackBarContext } from '../context/customizedSnakabrContext';
+import { ClickEventContext } from '../context/clickEventContext';
 
 export default function BasicAddTaskModal() {
+  const { setEvent } = useContext(ClickEventContext);
+  const { handleClickSnackBar } = useContext(SnackBarContext);
   const { title } = useContext(TasksManagementContext);
   const { columns } = useContext(ColumnsContext);
   const { addTasks } = useContext(AddDataContext);
@@ -36,15 +27,21 @@ export default function BasicAddTaskModal() {
     useContext(AddTaskModalContext);
 
   const { register, handleSubmit, reset } = useForm();
-  const onSubmit = async (data) => {
-    if (title) {
-      addTasks(columns, users, data, title);
-      const timer = setTimeout(function () {
-        handleAddTaskCompletion();
-        clearTimeout(timer);
-      }, 1000);
+  const onSubmit = async (data, e) => {
+    try {
+      setEvent(e.target.innerText);
+      if (title) {
+        addTasks(columns, users, data, title);
+        const timer = setTimeout(function () {
+          handleAddTaskCompletion();
+          clearTimeout(timer);
+        }, 1000);
+      }
+      reset();
+      handleClickSnackBar();
+    } catch (error) {
+      console.error('An error occurred:', error);
     }
-    reset();
   };
 
   const createColumn = () => {

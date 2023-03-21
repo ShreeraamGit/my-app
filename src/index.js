@@ -23,50 +23,53 @@ import { RandomColorsProvider } from './context/createRandomColorsContext';
 import { DeleteBoardProvider } from './context/deleteBoardContext';
 import { SnackBarProvider } from './context/customizedSnakabrContext';
 import { TaskListModalProvider } from './context/editTaskListModalContext';
+import { ClickEventProvider } from './context/clickEventContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <RandomColorsProvider>
-      <DropDownMenuProvider>
-        <MobileBoardModalProvider>
-          <EditTaskProvider>
-            <DarkLightModeProvider>
-              <LoaderProvider>
-                <ModalProvider>
-                  <SignInUpProvider>
-                    <UserProvider>
-                      <TasksManagementProvider>
-                        <BoardsProvider>
-                          <ColumnsProvider>
-                            <AddDataProvider>
-                              <AddBoardsProvider>
-                                <GetDataProvider>
-                                  <AddTaskModalProvider>
-                                    <EditTaskModalProvider>
-                                      <DeleteBoardProvider>
-                                        <SnackBarProvider>
-                                          <TaskListModalProvider>
-                                            <App />
-                                          </TaskListModalProvider>
-                                        </SnackBarProvider>
-                                      </DeleteBoardProvider>
-                                    </EditTaskModalProvider>
-                                  </AddTaskModalProvider>
-                                </GetDataProvider>
-                              </AddBoardsProvider>
-                            </AddDataProvider>
-                          </ColumnsProvider>
-                        </BoardsProvider>
-                      </TasksManagementProvider>
-                    </UserProvider>
-                  </SignInUpProvider>
-                </ModalProvider>
-              </LoaderProvider>
-            </DarkLightModeProvider>
-          </EditTaskProvider>
-        </MobileBoardModalProvider>
-      </DropDownMenuProvider>
+      <ClickEventProvider>
+        <DropDownMenuProvider>
+          <MobileBoardModalProvider>
+            <EditTaskProvider>
+              <DarkLightModeProvider>
+                <LoaderProvider>
+                  <ModalProvider>
+                    <SignInUpProvider>
+                      <UserProvider>
+                        <TasksManagementProvider>
+                          <BoardsProvider>
+                            <ColumnsProvider>
+                              <AddDataProvider>
+                                <AddBoardsProvider>
+                                  <GetDataProvider>
+                                    <AddTaskModalProvider>
+                                      <EditTaskModalProvider>
+                                        <DeleteBoardProvider>
+                                          <SnackBarProvider>
+                                            <TaskListModalProvider>
+                                              <App />
+                                            </TaskListModalProvider>
+                                          </SnackBarProvider>
+                                        </DeleteBoardProvider>
+                                      </EditTaskModalProvider>
+                                    </AddTaskModalProvider>
+                                  </GetDataProvider>
+                                </AddBoardsProvider>
+                              </AddDataProvider>
+                            </ColumnsProvider>
+                          </BoardsProvider>
+                        </TasksManagementProvider>
+                      </UserProvider>
+                    </SignInUpProvider>
+                  </ModalProvider>
+                </LoaderProvider>
+              </DarkLightModeProvider>
+            </EditTaskProvider>
+          </MobileBoardModalProvider>
+        </DropDownMenuProvider>
+      </ClickEventProvider>
     </RandomColorsProvider>
   </BrowserRouter>,
 );
