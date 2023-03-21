@@ -105,7 +105,7 @@ export default function BasicAddTaskModal() {
                       Title
                     </label>
                     <input
-                      className={`placeholder:text-[12px] border py-2 px-2 rounded-lg ${
+                      className={`placeholder:text-[12px] border py-2 text-[12px] px-2 rounded-lg ${
                         darkMode
                           ? 'bg-[#2B2C37] border-white'
                           : 'bg-white border-black'
@@ -128,7 +128,7 @@ export default function BasicAddTaskModal() {
                         darkMode
                           ? 'bg-[#2B2C37] border-white'
                           : 'bg-white border-black'
-                      } border placeholder:text-[12px] h-[6rem] break-all overflow-y-auto resize-none: placeholder:-translate-y-8 placeholder:whitespace-pre-wrap py-4 px-4 border-black rounded-lg`}
+                      } border placeholder:text-[12px] text-[12px] h-[6rem] break-all overflow-y-auto resize-none: placeholder:-translate-y-8 placeholder:whitespace-pre-wrap py-4 px-4 rounded-lg`}
                       type="text"
                       placeholder="e.g. Taking Break is good.This 15 minutes bareak will help you to reacharge the batteries little."
                       {...register('Description', {
@@ -149,7 +149,7 @@ export default function BasicAddTaskModal() {
                       index !== 0 ? (
                         <div key={index} className="flex items-center gap-5">
                           <input
-                            className={`border placeholder:text-[12px] py-1 px-2 border-black rounded-lg w-full ${
+                            className={`border text-[12px] placeholder:text-[12px] py-1 px-2 border-black rounded-lg w-full ${
                               darkMode
                                 ? 'bg-[#2B2C37] border-white'
                                 : 'bg-white border-black'
@@ -186,7 +186,7 @@ export default function BasicAddTaskModal() {
                       Status
                     </label>
                     <select
-                      className={`border py-1 px-2 border-black rounded-lg w-full text-[12px] ${
+                      className={`border py-1 px-2 rounded-lg w-full text-[12px] ${
                         darkMode
                           ? 'bg-[#2B2C37] border-white text-white'
                           : 'bg-white border-black text-black'

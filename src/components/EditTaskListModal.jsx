@@ -30,7 +30,9 @@ export default function EditTaskListModal({ task }) {
       >
         <Box sx={style}>
           <div className="flex flex-col gap-4">
-            <h1 className="font-bold text-[20px]">{task.taskName}</h1>
+            <h1 className="font-bold text-[20px]">
+              {task.taskName.slice(0, 1).toUpperCase() + task.taskName.slice(1)}
+            </h1>
             <p className="">{task.description}</p>
           </div>
         </Box>

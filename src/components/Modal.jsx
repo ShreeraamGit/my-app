@@ -14,7 +14,7 @@ export default function BasicModal() {
 
   const { users } = useContext(UsersContext);
   const { addBoards, addColumns } = useContext(AddDataContext);
-  const { darkMode, style } = useContext(DarkLightModeContext);
+  const { darkMode } = useContext(DarkLightModeContext);
 
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data, e) => {
@@ -37,6 +37,18 @@ export default function BasicModal() {
     setInputFields(newColumnFields);
   };
 
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: [350, 370],
+    bgcolor: darkMode ? '#2B2C37' : 'background.paper',
+    boxShadow: 24,
+    p: 2.5,
+    borderRadius: 3,
+  };
+
   return (
     <div>
       <Modal
@@ -49,7 +61,7 @@ export default function BasicModal() {
         <Box sx={style}>
           <div className="flex flex-col gap-3">
             <h1
-              className={`text-[24px] font-bold ${
+              className={`text-[15px] font-bold ${
                 darkMode ? 'text-white' : 'text-black'
               }`}
             >
@@ -57,24 +69,28 @@ export default function BasicModal() {
             </h1>
             <div className="">
               <form className="flex flex-col gap-3">
-                <div className="flex flex-col gap-5">
+                <div className="flex flex-col gap-2">
                   <label
-                    className={`font-bold ${
+                    className={`font-bold text-[12px] ${
                       darkMode ? 'text-white' : 'text-black'
                     }`}
                   >
                     Board Name
                   </label>
                   <input
-                    className="border py-4 px-4 border-black rounded-lg"
+                    className={`${
+                      darkMode
+                        ? 'bg-[#2B2C37] border-white'
+                        : 'bg-white border-black'
+                    } border py-2 text-[12px] placeholder:text-[12px] px-2 rounded-lg`}
                     type="text"
                     placeholder="e.g. Web Design"
                     {...register('title', { required: true, maxLength: 15 })}
                   />
                 </div>
-                <div className="flex flex-col gap-5">
+                <div className="flex flex-col gap-2">
                   <label
-                    className={`font-bold ${
+                    className={`font-bold text-[12px] ${
                       darkMode ? 'text-white' : 'text-black'
                     }`}
                   >
@@ -84,7 +100,11 @@ export default function BasicModal() {
                     index !== 0 ? (
                       <div key={index} className="flex items-center gap-5">
                         <input
-                          className="border py-4 px-4 border-black rounded-lg w-full"
+                          className={`${
+                            darkMode
+                              ? 'bg-[#2B2C37] border-white'
+                              : 'bg-white border-black'
+                          } border placeholder:text-[12px] text-[12px]  py-2 px-2 rounded-lg w-full`}
                           type="text"
                           placeholder="e.g. Todo"
                           {...register(`columns.${index}.columnName`, {
@@ -102,11 +122,11 @@ export default function BasicModal() {
                   )}
                 </div>
               </form>
-              <div className="flex flex-col mt-8 gap-8">
+              <div className="flex flex-col mt-5 gap-5">
                 <button
                   onClick={() => createColumn()}
                   type="createColumn"
-                  className="border text-[20px] text-[#635FC7] font-bold py-4 px-4 rounded-full bg-[#F4F7FD]"
+                  className="border text-[13px] text-[#635FC7] font-bold py-2 px-2 rounded-full bg-[#F4F7FD]"
                 >
                   + Add New Column
                 </button>
@@ -114,7 +134,7 @@ export default function BasicModal() {
                   onClick={handleSubmit(onSubmit)}
                   name="submit"
                   defaultValue={'Create New Board'}
-                  className="text-[20px] font-bold py-4 px-4 text-white rounded-full bg-[#635FC7]"
+                  className="text-[13px] font-bold py-2 px-2 text-white rounded-full bg-[#635FC7]"
                   type="submit"
                 >
                   Create New Board

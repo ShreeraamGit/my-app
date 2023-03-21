@@ -99,7 +99,7 @@ const TasksBox = () => {
           {columns.map((items, index) => (
             <div
               key={index}
-              className="text-white min-w-[69%] md:min-w-[19%] h-fit flex flex-col gap-5"
+              className="text-white min-w-[69%] md:min-w-[19%] h-fit flex flex-col gap-5 "
             >
               <div className="flex justify-start items-center gap-5">
                 <AiTwotoneCheckCircle
@@ -131,7 +131,8 @@ const TasksBox = () => {
                         darkMode ? 'text-white' : 'text-black'
                       }`}
                     >
-                      {item.taskName}
+                      {item.taskName.slice(0, 1).toUpperCase() +
+                        item.taskName.slice(1)}
                     </h1>
                     <span
                       className={`${
