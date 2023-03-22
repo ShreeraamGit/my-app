@@ -214,8 +214,16 @@ export default function BasicAddTaskModal() {
             </div>
           ) : (
             <div className="flex flex-col justify-center items-center gap-7">
-              <CgDanger className="h-[3rem] w-[3rem] " />
-              <h1 className="text-center text-xl md:text-3xl">
+              <CgDanger
+                className={`h-[3rem] w-[3rem] text-[12px] font-bold ${
+                  darkMode ? 'text-white' : 'text-[#000112]'
+                }`}
+              />
+              <h1
+                className={`text-center text-xl md:text-3xl text-[12px] font-bold ${
+                  darkMode ? 'text-white' : 'text-[#000112]'
+                }`}
+              >
                 Please select a board
               </h1>
             </div>

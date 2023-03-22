@@ -8,6 +8,7 @@ import { DarkLightModeContext } from '../context/darkLightMode';
 const DarkLightModeSwitch = () => {
   const { darkMode, setDarkMode, style, setStyle } =
     useContext(DarkLightModeContext);
+
   return (
     <div
       className={`flex w-full justify-center items-center gap-8 py-1 px-7 rounded-lg bg-[#F4F7FD] ${

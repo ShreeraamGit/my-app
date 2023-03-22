@@ -71,7 +71,7 @@ const TasksBox = () => {
     <div
       className={`${
         darkMode ? 'bg-[#20212C]' : 'bg-[#F4F7FD]'
-      } w-screen h-screen md:w-full md:h-full p-5 snap-x snap-mandatory`}
+      } w-screen relative h-screen md:w-full md:h-full p-5 snap-x snap-mandatory`}
     >
       {title && loading ? (
         <div
@@ -165,14 +165,16 @@ const TasksBox = () => {
               Please select a board to get started.
             </h1>
           </div>
+          {open ? <Modal /> : null}
+          {addTaskModalopen ? <BasicAddTaskModal /> : null}
+
+          {boardModalOpen ? <MobileBoardModal /> : null}
+          {openEditTaskModal ? <EditTaskModal /> : null}
+          {taskListModalOpen ? (
+            <EditTaskListModal task={individualTask} />
+          ) : null}
         </div>
       )}
-      {open ? <Modal /> : null}
-      {addTaskModalopen ? <BasicAddTaskModal /> : null}
-
-      {boardModalOpen ? <MobileBoardModal /> : null}
-      {openEditTaskModal ? <EditTaskModal /> : null}
-      {taskListModalOpen ? <EditTaskListModal task={individualTask} /> : null}
     </div>
   );
 };

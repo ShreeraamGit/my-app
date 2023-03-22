@@ -3,22 +3,24 @@ import { useContext } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { TaskListModalOpenContext } from '../context/editTaskListModalContext';
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  p: 4,
-};
+import { DarkLightModeContext } from '../context/darkLightMode';
 
 export default function EditTaskListModal({ task }) {
+  const { darkMode } = useContext(DarkLightModeContext);
   const { taskListModalOpen, handleTaskListModalClose } = useContext(
     TaskListModalOpenContext,
   );
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 2.5,
+    borderRadius: 3,
+  };
 
   return (
     <div>
