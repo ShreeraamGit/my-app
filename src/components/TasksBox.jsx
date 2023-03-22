@@ -61,7 +61,7 @@ const TasksBox = () => {
     if (title) {
       getTasksLists();
     }
-  }, [title, columns]);
+  }, [columns]);
 
   useEffect(() => {
     getTasksLists();

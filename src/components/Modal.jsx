@@ -8,10 +8,12 @@ import { useForm } from 'react-hook-form';
 import { TiDelete } from 'react-icons/ti';
 import { AddDataContext } from '../context/addDataContext';
 import { SnackBarContext } from '../context/customizedSnakabrContext';
+import { ClickEventContext } from '../context/clickEventContext';
 
 export default function BasicModal() {
   const { open, handleClose } = useContext(ModalContext);
   const { handleClickSnackBar } = useContext(SnackBarContext);
+  const { setEvent } = useContext(ClickEventContext);
   const [inputFields, setInputFields] = useState([1]);
 
   const { users } = useContext(UsersContext);
@@ -21,6 +23,7 @@ export default function BasicModal() {
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data, e) => {
     try {
+      setEvent(e.target.innerText);
       addBoards(data, users);
       addColumns(data, users);
       reset();
@@ -91,7 +94,7 @@ export default function BasicModal() {
                     } border py-2 text-[12px] placeholder:text-[12px] px-2 rounded-lg`}
                     type="text"
                     placeholder="e.g. Web Design"
-                    {...register('title', { required: true, maxLength: 15 })}
+                    {...register('title', { required: true, maxLength: 30 })}
                   />
                 </div>
                 <div className="flex flex-col gap-2">
