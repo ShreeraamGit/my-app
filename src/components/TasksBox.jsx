@@ -165,16 +165,14 @@ const TasksBox = () => {
               Please select a board to get started.
             </h1>
           </div>
-          {open ? <Modal /> : null}
-          {addTaskModalopen ? <BasicAddTaskModal /> : null}
-
-          {boardModalOpen ? <MobileBoardModal /> : null}
-          {openEditTaskModal ? <EditTaskModal /> : null}
-          {taskListModalOpen ? (
-            <EditTaskListModal task={individualTask} />
-          ) : null}
         </div>
       )}
+      {open ? <Modal /> : null}
+      {addTaskModalopen ? <BasicAddTaskModal /> : null}
+
+      {boardModalOpen ? <MobileBoardModal /> : null}
+      {openEditTaskModal ? <EditTaskModal /> : null}
+      {taskListModalOpen ? <EditTaskListModal task={individualTask} /> : null}
     </div>
   );
 };

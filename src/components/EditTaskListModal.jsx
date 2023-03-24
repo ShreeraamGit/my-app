@@ -1,11 +1,15 @@
 import * as React from 'react';
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { TaskListModalOpenContext } from '../context/editTaskListModalContext';
 import { DarkLightModeContext } from '../context/darkLightMode';
+import { ColumnsContext } from '../context/columnContext';
+import { useForm, Controller } from 'react-hook-form';
+import Checkbox from '@mui/material/Checkbox';
 
 export default function EditTaskListModal({ task }) {
+  const { columns } = useContext(ColumnsContext);
   const { darkMode } = useContext(DarkLightModeContext);
   const { taskListModalOpen, handleTaskListModalClose } = useContext(
     TaskListModalOpenContext,
@@ -16,10 +20,37 @@ export default function EditTaskListModal({ task }) {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
-    bgcolor: 'background.paper',
+    bgcolor: darkMode ? '#2B2C37' : 'background.paper',
     boxShadow: 24,
     p: 2.5,
     borderRadius: 3,
+  };
+
+  const { control, register } = useForm({
+    defaultValues: {
+      checkbox: false,
+      status: '',
+    },
+  });
+
+  const [checkboxValue, setCheckboxValue] = useState(false);
+  const [selectValue, setSelectValue] = useState('');
+
+  const handleCheckboxChange = (event) => {
+    setCheckboxValue(event.target.checked);
+  };
+
+  const handleSelectChange = (event) => {
+    setSelectValue(event.target.value);
+  };
+
+  useEffect(() => {
+    // Call your custom handleSubmit function here
+    handleSubmit({ checkbox: checkboxValue, status: selectValue });
+  }, [checkboxValue, selectValue]);
+
+  const handleSubmit = (data) => {
+    // Add your custom logic to handle the data here
   };
 
   return (
@@ -31,14 +62,114 @@ export default function EditTaskListModal({ task }) {
         onClose={handleTaskListModalClose}
       >
         <Box sx={style}>
-          <div className="flex flex-col gap-4">
-            <h1 className="font-bold text-[20px]">
-              {task.taskName.slice(0, 1).toUpperCase() + task.taskName.slice(1)}
-            </h1>
-            <p className="">{task.description}</p>
+          <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-3">
+              <h1
+                className={`text-[18px] font-bold ${
+                  darkMode ? 'text-white' : 'text-black'
+                }`}
+              >
+                {task.taskName.slice(0, 1).toUpperCase() +
+                  task.taskName.slice(1)}
+              </h1>
+              <p
+                className={`text-[15px] ${
+                  darkMode ? 'text-white' : 'text-black'
+                }`}
+              >
+                {task.description}
+              </p>
+            </div>
+            <div
+              className={`text-[18px] font-bold ${
+                darkMode ? 'text-white' : 'text-black'
+              }`}
+            >
+              <div className="flex flex-col">
+                <form className="flex flex-col">
+                  <span className="text-[15px] mb-3 gap-2">
+                    Subtasks (2 of 3)
+                  </span>
+                  {task.subTasks.map((items, index) => (
+                    <Controller
+                      key={index}
+                      name={`checkbox${index}`}
+                      defaultValue={false}
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => (
+                        <span
+                          className={`${
+                            darkMode
+                              ? 'bg-[#3E3F4E] border-white'
+                              : 'bg-white border-black'
+                          } flex items-center py-1 px-1 rounded-md`}
+                        >
+                          <Checkbox
+                            {...field}
+                            onChange={handleCheckboxChange}
+                          />
+                          <label
+                            className={`font-normal text-[15px] ${
+                              checkboxValue ? 'line-through' : ''
+                            }`}
+                            htmlFor={field.name}
+                          >
+                            {items.title.slice(0, 1).toUpperCase() +
+                              items.title.slice(1)}
+                          </label>
+                        </span>
+                      )}
+                    />
+                  ))}
+                  <div className="flex flex-col gap-2 mt-3">
+                    <label
+                      className={`text-[15px] font-bold ${
+                        darkMode ? 'text-white' : 'text-[#000112]'
+                      }`}
+                    >
+                      Status
+                    </label>
+                    <select
+                      className={`border py-1 px-2 rounded-lg w-full text-[12px] ${
+                        darkMode
+                          ? 'bg-[#2B2C37] border-white text-white'
+                          : 'bg-white border-black text-black'
+                      }`}
+                      onChange={handleSelectChange}
+                      value={selectValue}
+                    >
+                      {columns.map((items, index) => (
+                        <option key={index} className="" value={items.colName}>
+                          {items.colName.charAt(0).toUpperCase() +
+                            items.colName.slice(1)}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
         </Box>
       </Modal>
     </div>
   );
 }
+
+/*<Controller
+                    name="checkbox"
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field }) => (
+                      <span className="flex items-center">
+                        <Checkbox {...field} />
+                        <label
+                          className="font-normal text-[13px]"
+                          htmlFor={field.name}
+                        >
+                          {items}
+                        </label>
+                      </span>
+                    )}
+                  />*/
