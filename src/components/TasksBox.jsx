@@ -33,7 +33,7 @@ const TasksBox = () => {
   const { getTasks, getColumns } = useContext(GetDataContext);
   const { users } = useContext(UsersContext);
   const { open } = useContext(ModalContext);
-  const { addTaskModalopen, addTaskCompletion } =
+  const { addTaskModalopen, addTaskCompletion, updateTaskCompletion } =
     useContext(AddTaskModalContext);
   const { boardModalOpen } = useContext(MobileBoardModalContext);
   const { openEditTaskModal } = useContext(EditTaskModalContext);
@@ -66,6 +66,10 @@ const TasksBox = () => {
   useEffect(() => {
     getTasksLists();
   }, [addTaskCompletion]);
+
+  useEffect(() => {
+    getTasksLists();
+  }, [updateTaskCompletion]);
 
   return (
     <div

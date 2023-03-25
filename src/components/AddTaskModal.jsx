@@ -130,7 +130,7 @@ export default function BasicAddTaskModal() {
                       placeholder="e.g. Taking Break is good.This 15 minutes bareak will help you to reacharge the batteries little."
                       {...register('Description', {
                         required: true,
-                        maxLength: 100,
+                        maxLength: 500,
                       })}
                     />
                   </div>

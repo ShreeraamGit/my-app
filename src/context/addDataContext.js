@@ -103,25 +103,71 @@ export const AddDataProvider = ({ children }) => {
     }
   };
 
+  const updateTasks = async (
+    columns,
+    users,
+    tasks,
+    title,
+    checkboxValue,
+    selectValue,
+  ) => {
+    for (const item of columns) {
+      if (item.colName === tasks.colToAdd) {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        await setDoc(
+          doc(
+            db,
+            'data',
+            'boards',
+            'users',
+            `${users.uid}`,
+            'boardDetails',
+            `boardName - ${title.replace(/\s/g, '')}`,
+            'columns',
+            `colName - ${item.colName.replace(/\s/g, '')}`,
+            'tasks',
+            `taskName - ${tasks.taskName.replace(/\s/g, '')}`,
+          ),
+          {
+            taskName: tasks.taskName,
+            colToAdd: selectValue,
+            description: tasks.description,
+            createdAt: serverTimestamp(),
+            subTasks: tasks.subTasks.map(({ title }, index) => ({
+              title,
+              isCompleted: checkboxValue[index],
+            })),
+          },
+        );
+      }
+    }
+  };
+
   const value = {
     writeData,
     writeUsers,
     addBoards,
     addColumns,
     addTasks,
+    updateTasks,
   };
   return (
     <AddDataContext.Provider value={value}>{children}</AddDataContext.Provider>
   );
 };
 
-/*const addTasks = async (columns, users, tasks, title) => {
-    const subTasks = tasks.subtasks.filter(
-      (value) => Object.keys(value).length !== 0,
-    );
+/*const updateTasks = async (
+    columns,
+    users,
+    tasks,
+    title,
+    checkBox,
+    status,
+  ) => {
     for (const item of columns) {
       if (item.colName === tasks.status) {
         await new Promise((resolve) => setTimeout(resolve, 1000));
+        console.log('i m good');
         await setDoc(
           doc(
             db,
@@ -138,12 +184,12 @@ export const AddDataProvider = ({ children }) => {
           ),
           {
             taskName: tasks.title,
-            colToAdd: item.colName,
+            colToAdd: status.length === 0 ? status : item.colName,
             description: tasks.Description,
             createdAt: serverTimestamp(),
-            subTasks: subTasks.map(({ title }) => ({
+            subTasks: tasks.subTasks.map(({ title }, index) => ({
               title,
-              isCompleted: false,
+              isCompleted: checkBox[index],
             })),
           },
         );
