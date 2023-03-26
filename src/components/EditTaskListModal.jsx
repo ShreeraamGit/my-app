@@ -9,10 +9,13 @@ import { TasksManagementContext } from '../context/tasksManagementContext';
 import { UsersContext } from '../context/usersContext';
 import { AddDataContext } from '../context/addDataContext';
 import { AddTaskModalContext } from '../context/addTaskModal';
+import { ClickEventContext } from '../context/clickEventContext';
+import { SnackBarContext } from '../context/customizedSnakabrContext';
 import { useForm, Controller } from 'react-hook-form';
 import Checkbox from '@mui/material/Checkbox';
 
 export default function EditTaskListModal({ task }) {
+  const { handleClickSnackBar } = useContext(SnackBarContext);
   const { handleUpdateTaskCompletion } = useContext(AddTaskModalContext);
   const { updateTasks } = useContext(AddDataContext);
   const { title } = useContext(TasksManagementContext);
@@ -22,17 +25,6 @@ export default function EditTaskListModal({ task }) {
   const { taskListModalOpen, handleTaskListModalClose } = useContext(
     TaskListModalOpenContext,
   );
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: darkMode ? '#2B2C37' : 'background.paper',
-    boxShadow: 24,
-    p: 2.5,
-    borderRadius: 3,
-  };
 
   const { control } = useForm({
     defaultValues: {
@@ -64,13 +56,14 @@ export default function EditTaskListModal({ task }) {
     handleSubmit({ checkbox: checkboxValue, status: selectValue });
   }, [checkboxValue, selectValue]);*/
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
     try {
       updateTasks(columns, users, task, title, checkboxValue, selectValue);
       const timer = setTimeout(function () {
         handleUpdateTaskCompletion();
         clearTimeout(timer);
       }, 1000);
+      handleClickSnackBar();
     } catch (error) {
       // handle the error here
       console.error('An error occurred:', error);
@@ -85,7 +78,19 @@ export default function EditTaskListModal({ task }) {
         open={taskListModalOpen}
         onClose={handleTaskListModalClose}
       >
-        <Box sx={style}>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: [350, 370],
+            bgcolor: darkMode ? '#2B2C37' : 'background.paper',
+            boxShadow: 24,
+            p: 2.5,
+            borderRadius: 3,
+          }}
+        >
           <div className="flex flex-col gap-2">
             <div className="flex flex-col gap-3">
               <h1

@@ -14,7 +14,7 @@ export default function CustomizedSnackbars({ message }) {
   return (
     <Snackbar
       open={snackbarOpen}
-      autoHideDuration={6000}
+      autoHideDuration={4000}
       onClose={handleCloseSnackBar}
     >
       <Alert
