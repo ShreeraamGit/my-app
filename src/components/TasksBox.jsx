@@ -131,7 +131,7 @@ const TasksBox = () => {
                     }`}
                   >
                     <h1
-                      className={`font-bold text-[12px] tracking-[0.08rem] ${
+                      className={`font-bold text-[15px] tracking-[0.08rem] ${
                         darkMode ? 'text-white' : 'text-black'
                       }`}
                     >
@@ -141,11 +141,15 @@ const TasksBox = () => {
                     <span
                       className={`${
                         darkMode
-                          ? 'text-white text-[12px]'
-                          : 'text-[12px] text-black'
+                          ? 'text-[#828FA3] text-[15px] font-bold'
+                          : 'text-[15px] text-black font-bold'
                       }`}
                     >
-                      0 of {item.subTasks.length} Subtasks
+                      {`${
+                        item.subTasks.filter((subtask) => subtask.isCompleted)
+                          .length
+                      } of ${item.subTasks.length} `}
+                      Subtasks
                     </span>
                   </button>
                 ) : null,

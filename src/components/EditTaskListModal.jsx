@@ -9,7 +9,6 @@ import { TasksManagementContext } from '../context/tasksManagementContext';
 import { UsersContext } from '../context/usersContext';
 import { AddDataContext } from '../context/addDataContext';
 import { AddTaskModalContext } from '../context/addTaskModal';
-import { ClickEventContext } from '../context/clickEventContext';
 import { SnackBarContext } from '../context/customizedSnakabrContext';
 import { useForm, Controller } from 'react-hook-form';
 import Checkbox from '@mui/material/Checkbox';
@@ -64,6 +63,7 @@ export default function EditTaskListModal({ task }) {
         clearTimeout(timer);
       }, 1000);
       handleClickSnackBar();
+      handleTaskListModalClose();
     } catch (error) {
       // handle the error here
       console.error('An error occurred:', error);
@@ -117,42 +117,50 @@ export default function EditTaskListModal({ task }) {
               <div className="flex flex-col">
                 <form className="flex flex-col">
                   <span className="text-[15px] mb-3 gap-2">
-                    Subtasks ({`${0} of ${task.subTasks.length}`})
+                    Subtasks (
+                    {`${
+                      task.subTasks.filter((subtask) => subtask.isCompleted)
+                        .length
+                    } of ${task.subTasks.length}`}
+                    )
                   </span>
-                  {task.subTasks.map((items, index) => (
-                    <Controller
-                      className=""
-                      key={index}
-                      name={`checkbox${index}`}
-                      defaultValue={false}
-                      control={control}
-                      rules={{ required: true }}
-                      render={({ field }) => (
-                        <span
-                          className={`${
-                            darkMode
-                              ? 'bg-[#3E3F4E] border-white'
-                              : 'bg-white border-black'
-                          } flex items-center py-1 px-1 rounded-md`}
-                        >
-                          <Checkbox
-                            {...field}
-                            checked={checkboxValue[index]}
-                            onChange={() => handleCheckboxChange(index)}
-                          />
-                          <label
-                            className={`font-normal text-[15px] ${
-                              checkboxValue[index] ? 'line-through' : ''
-                            }`}
-                            htmlFor={field.name}
+                  <div className="flex flex-col gap-2">
+                    {task.subTasks.map((items, index) => (
+                      <Controller
+                        className=""
+                        key={index}
+                        name={`checkbox${index}`}
+                        defaultValue={false}
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field }) => (
+                          <span
+                            className={`${
+                              darkMode
+                                ? 'bg-[#3E3F4E] border-white'
+                                : 'bg-white border-black'
+                            } flex items-center gap-3 py-2 px-2 rounded-md`}
                           >
-                            {items.title.slice(0, 1).toUpperCase() +
-                              items.title.slice(1)}
-                          </label>
-                        </span>
-                      )}
-                    />
-                  ))}
+                            <Checkbox
+                              {...field}
+                              checked={checkboxValue[index]}
+                              onChange={() => handleCheckboxChange(index)}
+                              className="w-2 h-2"
+                            />
+                            <label
+                              className={`font-normal text-[14px] ${
+                                checkboxValue[index] ? 'line-through' : ''
+                              }`}
+                              htmlFor={field.name}
+                            >
+                              {items.title.slice(0, 1).toUpperCase() +
+                                items.title.slice(1)}
+                            </label>
+                          </span>
+                        )}
+                      />
+                    ))}
+                  </div>
                   <div className="flex flex-col gap-2 mt-3">
                     <label
                       className={`text-[15px] font-bold ${
@@ -201,7 +209,8 @@ export default function EditTaskListModal({ task }) {
   );
 }
 
-/*<Controller
+/*{task.subTasks.map((items, index) => (
+                    <Controller
                       className=""
                       key={index}
                       name={`checkbox${index}`}
@@ -218,11 +227,12 @@ export default function EditTaskListModal({ task }) {
                         >
                           <Checkbox
                             {...field}
-                            onChange={handleCheckboxChange}
+                            checked={checkboxValue[index]}
+                            onChange={() => handleCheckboxChange(index)}
                           />
                           <label
                             className={`font-normal text-[15px] ${
-                              checkboxValue ? 'line-through' : ''
+                              checkboxValue[index] ? 'line-through' : ''
                             }`}
                             htmlFor={field.name}
                           >
@@ -231,6 +241,5 @@ export default function EditTaskListModal({ task }) {
                           </label>
                         </span>
                       )}
-                    />*/
-
-/*updateTasks(columns, users, task, title, data.checkbox, data.status);*/
+                    />
+                  ))}*/
