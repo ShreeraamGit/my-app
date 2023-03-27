@@ -19,7 +19,7 @@ const SideMenu = () => {
       </div>
       <div className="flex flex-col gap-4">
         <DarkLightModeSwitch />
-        <DropDownMenu menuItems={['profile', 'account']} />
+        <DropDownMenu menuItems={['profile', 'settings']} />
       </div>
     </div>
   );
