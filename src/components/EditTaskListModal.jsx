@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { TaskListModalOpenContext } from '../context/editTaskListModalContext';
@@ -48,12 +48,6 @@ export default function EditTaskListModal({ task }) {
   const handleSelectChange = (event) => {
     setSelectValue(event.target.value);
   };
-
-  /*useEffect(() => {
-    // Call your custom handleSubmit function here
-    console.log('i run when modal open');
-    handleSubmit({ checkbox: checkboxValue, status: selectValue });
-  }, [checkboxValue, selectValue]);*/
 
   const handleSubmit = (e) => {
     try {
@@ -208,38 +202,3 @@ export default function EditTaskListModal({ task }) {
     </div>
   );
 }
-
-/*{task.subTasks.map((items, index) => (
-                    <Controller
-                      className=""
-                      key={index}
-                      name={`checkbox${index}`}
-                      defaultValue={false}
-                      control={control}
-                      rules={{ required: true }}
-                      render={({ field }) => (
-                        <span
-                          className={`${
-                            darkMode
-                              ? 'bg-[#3E3F4E] border-white'
-                              : 'bg-white border-black'
-                          } flex items-center py-1 px-1 rounded-md`}
-                        >
-                          <Checkbox
-                            {...field}
-                            checked={checkboxValue[index]}
-                            onChange={() => handleCheckboxChange(index)}
-                          />
-                          <label
-                            className={`font-normal text-[15px] ${
-                              checkboxValue[index] ? 'line-through' : ''
-                            }`}
-                            htmlFor={field.name}
-                          >
-                            {items.title.slice(0, 1).toUpperCase() +
-                              items.title.slice(1)}
-                          </label>
-                        </span>
-                      )}
-                    />
-                  ))}*/
