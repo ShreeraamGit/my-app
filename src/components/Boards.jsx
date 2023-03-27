@@ -35,7 +35,7 @@ const Boards = () => {
   return (
     <div className="flex flex-col gap-7">
       <h2
-        className={`tracking-[0.18rem] text-[15px] font-semibold ${
+        className={`tracking-[0.18rem] text-[12px] font-semibold ${
           darkMode ? 'text-[#E4EBFA]' : 'text-[#A8A4FF]'
         }`}
       >

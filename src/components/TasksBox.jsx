@@ -88,7 +88,7 @@ const TasksBox = () => {
               darkMode ? 'text-white' : 'text-black'
             } w-[2rem] h-[2rem]`}
           />
-          <h1 className="text-[12px] md:text-[18px]">
+          <h1 className="text-[12px] md:text-[15px]">
             Loading.... Please Wait....
           </h1>
         </div>
@@ -131,7 +131,7 @@ const TasksBox = () => {
                     }`}
                   >
                     <h1
-                      className={`font-bold text-[15px] tracking-[0.08rem] ${
+                      className={`font-bold text-[13px] tracking-[0.08rem] ${
                         darkMode ? 'text-white' : 'text-black'
                       }`}
                     >
@@ -141,8 +141,8 @@ const TasksBox = () => {
                     <span
                       className={`${
                         darkMode
-                          ? 'text-[#828FA3] text-[15px] font-bold'
-                          : 'text-[15px] text-black font-bold'
+                          ? 'text-[#828FA3] text-[13px] font-bold'
+                          : 'text-[13px] text-black font-bold'
                       }`}
                     >
                       {`${
@@ -166,7 +166,7 @@ const TasksBox = () => {
               }`}
             />
             <h1
-              className={`text-[12px] md:text-[18px] ${
+              className={`text-[12px] md:text-[15px] ${
                 darkMode ? 'text-white' : 'text-black'
               }`}
             >
