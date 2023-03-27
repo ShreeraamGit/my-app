@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { SignInUpContext } from '../context/loginContext';
 import { BsGoogle } from 'react-icons/bs';
 import { BsFacebook } from 'react-icons/bs';
-import { BsTwitter } from 'react-icons/bs';
+import { BsGithub } from 'react-icons/bs';
 
 const LoginWithSocial = () => {
   const { handleLogin, handleFacebookLogin, handleGithubLogin } =
@@ -23,7 +23,7 @@ const LoginWithSocial = () => {
           onClick={() => handleFacebookLogin()}
           className=" h-[1.8rem] w-[1.8rem] md:h-[2rem] md:w-[2rem] cursor-pointer"
         />
-        <BsTwitter
+        <BsGithub
           onClick={() => handleGithubLogin()}
           className=" h-[1.8rem] w-[1.8rem] md:h-[2rem] md:w-[2rem] cursor-pointer"
         />
