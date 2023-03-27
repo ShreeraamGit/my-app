@@ -5,7 +5,8 @@ import { BsFacebook } from 'react-icons/bs';
 import { BsTwitter } from 'react-icons/bs';
 
 const LoginWithSocial = () => {
-  const { handleLogin, handleFacebookLogin } = useContext(SignInUpContext);
+  const { handleLogin, handleFacebookLogin, handleGithubLogin } =
+    useContext(SignInUpContext);
   return (
     <div className="flex flex-col gap-7">
       <div className="flex justify-center items-center">
@@ -22,7 +23,10 @@ const LoginWithSocial = () => {
           onClick={() => handleFacebookLogin()}
           className=" h-[1.8rem] w-[1.8rem] md:h-[2rem] md:w-[2rem] cursor-pointer"
         />
-        <BsTwitter className=" h-[1.8rem] w-[1.8rem] md:h-[2rem] md:w-[2rem]cursor-pointer" />
+        <BsTwitter
+          onClick={() => handleGithubLogin()}
+          className=" h-[1.8rem] w-[1.8rem] md:h-[2rem] md:w-[2rem] cursor-pointer"
+        />
       </div>
     </div>
   );
