@@ -29,7 +29,7 @@ const BoardsList = ({
                       setLoading((prevState) => !prevState);
                     }, 1500);
                   }}
-                  className={`text-[15px] text-white font-semibold flex items-center gap-5 ${
+                  className={`text-[12px] text-white font-semibold flex items-center gap-3 ${
                     darkMode ? 'text-[#E4EBFA]' : 'text-black'
                   }`}
                 >
@@ -41,9 +41,9 @@ const BoardsList = ({
             ))
           ) : (
             <div className="flex justify-center items-center gap-5">
-              <CircularProgress />
+              <CircularProgress className="h-2 w-2" />
               <h1
-                className={`text-center text-[18px] ${
+                className={`text-center text-[12px] ${
                   darkMode ? 'text-white' : 'text-black'
                 }`}
               >
@@ -59,7 +59,7 @@ const BoardsList = ({
           className="text-[18px] font-semibold flex items-center gap-5"
         >
           <TiFlowChildren className="h-[1.5rem] w-[1.5rem] text-[#635FC7]" />
-          <span className="text-[#635FC7] text-[15px]">+ Create New Board</span>
+          <span className="text-[#635FC7] text-[13px]">+ Create New Board</span>
         </button>
       </div>
     </Fragment>

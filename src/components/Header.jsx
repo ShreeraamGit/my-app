@@ -62,12 +62,12 @@ const Header = () => {
           )}
         </button>
       </div>
-      <div className="flex justify-center items-center gap-1 md:gap-1">
+      <div className="flex justify-center items-center gap-1 md:gap-0">
         <button
           onClick={() => {
             handleAddTaskModalOpen();
           }}
-          className="p-2 text-[12px] md:text-[15px] rounded-full hidden md:block px-9 bg-[#635FC7] font-semibold text-white"
+          className="p-2 text-[12px] md:text-[12px] rounded-full hidden md:block px-5 bg-[#635FC7] font-semibold text-white"
         >
           + Add New Task
         </button>
