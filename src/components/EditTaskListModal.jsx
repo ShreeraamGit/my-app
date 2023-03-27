@@ -10,10 +10,12 @@ import { UsersContext } from '../context/usersContext';
 import { AddDataContext } from '../context/addDataContext';
 import { AddTaskModalContext } from '../context/addTaskModal';
 import { SnackBarContext } from '../context/customizedSnakabrContext';
+import { ClickEventContext } from '../context/clickEventContext';
 import { useForm, Controller } from 'react-hook-form';
 import Checkbox from '@mui/material/Checkbox';
 
 export default function EditTaskListModal({ task }) {
+  const { setEvent } = useContext(ClickEventContext);
   const { handleClickSnackBar } = useContext(SnackBarContext);
   const { handleUpdateTaskCompletion } = useContext(AddTaskModalContext);
   const { updateTasks } = useContext(AddDataContext);
@@ -183,7 +185,8 @@ export default function EditTaskListModal({ task }) {
                 </form>
                 <div className="flex flex-col mt-5 gap-8">
                   <button
-                    onClick={() => {
+                    onClick={(e) => {
+                      setEvent(e.target.innerText);
                       handleSubmit();
                     }}
                     name="submit"

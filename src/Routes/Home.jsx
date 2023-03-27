@@ -17,7 +17,7 @@ const Home = () => {
       ? 'Tasks and Subtasks Created Succesfully'
       : event === 'Create New Board'
       ? 'Board Created Succesfully'
-      : 'Tasks and Subtasks updated Succesfully';
+      : 'Tasks and Subtasks Updated Succesfully';
 
   return (
     <div className="relative">
