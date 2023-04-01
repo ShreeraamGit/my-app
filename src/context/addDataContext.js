@@ -1,5 +1,11 @@
 import { createContext } from 'react';
-import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
+import {
+  doc,
+  setDoc,
+  getDoc,
+  serverTimestamp,
+  deleteDoc,
+} from 'firebase/firestore';
 import { db } from '../utils/firebaseClient';
 
 export const AddDataContext = createContext({});
@@ -112,8 +118,7 @@ export const AddDataProvider = ({ children }) => {
     selectValue,
   ) => {
     for (const item of columns) {
-      if (item.colName === tasks.colToAdd) {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+      if (item.colName === tasks.colToAdd && item.colName === selectValue) {
         await setDoc(
           doc(
             db,
@@ -130,7 +135,7 @@ export const AddDataProvider = ({ children }) => {
           ),
           {
             taskName: tasks.taskName,
-            colToAdd: selectValue,
+            colToAdd: tasks.colToAdd,
             description: tasks.description,
             createdAt: serverTimestamp(),
             subTasks: tasks.subTasks.map(({ title }, index) => ({
@@ -139,6 +144,55 @@ export const AddDataProvider = ({ children }) => {
             })),
           },
         );
+      } else if (
+        item.colName === tasks.colToAdd &&
+        item.colName !== selectValue
+      ) {
+        await setDoc(
+          doc(
+            db,
+            'data',
+            'boards',
+            'users',
+            `${users.uid}`,
+            'boardDetails',
+            `boardName - ${title.replace(/\s/g, '')}`,
+            'columns',
+            `colName - ${selectValue.replace(/\s/g, '')}`,
+            'tasks',
+            `taskName - ${tasks.taskName.replace(/\s/g, '')}`,
+          ),
+          {
+            taskName: tasks.taskName,
+            colToAdd: selectValue,
+            description: tasks.description,
+            createdAt: serverTimestamp(),
+            subTasks: tasks.subTasks.map(({ title, isCompleted }, index) => ({
+              title,
+              isCompleted: isCompleted,
+            })),
+          },
+        )
+          .then(() => {
+            return new Promise((resolve) => setTimeout(resolve, 1000));
+          })
+          .then(() => {
+            return deleteDoc(
+              doc(
+                db,
+                'data',
+                'boards',
+                'users',
+                `${users.uid}`,
+                'boardDetails',
+                `boardName - ${title.replace(/\s/g, '')}`,
+                'columns',
+                `colName - ${tasks.colToAdd.replace(/\s/g, '')}`,
+                'tasks',
+                `taskName - ${tasks.taskName.replace(/\s/g, '')}`,
+              ),
+            );
+          });
       }
     }
   };
@@ -156,18 +210,8 @@ export const AddDataProvider = ({ children }) => {
   );
 };
 
-/*const updateTasks = async (
-    columns,
-    users,
-    tasks,
-    title,
-    checkBox,
-    status,
-  ) => {
-    for (const item of columns) {
-      if (item.colName === tasks.status) {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        console.log('i m good');
+/*console.log('tasks to be added - ', selectValue);
+        console.log('tasks to be deleted - ', tasks.colToAdd);
         await setDoc(
           doc(
             db,
@@ -178,21 +222,33 @@ export const AddDataProvider = ({ children }) => {
             'boardDetails',
             `boardName - ${title.replace(/\s/g, '')}`,
             'columns',
-            `colName - ${item.colName.replace(/\s/g, '')}`,
+            `colName - ${selectValue.replace(/\s/g, '')}`,
             'tasks',
-            `taskName - ${tasks.title.replace(/\s/g, '')}`,
+            `taskName - ${tasks.taskName.replace(/\s/g, '')}`,
           ),
           {
-            taskName: tasks.title,
-            colToAdd: status.length === 0 ? status : item.colName,
-            description: tasks.Description,
+            taskName: tasks.taskName,
+            colToAdd: selectValue,
+            description: tasks.description,
             createdAt: serverTimestamp(),
-            subTasks: tasks.subTasks.map(({ title }, index) => ({
+            subTasks: tasks.subTasks.map(({ title, isCompleted }) => ({
               title,
-              isCompleted: checkBox[index],
+              isCompleted: isCompleted,
             })),
           },
         );
-      }
-    }
-  };*/
+        await deleteDoc(
+          doc(
+            db,
+            'data',
+            'boards',
+            'users',
+            `${users.uid}`,
+            'boardDetails',
+            `boardName - ${title.replace(/\s/g, '')}`,
+            'columns',
+            `colName - ${tasks.colToAdd.replace(/\s/g, '')}`,
+            'tasks',
+            `taskName - ${tasks.taskName.replace(/\s/g, '')}`,
+          ),
+        );*/

@@ -14,7 +14,7 @@ import { ClickEventContext } from '../context/clickEventContext';
 import { useForm, Controller } from 'react-hook-form';
 import Checkbox from '@mui/material/Checkbox';
 
-export default function EditTaskListModal({ task }) {
+export default function EditTaskListModal({ task, lastCol }) {
   const { setEvent } = useContext(ClickEventContext);
   const { handleClickSnackBar } = useContext(SnackBarContext);
   const { handleUpdateTaskCompletion } = useContext(AddTaskModalContext);
@@ -34,8 +34,6 @@ export default function EditTaskListModal({ task }) {
     },
   });
 
-  //console.log(task);
-
   const [checkboxValue, setCheckboxValue] = useState(
     task.subTasks.map((items) => items.isCompleted),
   );
@@ -51,13 +49,13 @@ export default function EditTaskListModal({ task }) {
     setSelectValue(event.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = () => {
     try {
       updateTasks(columns, users, task, title, checkboxValue, selectValue);
       const timer = setTimeout(function () {
         handleUpdateTaskCompletion();
         clearTimeout(timer);
-      }, 1000);
+      }, 1200);
       handleClickSnackBar();
       handleTaskListModalClose();
     } catch (error) {
@@ -157,46 +155,60 @@ export default function EditTaskListModal({ task }) {
                       />
                     ))}
                   </div>
-                  <div className="flex flex-col gap-2 mt-3">
-                    <label
-                      className={`text-[15px] font-bold ${
-                        darkMode ? 'text-white' : 'text-[#000112]'
-                      }`}
-                    >
-                      Status
-                    </label>
-                    <select
-                      className={`border py-2 px-2 rounded-lg w-full text-[12px] ${
-                        darkMode
-                          ? 'bg-[#2B2C37] border-white text-white'
-                          : 'bg-white border-black text-black'
-                      }`}
-                      onChange={handleSelectChange}
-                      value={selectValue}
-                    >
-                      {columns.map((items, index) => (
-                        <option key={index} className="" value={items.colName}>
-                          {items.colName.charAt(0).toUpperCase() +
-                            items.colName.slice(1)}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                  {lastCol ? (
+                    <div className="flex flex-col gap-2 mt-3">
+                      <label
+                        className={`text-[15px] font-bold ${
+                          darkMode ? 'text-white' : 'text-[#000112]'
+                        }`}
+                      >
+                        Status
+                      </label>
+                      <select
+                        className={`border py-2 px-2 rounded-lg w-full text-[12px] ${
+                          darkMode
+                            ? 'bg-[#2B2C37] border-white text-white'
+                            : 'bg-white border-black text-black'
+                        }`}
+                        onChange={handleSelectChange}
+                        value={selectValue}
+                      >
+                        {columns.map((items, index) => (
+                          <option
+                            key={index}
+                            className=""
+                            value={items.colName}
+                          >
+                            {items.colName.charAt(0).toUpperCase() +
+                              items.colName.slice(1)}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  ) : null}
                 </form>
-                <div className="flex flex-col mt-5 gap-8">
-                  <button
-                    onClick={(e) => {
-                      setEvent(e.target.innerText);
-                      handleSubmit();
-                    }}
-                    name="submit"
-                    defaultValue={'Create New Board'}
-                    className="text-[13px] font-bold py-1 px-2 text-white rounded-full bg-[#635FC7]"
-                    type="submit"
-                  >
-                    Update Task
-                  </button>
-                </div>
+                {lastCol ? (
+                  <div className="flex flex-col mt-5 gap-8">
+                    <button
+                      onClick={(e) => {
+                        setEvent(e.target.innerText);
+                        handleSubmit();
+                      }}
+                      name="submit"
+                      defaultValue={'Create New Board'}
+                      className="text-[13px] font-bold py-1 px-2 text-white rounded-full bg-[#635FC7]"
+                      type="submit"
+                    >
+                      Update Task
+                    </button>
+                  </div>
+                ) : (
+                  <div className="">
+                    <h1 className="flex justify-center items-center mt-6 border text-[15px]  text-white bg-[#635FC7] rounded-md p-1">
+                      Task Has been Completed.
+                    </h1>
+                  </div>
+                )}
               </div>
             </div>
           </div>

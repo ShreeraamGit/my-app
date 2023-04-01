@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import { TasksManagementContext } from '../context/tasksManagementContext';
 import { LoadingContext } from '../context/loadingContext';
 import { ColumnsContext } from '../context/columnContext';
@@ -22,6 +22,7 @@ import { AiTwotoneCheckCircle } from 'react-icons/ai';
 import { GoAlert } from 'react-icons/go';
 
 const TasksBox = () => {
+  const [lastCol, setLastCol] = useState();
   const [individualTask, setIndividualTask] = useState();
   const { title, taskLists, setTasksLists } = useContext(
     TasksManagementContext,
@@ -40,6 +41,8 @@ const TasksBox = () => {
   const { handleTaskListModalOpen, taskListModalOpen } = useContext(
     TaskListModalOpenContext,
   );
+
+  const lastIndex = columns.length - 1;
 
   const getColumnsLists = async () => {
     const recieveColumns = await getColumns(users, title);
@@ -100,9 +103,9 @@ const TasksBox = () => {
               : 'transparent-scrollbar-light-mode'
           } md:w-full overflow-scroll snap-always snap-center flex gap-7 md:gap-14`}
         >
-          {columns.map((items, index) => (
+          {columns.map((items, colIndex) => (
             <div
-              key={index}
+              key={colIndex}
               className="text-white min-w-[69%] md:min-w-[19%] h-fit flex flex-col gap-5 "
             >
               <div className="flex justify-start items-center gap-5">
@@ -118,14 +121,19 @@ const TasksBox = () => {
                   <TaskNumberCount task={taskLists} colName={items.colName} />)
                 </h3>
               </div>
-              {taskLists.map((item, index) =>
+              {taskLists.map((item, taskListIndex) =>
                 item.colToAdd === items.colName ? (
                   <button
                     onClick={() => {
                       handleTaskListModalOpen();
                       setIndividualTask(item);
+                      if (columns.length > 0 && colIndex === lastIndex) {
+                        setLastCol(false);
+                      } else {
+                        setLastCol(true);
+                      }
                     }}
-                    key={index}
+                    key={taskListIndex}
                     className={`flex shadow-xl rounded-lg cursor-pointer flex-col gap-3 p-4 ${
                       darkMode ? 'bg-[#3E3F4E]' : 'bg-white'
                     }`}
@@ -180,7 +188,9 @@ const TasksBox = () => {
 
       {boardModalOpen ? <MobileBoardModal /> : null}
       {openEditTaskModal ? <EditTaskModal /> : null}
-      {taskListModalOpen ? <EditTaskListModal task={individualTask} /> : null}
+      {taskListModalOpen ? (
+        <EditTaskListModal task={individualTask} lastCol={lastCol} />
+      ) : null}
     </div>
   );
 };
