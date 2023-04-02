@@ -42,7 +42,7 @@ const TasksBox = () => {
     TaskListModalOpenContext,
   );
 
-  const lastIndex = columns.length - 1;
+  const lastIndex = columns.length > 0 && columns.length - 1;
 
   const getColumnsLists = async () => {
     const recieveColumns = await getColumns(users, title);
@@ -106,7 +106,7 @@ const TasksBox = () => {
           {columns.map((items, colIndex) => (
             <div
               key={colIndex}
-              className="text-white min-w-[69%] md:min-w-[19%] h-fit flex flex-col gap-5 "
+              className="text-white min-w-[49%] md:min-w-[19%] h-fit flex flex-col gap-5 "
             >
               <div className="flex justify-start items-center gap-5">
                 <AiTwotoneCheckCircle

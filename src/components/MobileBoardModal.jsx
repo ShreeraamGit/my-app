@@ -11,6 +11,7 @@ import { ModalContext } from '../context/modalContext';
 import { DarkLightModeContext } from '../context/darkLightMode';
 import DarkLightModeSwitch from './DarkLightModeSwitch';
 import BoardsList from './BoardsList';
+import DropDownMenu from '../components/HideSideBar';
 import { collection } from 'firebase/firestore';
 import { db } from '../utils/firebaseClient';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -76,7 +77,10 @@ const MobileBoardModal = () => {
               handleOpen={handleOpen}
               handleBoardModalClose={handleBoardModalClose}
             />
-            <DarkLightModeSwitch />
+            <div className="flex flex-col justify-center items-center gap-3">
+              <DarkLightModeSwitch />
+              <DropDownMenu menuItems={['profile', 'settings']} />
+            </div>
           </div>
         </Box>
       </Modal>
