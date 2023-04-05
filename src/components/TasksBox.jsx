@@ -42,7 +42,8 @@ const TasksBox = () => {
     TaskListModalOpenContext,
   );
 
-  const lastIndex = columns.length > 0 && columns.length - 1;
+  const lastIndex =
+    columns && columns.length > 0 ? columns.length - 1 : undefined;
 
   const getColumnsLists = async () => {
     const recieveColumns = await getColumns(users, title);
