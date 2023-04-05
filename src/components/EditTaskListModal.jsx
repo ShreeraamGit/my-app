@@ -118,7 +118,7 @@ export default function EditTaskListModal({ task, lastCol }) {
                     } of ${task.subTasks.length}`}
                     )
                   </span>
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-2 max-h-[150px] overflow-y-auto">
                     {task.subTasks.map((items, index) => (
                       <Controller
                         className=""
