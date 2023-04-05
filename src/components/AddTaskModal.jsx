@@ -134,7 +134,7 @@ export default function BasicAddTaskModal() {
                       })}
                     />
                   </div>
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-2 max-h-[190px] overflow-y-auto">
                     <label
                       className={`text-[12px] font-bold ${
                         darkMode ? 'text-white' : 'text-[#000112]'

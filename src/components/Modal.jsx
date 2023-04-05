@@ -97,7 +97,7 @@ export default function BasicModal() {
                     {...register('title', { required: true, maxLength: 30 })}
                   />
                 </div>
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 max-h-[190px] overflow-y-auto">
                   <label
                     className={`font-bold text-[12px] ${
                       darkMode ? 'text-white' : 'text-black'
