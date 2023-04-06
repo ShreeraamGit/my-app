@@ -11,7 +11,7 @@ const SideMenu = () => {
     <div
       className={`${
         darkMode ? 'bg-lightBlack2' : 'white'
-      } w-[22%] relative h-screen p-6 hidden md:flex flex-col justify-between items-center border-r-[0.5px]`}
+      } w-[15%] relative h-screen p-6 hidden md:flex flex-col justify-between items-center border-r-[0.5px]`}
     >
       <div className="flex flex-col gap-11">
         <LogoHeader />
