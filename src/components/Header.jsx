@@ -8,6 +8,7 @@ import { RiArrowDropDownLine } from 'react-icons/ri';
 import { RiArrowDropUpLine } from 'react-icons/ri';
 import HeaderDropDownMenu from './HeaderDropDownMenu';
 import { MdAddCircle } from 'react-icons/md';
+import InviteUsersButton from '../features/inviteUsers';
 
 const Header = () => {
   const { title } = useContext(TasksManagementContext);

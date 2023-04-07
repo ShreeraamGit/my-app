@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { TasksManagementContext } from '../context/tasksManagementContext';
 import { LoadingContext } from '../context/loadingContext';
 import { ColumnsContext } from '../context/columnContext';
@@ -107,7 +107,7 @@ const TasksBox = () => {
           {columns.map((items, colIndex) => (
             <div
               key={colIndex}
-              className="text-white min-w-[49%] md:min-w-[19%] h-fit flex flex-col gap-5 "
+              className="text-white min-w-[48%] md:min-w-[16%] h-fit flex flex-col gap-5 "
             >
               <div className="flex justify-start items-center gap-5">
                 <AiTwotoneCheckCircle
